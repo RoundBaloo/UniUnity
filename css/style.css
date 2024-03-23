@@ -1,0 +1,107 @@
+body{
+    font-size: 20px;
+    font-weight: 400;
+    color: black;
+}
+
+header{
+    background-color: black;
+    height: 150px;
+}
+
+.Avatar{
+    border-radius: 100%;
+    position: absolute;
+    right: 90px;
+    top: 30px;
+}
+
+.Bigger{
+    position: static;
+    margin-top: 30px;
+    margin-left: 90px;
+}
+
+.Logo{
+    position: absolute;
+    left: 90px;
+    top: 40px;
+}
+
+ul{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.UserName{
+    font-size: 24px;
+    text-align: center;
+}
+
+.Direction{
+    text-align: center;
+    font-weight: 300;
+    color: #6C6C6C;
+}
+
+.Search{
+    text-align: center;
+    font-weight: 300;
+}
+
+.InSearch{
+    color: #568c35;
+}
+
+.Notification{
+    position: absolute;
+    right: 210px;
+    top: 52px;
+}
+
+.PublishProject{
+    font-size: 19px;
+    color: white;
+    position: absolute;
+    border: 3px solid white;
+    padding: 5px 23px;
+    width: 245px;
+    height: 45px;
+    border-radius: 23px;
+    right: 287px;
+    top: 52px;
+}
+
+.Filter{
+    width: 450px;
+    height: 60px;
+    border: 3px solid black;
+    border-radius: 79px;
+    padding: 10px 56px;
+    position: relative;
+    top: 60px;
+    left: 90px;
+}
+
+.User-1{
+    position: relative;
+    top: 90px;
+    left: 90px;
+    border: 3px solid black;
+    border-radius: 11px;
+    width: 390px;
+    height: 660px;
+    box-shadow: 0 0 4px 2px rgba(0, 0, 0, 0.25);
+}
+
+.naming{
+    margin-left: 30px;
+    width: 140px;
+}
+
+.description{
+    text-align: right;
+    margin-right: 30px;
+    font-weight: 300;
+}
