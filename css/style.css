@@ -58,7 +58,22 @@ ul{
     position: absolute;
     right: 210px;
     top: 52px;
+    transform-origin: 50% 0;
 }
+
+@keyframes swing {
+    0% { transform: rotate(0deg); }
+    20% { transform: rotate(10deg); }
+    40% { transform: rotate(-10deg); }
+    60% { transform: rotate(10deg); }
+    80% { transform: rotate(-10deg); }
+    100% { transform: rotate(0deg); }
+}
+
+.Notification:hover {
+    animation: swing 0.5s ease-in-out;
+}
+   
 
 .PublishProject{
     font-size: 19px;
@@ -73,16 +88,44 @@ ul{
     top: 52px;
 }
 
-.Filter{
-    width: 450px;
-    height: 60px;
+.Filter, .Filter input[type=text], .filter-placeholder {
     border: 3px solid black;
     border-radius: 79px;
     padding: 10px 56px;
+    width: 450px; /* Установите ширину, которая соответствует вашей кнопке */
+    transition: height 0.3s ease; /* Добавьте переход для изменения высоты */
+}
+   
+.Filter {
+    height: 60px;
     position: relative;
+    border-radius: 30px;
     top: 60px;
     left: 90px;
+    cursor: pointer;
+    overflow: hidden;
 }
+   
+.Filter input[type=text] {
+    margin-top: 20px;
+    padding: 10px;
+    width: 100%; /* Установите ширину ввода равной 100% ширины родительского элемента */
+    box-sizing: border-box; /* Убедитесь, что padding не влияет на общую ширину */
+}
+   
+   
+.filter-placeholder {
+    margin-top: 20px;
+    padding: 10px;
+    width: 100%; /* Установите ширину заглушки равной 100% ширины родительского элемента */
+    box-sizing: border-box; /* Убедитесь, что padding не влияет на общую ширину */
+}
+
+.filter-content {
+    opacity: 0; /* Скрытое содержимое изначально прозрачно */
+    transition: opacity 0.3s ease, height 0.3s ease; /* Плавный переход для opacity и height */
+   }
+   
 
 .User-1{
     position: relative;
@@ -93,6 +136,12 @@ ul{
     width: 390px;
     height: 660px;
     box-shadow: 0 0 4px 2px rgba(0, 0, 0, 0.25);
+    transition: transform 0.3s ease;
+}
+
+.User-1:hover {
+    transform: translateY(-3px) scale(1.01);
+    box-shadow: 0 0 8px 4px rgba(0, 0, 0, 0.25);
 }
 
 .naming{
@@ -105,3 +154,4 @@ ul{
     margin-right: 30px;
     font-weight: 300;
 }
+   
