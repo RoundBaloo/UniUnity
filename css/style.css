@@ -1,60 +1,60 @@
-body{
+body {
     font-size: 20px;
     font-weight: 400;
     color: black;
 }
 
-header{
+header {
     background-color: black;
     height: 150px;
 }
 
-.Avatar{
+.Avatar {
     border-radius: 100%;
     position: absolute;
     right: 90px;
     top: 30px;
 }
 
-.Bigger{
+.Bigger {
     position: static;
     margin-top: 30px;
     margin-left: 90px;
 }
 
-.Logo{
+.Logo {
     position: absolute;
     left: 90px;
     top: 40px;
 }
 
-ul{
+ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
 }
 
-.UserName{
+.UserName {
     font-size: 24px;
     text-align: center;
 }
 
-.Direction{
+.Direction {
     text-align: center;
     font-weight: 300;
     color: #6C6C6C;
 }
 
-.Search{
+.Search {
     text-align: center;
-    font-weight: 300;
+    font-weight: 400;
 }
 
-.InSearch{
+.InSearch {
     color: #568c35;
 }
 
-.Notification{
+.Notification {
     position: absolute;
     right: 210px;
     top: 52px;
@@ -62,12 +62,24 @@ ul{
 }
 
 @keyframes swing {
-    0% { transform: rotate(0deg); }
-    20% { transform: rotate(10deg); }
-    40% { transform: rotate(-10deg); }
-    60% { transform: rotate(10deg); }
-    80% { transform: rotate(-10deg); }
-    100% { transform: rotate(0deg); }
+    0% {
+        transform: rotate(0deg);
+    }
+    20% {
+        transform: rotate(10deg);
+    }
+    40% {
+        transform: rotate(-10deg);
+    }
+    60% {
+        transform: rotate(10deg);
+    }
+    80% {
+        transform: rotate(-10deg);
+    }
+    100% {
+        transform: rotate(0deg);
+    }
 }
 
 .Notification:hover {
@@ -75,7 +87,7 @@ ul{
 }
 
 
-.PublishProject{
+.PublishProject {
     font-size: 19px;
     color: white;
     position: absolute;
@@ -122,39 +134,39 @@ ul{
     transition: opacity 0.3s ease, height 0.3s ease; /* Плавный переход для opacity и height */
 }
 
-.filterGridSystem{
+.filterGridSystem {
     display: grid;
     border-top: 3px solid black;
     grid-template-columns: 0.4fr 0.6fr;
     height: 100%;
 }
 
-.filterGridSystem li{
+.filterGridSystem li {
     margin-bottom: 24px;
 }
 
-.FilterNaming{
+.FilterNaming {
     padding-top: 25px;
     padding-left: 30px;
     border-right: 3px solid black;
     margin: 0;
 }
 
-.FilterValue{
+.FilterValue {
     font-size: 18px;
     padding-top: 25px;
     padding-left: 30px;
     margin-right: 60px;
 }
 
-.FilterValue li{
+.FilterValue li {
     border: 2px solid black;
     border-radius: 15px;
     padding-left: 20px;
 }
 
 
-.User-1{
+.User-1 {
     position: relative;
     top: 90px;
     left: 90px;
@@ -171,14 +183,50 @@ ul{
     box-shadow: 0 0 8px 4px rgba(0, 0, 0, 0.25);
 }
 
-.naming{
-    margin-left: 30px;
-    width: 140px;
+.UserGrid {
+    display: grid;
+    justify-content: space-around;
+
 }
 
-.description{
-    text-align: right;
+.UserName {
+    grid-column-start: 1;
+    grid-column-end: 5;
+    margin: 0;
+}
+
+.centerInfo {
+    grid-column-start: 1;
+    grid-column-end: 5;
+    margin-bottom: 10px;
+}
+
+.naming {
+    margin-left: 30px;
+}
+
+.naming li {
+    margin-bottom: 15px;
+}
+
+.description {
     margin-right: 30px;
+    text-align: right;
     font-weight: 300;
+}
+
+.description li {
+    margin-bottom: 15px;
+}
+
+.portfolioButton{
+    font-size: 16px;
+    border: 3px solid black;
+    border-radius: 20px;
+    width: 120px;
+    height: 30px;
+    text-align: center;
+    position: relative;
+    left: 240px;
 }
 

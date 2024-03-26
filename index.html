@@ -24,7 +24,7 @@
         <p class="button-text">Фильтр и поиск</p>
         <div class="filter-content" style="display: none;">
            <input type="text" placeholder="Введите текст для поиска...">
-            <img class = "Avatar" src = img/searchIcon.svg.jpg width="40" height="40">
+            <img class = "SearchButton" src = img/searchIcon.svg width="40" height="40">
             <div class="filterGridSystem">
                 <ul class="FilterNaming">
                     <li>Институт</li>
@@ -43,26 +43,29 @@
     </div>
     <div class = "User-1">
         <a><img class = "Avatar Bigger" src = img/avatarPlaceholder.jpg width="210" height="210"></a>
-        <p class = "UserName">Имя Фамилия</p>
-        <ul>
-            <li class = "Direction">UX-дизайнер</li>
-            <li class = "Search InSearch">В поиске команды</li>
-        </ul>
-        <ul class = "naming">
-            <li>О себе</li>
-            <li>Институт</li>
-            <li>Направление</li>
-            <li>Курс</li>
-            <li>Уровень</li>
-        </ul>
-        <ul class = "description">
-            <li>туруруруру</li>
-            <li>ИРИТ-РТФ</li>
-            <li>программная инженерия</li>
-            <li>1</li>
-            <li>junior</li>
-        </ul>
-        <p>Портфолио</p>
+        <div class = UserGrid>
+            <p class = "UserName">Имя Фамилия</p>
+            <ul class = "centerInfo">
+                <li class = "Direction">UX-дизайнер</li>
+                <li class = "Search InSearch">В поиске команды</li>
+            </ul>
+            <ul class = "naming">
+                <li>О себе</li>
+                <li>Институт</li>
+                <li>Направление</li>
+                <li>Курс</li>
+                <li>Уровень</li>
+            </ul>
+            <ul class = "description">
+                <li>туруруруру</li>
+                <li>ИРИТ-РТФ</li>
+                <li>программная инженерия</li>
+                <li>1</li>
+                <li>junior</li>
+            </ul>
+        </div>
+
+        <p class = "portfolioButton">Портфолио</p>
     </div>
     <script src="js/front.js" type="text/babel"></script>
     <script src="js/front2.js" type="text/babel"></script>
