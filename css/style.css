@@ -90,10 +90,12 @@ ul{
 
 .Filter, .Filter input[type=text], .filter-placeholder {
     border: 3px solid black;
-    border-radius: 79px;
-    padding: 10px 56px;
-    width: 450px; /* Установите ширину, которая соответствует вашей кнопке */
+    width: 510px; /* Установите ширину, которая соответствует вашей кнопке */
     transition: height 0.3s ease; /* Добавьте переход для изменения высоты */
+}
+
+.button-text {
+    padding: 10px 56px;
 }
 
 .Filter {
@@ -107,23 +109,48 @@ ul{
 }
 
 .Filter input[type=text] {
-    margin-top: 20px;
-    padding: 10px;
-    width: 100%; /* Установите ширину ввода равной 100% ширины родительского элемента */
-    box-sizing: border-box; /* Убедитесь, что padding не влияет на общую ширину */
-}
-
-
-.filter-placeholder {
-    margin-top: 20px;
-    padding: 10px;
-    width: 100%; /* Установите ширину заглушки равной 100% ширины родительского элемента */
+    padding-left: 30px;
+    padding-top: 27px;
+    padding-bottom: 24px;
+    border: none;
+    width: 85%; /* Установите ширину ввода равной 100% ширины родительского элемента */
     box-sizing: border-box; /* Убедитесь, что padding не влияет на общую ширину */
 }
 
 .filter-content {
     opacity: 0; /* Скрытое содержимое изначально прозрачно */
     transition: opacity 0.3s ease, height 0.3s ease; /* Плавный переход для opacity и height */
+}
+
+.filterGridSystem{
+    display: grid;
+    border-top: 3px solid black;
+    grid-template-columns: 0.4fr 0.6fr;
+    height: 100%;
+}
+
+.filterGridSystem li{
+    margin-bottom: 24px;
+}
+
+.FilterNaming{
+    padding-top: 25px;
+    padding-left: 30px;
+    border-right: 3px solid black;
+    margin: 0;
+}
+
+.FilterValue{
+    font-size: 18px;
+    padding-top: 25px;
+    padding-left: 30px;
+    margin-right: 60px;
+}
+
+.FilterValue li{
+    border: 2px solid black;
+    border-radius: 15px;
+    padding-left: 20px;
 }
 
 
@@ -154,4 +181,4 @@ ul{
     margin-right: 30px;
     font-weight: 300;
 }
-   
+

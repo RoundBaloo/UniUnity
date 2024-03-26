@@ -4,7 +4,7 @@ document.querySelector('.button-text').addEventListener('click', function(event)
     if (filterContent.style.display === 'none') {
        filterContent.style.display = 'block';
        filterContent.style.opacity = '1'; // Показываем содержимое
-       this.parentNode.style.height = '220px'; // Расширяем кнопку
+       this.parentNode.style.height = '400px'; // Расширяем кнопку
     } else {
        filterContent.style.opacity = '0'; // Скрываем содержимое
        setTimeout(() => {
