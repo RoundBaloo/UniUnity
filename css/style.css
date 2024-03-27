@@ -230,3 +230,8 @@ ul {
     left: 240px;
 }
 
+.cards {
+    display: grid;
+    gap: 60px;
+    grid-template-columns: repeat(auto-fill, 390px);
+}
