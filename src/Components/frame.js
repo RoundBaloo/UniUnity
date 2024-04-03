@@ -1,6 +1,6 @@
 import React from "react"
-import './css/style.css'
-import avatar from './img/avatarPlaceholder.jpg'
+import '../css/style.css'
+import avatar from '../img/avatarPlaceholder.jpg'
 
 class Frame extends React.Component {
     render () {  
@@ -17,12 +17,6 @@ class Frame extends React.Component {
                     </li>
                 </ul>
                 <ul>
-                    <li>
-                        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                            <div className="naming">О себе</div>
-                            <div className="description">{frame.info}</div>
-                        </div>
-                    </li>
                     <li>
                         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                             <div className="naming">Институт</div>
