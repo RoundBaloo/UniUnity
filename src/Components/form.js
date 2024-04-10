@@ -15,7 +15,8 @@ export default class form extends Component {
   }
   render() {
     return (
-      <form>
+      !this.props.onFilled ? (
+        <form>
         <input placeholder='Фамилия' onChange={(e) => this.setState({secondName: e.target.value})}/>
         <input placeholder='Имя' onChange={(e) => this.setState({firstName: e.target.value})}/>
         <input placeholder='Отчество' onChange={(e) => this.setState({fatherName: e.target.value})}/>
@@ -46,7 +47,8 @@ export default class form extends Component {
           if (this.state.firstName.length < 3)
             console.log('error')
           else {
-            this.props.onAdd({
+              console.log(1)
+              this.props.onAdd1({
               firstName: this.state.firstName,
               secondName: this.state.secondName,
               fatherName: this.state.fatherName,
@@ -55,9 +57,11 @@ export default class form extends Component {
               year: this.state.year,
               skill: this.state.skill
           })
+          this.props.onFill()
         }
         }}>Добавить</button>
       </form>
+      ) : (<span>Форма заполнена</span>)
     )
   }
 }

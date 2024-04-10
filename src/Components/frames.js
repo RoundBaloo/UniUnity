@@ -2,7 +2,8 @@ import React from "react";
 import Frame from './frame.js'
 
 class Frames extends React.Component {
-    render () {
+    render() {
+        console.log(this.props.frames)
         return (
             <div className="frames-container">
                 {this.props.frames.map((frame) => (
@@ -11,8 +12,8 @@ class Frames extends React.Component {
                     frame={frame} />
                 ))}
             </div>
-        )
+        );
     }
 }
 
-export default Frames
+export default Frames;
