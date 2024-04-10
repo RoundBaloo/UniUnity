@@ -22,7 +22,7 @@ class User(db.Model):
     search_aim = db.Column(db.String(100), nullable=False)
     about = db.Column(db.Text())
     skill_level = db.Column(db.String(100), nullable=False)
-    team_search_state = db.Column(db.Bool(100), nullable=False)
+    team_search_state = db.Column(db.Boolean(100), nullable=False)
     projects = db.relationship('Project', backref='user', lazy=True)
 
     def __init__(self, **kwargs):

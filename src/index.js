@@ -27,7 +27,10 @@ function App() {
     addFrame(arr);
   });
   
-  axios.post(apiUrl, {"email": "123", "password": "1223"})
+  axios.post(apiUrl, {
+    "email": "123", 
+    "password": "1223",
+  })
     .then(response => {
       console.log('User added successfully:', response.data);
     })
@@ -67,11 +70,9 @@ function App() {
             <Link to="/profile" className="Avatar">
               <img className="Avatar" src={avatar} width={90} />
             </Link>
-          </header>
-          {isLoggedIn 
-          ? (<p>Вы молодец</p>) : (<p>Зарегистрируйтесь пожалуйста или войдите в аккаунт</p>)}  
+          </header> 
           <Routes>
-            <Route exact path="/" element={<Main frames={frames} onAdd={addFrame}/>} />
+            <Route exact path="/" element={<Main frames={frames} onAdd={addFrame} onLogIn={isLoggedIn}/>} />
             <Route exact path="/profile" element={<Profile frames={frames} 
               onLogIn={makeLoggedIn} onLoggedIn={isLoggedIn} onFill={makeFill} onFilled={isFill} onAdd={addFrame} onAdd1={addFrame1}/>} />
           </Routes>
