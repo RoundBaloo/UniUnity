@@ -3,7 +3,6 @@ import Frame from './frame.js'
 
 class Frames extends React.Component {
     render() {
-        console.log(this.props.frames)
         return (
             <div className="frames-container">
                 {this.props.frames.map((frame) => (

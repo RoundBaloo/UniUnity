@@ -12,23 +12,22 @@ import Profile from './Pages/profile';
 import Main from './Pages/main';
 import axios from 'axios';
 
-const baseUrl = 'https://reqres.in/api/users';
-const apiUrl = 'https://reqres.in/api/users'
+const baseUrl = 'http://127.0.0.1:5000/users';
+const apiUrl = 'http://127.0.0.1:5000/register'
 
 function App() {
  const [frames, setFrames] = useState([]);
  const [isLoggedIn, setIsLoggedIn] = useState(false);
  const [isFill, setIsFill] = useState(false);
- const [users, setUsers] = useState([]);
 
  useEffect(() => {
   axios.get(baseUrl).then((res) => {
-    console.log(res.data.data);
-    let arr = res.data.data;
+    console.log(res.data.users);
+    let arr = res.data.users;
     addFrame(arr);
   });
   
-  axios.post(apiUrl, {"first_name": "morpheus", "last_name": "leader"})
+  axios.post(apiUrl, {"email": "123", "password": "1223"})
     .then(response => {
       console.log('User added successfully:', response.data);
     })
@@ -73,7 +72,8 @@ function App() {
           ? (<p>Вы молодец</p>) : (<p>Зарегистрируйтесь пожалуйста или войдите в аккаунт</p>)}  
           <Routes>
             <Route exact path="/" element={<Main frames={frames} onAdd={addFrame}/>} />
-            <Route exact path="/profile" element={<Profile frames={frames} onLogIn={makeLoggedIn} onFill={makeFill} onFilled={isFill} onAdd={addFrame} onAdd1={addFrame1}/>} />
+            <Route exact path="/profile" element={<Profile frames={frames} 
+              onLogIn={makeLoggedIn} onLoggedIn={isLoggedIn} onFill={makeFill} onFilled={isFill} onAdd={addFrame} onAdd1={addFrame1}/>} />
           </Routes>
         </>
       </Router>
