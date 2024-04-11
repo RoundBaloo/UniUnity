@@ -7,8 +7,8 @@ class Frame extends React.Component {
         const { frame } = this.props;
         return (
             <div className = "Frame">
-                <a className="Avatar Bigger"><img className="Avatar Bigger" src={frame.avatar} width={210} height={210}/></a>
-                <p className = "UserName">{frame.password} {frame.email}</p>
+                <a className="Avatar Bigger"><img className="Avatar Bigger" src={avatar} width={210} height={210}/></a>
+                <p className = "UserName">{frame.lastName} {frame.firstName}</p>
                 <ul>
                     <li className = "Direction">{frame.specialization}</li>
                     <li className="Search">{frame.isLookinForTeam ? 

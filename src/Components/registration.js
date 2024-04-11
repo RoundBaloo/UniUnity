@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import '../css/registration.css';
 import styled from 'styled-components';
+import axios from 'axios';
 
- const StyledForm = styled.form`
+const apiUrl = 'http://127.0.0.1:5000/register'
+
+const StyledForm = styled.form`
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -57,7 +60,6 @@ const FormContainer = styled.div`
     height: 80vh;
 `;
 
-
 export default class registration extends Component {
     constructor(props){
         super(props)
@@ -83,14 +85,21 @@ export default class registration extends Component {
                     <StyledInput onChange={(e) => this.setState({FIO: e.target.value})} />  
                 </StyledForm>
                 <StyledButton type="button" onClick={() => {
-                    if (this.state.password === this.state.repeated_password
-                        && this.state.email.includes('@')
-                        && this.state.FIO.split(' ').length == 3){
-                            this.props.onLogIn()
+                    axios.post(apiUrl, {
+                        "email": this.state.email, 
+                        "password": this.state.password,
+                        "lastName": this.state.FIO.split(" ")[0],
+                        "firstName": this.state.FIO.split(" ")[1],
+                        "fatherName": this.state.FIO.split(" ")[2]
+                      })
+                        .then(response => {
+                            console.log('User added successfully:', response.data);
                             this.props.onHandleRegister()
-                        }
-                    else
-                        console.log("bad")
+                            this.props.onLogIn()
+                        })
+                        .catch(error => {
+                          console.error('Error adding user:', error);
+                        });
                 }}>
                 зарегистрироваться</StyledButton>
                 

@@ -12,13 +12,15 @@ import Profile from './Pages/profile';
 import Main from './Pages/main';
 import axios from 'axios';
 
+
 const baseUrl = 'http://127.0.0.1:5000/users';
-const apiUrl = 'http://127.0.0.1:5000/register'
 
 function App() {
  const [frames, setFrames] = useState([]);
  const [isLoggedIn, setIsLoggedIn] = useState(false);
  const [isFill, setIsFill] = useState(false);
+ const [isOnline, setOnline] = useState(false);
+ const [isRegistration, setRegistration] = useState(false);
 
  useEffect(() => {
   axios.get(baseUrl).then((res) => {
@@ -26,18 +28,6 @@ function App() {
     let arr = res.data.users;
     addFrame(arr);
   });
-  
-  axios.post(apiUrl, {
-    "email": "123", 
-    "password": "1223",
-  })
-    .then(response => {
-      console.log('User added successfully:', response.data);
-    })
-    .catch(error => {
-      console.error('Error adding user:', error);
-    });
-
  }, []);
 
  const addFrame = (data) => {
@@ -47,6 +37,10 @@ function App() {
 
       setFrames(data);
  };
+
+ const makeOnline = () => {
+  setOnline(true);
+ }
 
  const addFrame1 = (frame) => {
   setFrames(prevFrames => [...prevFrames, [{frame}]])
@@ -60,21 +54,42 @@ function App() {
     setIsFill(true);
   };
 
+  const updateUsersArray = () => {
+    axios.get(baseUrl).then((res) => {
+      console.log(res.data.users);
+      let arr = res.data.users;
+      addFrame(arr);
+    });
+  }
+
+  const makeRegistration = () => {
+    setRegistration(true);
+  }
+
+  const makeNonRegistration = () => {
+    setRegistration(false);
+  }
+
  return (
       <Router>
         <>
           <header className="header">
-            <Link to="/" className="Logo"><img src={logo} width={200} height={69} /></Link>
+            <Link to="/" className="Logo"><img src={logo} width={200} height={69} onClick={updateUsersArray}/></Link>
             <a href="#"><p className="PublishProject">Опубликовать проект</p></a>
             <a href="#" className="Notification"><img className="Notification" src={notification} width={45} /></a>
-            <Link to="/profile" className="Avatar">
-              <img className="Avatar" src={avatar} width={90} />
+            <Link to="/profile" className="Avatar" onClick={makeNonRegistration}>
+              <img className="Avatar" src={avatar} width={90}/>
             </Link>
-          </header> 
+          </header>
           <Routes>
-            <Route exact path="/" element={<Main frames={frames} onAdd={addFrame} onLogIn={isLoggedIn}/>} />
+            <Route exact path="/" element={<Main frames={frames} onAdd={addFrame} onLogIn={isLoggedIn}
+              onMakeRegistration={makeRegistration} onRegistarion={isRegistration}
+              onMakeNonRegistration={makeNonRegistration}/>} />
             <Route exact path="/profile" element={<Profile frames={frames} 
-              onLogIn={makeLoggedIn} onLoggedIn={isLoggedIn} onFill={makeFill} onFilled={isFill} onAdd={addFrame} onAdd1={addFrame1}/>} />
+              onLogIn={makeLoggedIn} onLoggedIn={isLoggedIn} onFill={makeFill} 
+              onFilled={isFill} onAdd={addFrame} onAdd1={addFrame1}
+              onOnline={isOnline} onMakeRegistration={makeRegistration}
+              onRegistarion={isRegistration}/>} />
           </Routes>
         </>
       </Router>
