@@ -9,11 +9,12 @@ class User(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
 
-    email = db.Column(db.String(120), unique=True, nullable=False)
-    password = db.Column(db.String(120), nullable=False)
+    email = db.Column(db.String(120), unique=True)
+    password = db.Column(db.String(120))
 
-    first_name = db.Column(db.String(100), nullable=False)
-    last_name = db.Column(db.String(100), nullable=False)
+    first_name = db.Column(db.String(100))
+    last_name = db.Column(db.String(100))
+    father_name = db.Column(db.String(100))
 
     institute = db.Column(db.String(100))
     study_direction = db.Column(db.String(100))
@@ -28,6 +29,17 @@ class User(db.Model):
     def __init__(self, **kwargs):
         self.email = kwargs.get('email')
         self.password = bcrypt.hash(kwargs.get('password'))
+        self.first_name = kwargs.get('firstName')
+        self.last_name = kwargs.get('lastName')
+        self.father_name = kwargs.get('fatherName')
+        self.institute = kwargs.get('institute')
+        self.study_direction = kwargs.get('studyDirection')
+        self.course = kwargs.get('course')
+        self.profession = kwargs.get('profession')
+        self.search_aim = kwargs.get('searchAim')
+        self.about = kwargs.get('about')
+        self.skill_level = kwargs.get('skillLevel')
+        self.team_search_state = kwargs.get('teamSearchState')
 
     def get_token(self, expire_time=24):
         expire_delta = timedelta(expire_time)
@@ -50,6 +62,7 @@ class User(db.Model):
 
             "firstName": self.first_name,
             "lastName": self.last_name,
+            "fatherName": self.father_name,
 
             "institute": self.institute,
             "studyDirection": self.study_direction,

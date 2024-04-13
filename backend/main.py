@@ -1,9 +1,11 @@
 # CRUD - Create Read Update Delete
 from flask import jsonify, request
+from flask_cors import CORS
 from flask_jwt_extended import jwt_required, get_jwt_identity
 from config import app, db
 from models import User, Project
 
+CORS(app)
 
 # Получение юзеров
 @app.route("/users", methods=["GET"])
@@ -64,8 +66,11 @@ def register():
     params = request.json
     user = User(**params)
     try:
+        print(1)
         db.session.add(user)  # подготовка к добавлению в БД
+        print(2)
         db.session.commit()  # добавление в БД
+        print(3)
     except Exception as e:
         return jsonify({"message": str(e)}), 400
 
@@ -80,7 +85,6 @@ def login():
     user = User.authenticate(**params)
     token = user.get_token()
     return {'access_token': token}  # доступ к аккаунту
-
 
 # Получение проектов юзера
 @app.route("/get_user_projects/<int:user_id>", methods=["GET"])

@@ -1,63 +1,93 @@
 import React, { useState, useEffect } from "react";
-import ReactDOM from "react-dom";
+import { createRoot } from 'react-dom/client';
 import './css/style.css';
 import logo from './img/LogoPlaceholder.png';
 import notification from './img/NotificationButton.svg';
 import avatar from './img/avatarPlaceholder.jpg';
-import Frames from './Components/frames.js';
-import { Link, useSearchParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Profile from './Pages/profile';
 import Main from './Pages/main';
+import axios from 'axios';
+
+const baseUrl = 'http://127.0.0.1:5000/users';
 
 function App() {
- const [frames, setFrames] = useState([]);
- const [isLoggedIn, setIsLoggedIn] = useState(false);
- const [users, setUsers] = useState([]);
+  const [frames, setFrames] = useState([]);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isFill, setIsFill] = useState(false);
+  const [isOnline, setOnline] = useState(false);
+  const [isRegistration, setRegistration] = useState(false);
 
- useEffect(() => {
-  fetchUsers()
- }, []);
- 
- const fetchUsers = async () => {
-  const response = await fetch("https://127.0.0.1:5500/users")
-  const data = await response.json()
-  setUsers(data.users)
-  console.log(data.users)
- }
+  useEffect(() => {
+    axios.get(baseUrl).then((res) => {
+      console.log(res.data.users);
+      let arr = res.data.users;
+      addFrame(arr);
+    });
+  }, []);
 
- const addFrame = (frame) => {
-    const id = frames.length + 1;
-    const specialization = "default";
-    const isLookingForTeam = true;
-
-    setFrames([...frames, {id, ...frame, specialization, isLookingForTeam }]);
- };
+  const addFrame = (data) => {
+        setFrames(data);
+  };
   
- const makeLoggedIn = () => {
+  const addFrame1 = (frame) => {
+    setFrames(prevFrames => [...prevFrames, [{frame}]])
+  };
+
+    const makeOnline = () => {
+    setOnline(true);
+  }
+    
+  const makeLoggedIn = () => {
     setIsLoggedIn(true);
- };
+  };
+
+  const makeFill = () => {
+    setIsFill(true);
+  };
+
+  const updateUsersArray = () => {
+    axios.get(baseUrl).then((res) => {
+      console.log(res.data.users);
+      let arr = res.data.users;
+      addFrame(arr);
+    });
+  }
+
+  const makeRegistration = () => {
+    setRegistration(true);
+  }
+
+  const makeNonRegistration = () => {
+    setRegistration(false);
+  }
 
  return (
-    <Router>
-      <>
-        <header className="header">
-          <Link to="/" className="Logo"><img src={logo} width={200} height={69} /></Link>
-          <a href="#"><p className="PublishProject">Опубликовать проект</p></a>
-          <a href="#" className="Notification"><img className="Notification" src={notification} width={45} /></a>
-          <Link to="/profile" className="Avatar">
-            <img className="Avatar" src={avatar} width={90} />
-          </Link>
-        </header>
-        {isLoggedIn 
-        ? (<p>Вы молодец</p>) : (<p>Зарегистрируйтесь пожалуйста или войдите в аккаунт</p>)}  
-        <Routes>
-          <Route exact path="/" element={<Main frames={frames} onAdd={addFrame}/>} />
-          <Route exact path="/profile" element={<Profile frames={frames} onLogIn={makeLoggedIn} onAdd={addFrame}/>} />
-        </Routes>
-      </>
-    </Router>
+      <Router>
+        <>
+          <header className="header">
+            <Link to="/" className="Logo"><img src={logo} width={200} height={69} onClick={updateUsersArray}/></Link>
+            <a href="#"><p className="PublishProject">Опубликовать проект</p></a>
+            <a href="#" className="Notification"><img className="Notification" src={notification} width={45} /></a>
+            <Link to="/profile" className="Avatar" onClick={makeNonRegistration}>
+              <img className="Avatar" src={avatar} width={90}/>
+            </Link>
+          </header>
+          <Routes>
+            <Route exact path="/" element={<Main frames={frames} onAdd={addFrame} onLogIn={isLoggedIn}
+              onMakeRegistration={makeRegistration} onRegistarion={isRegistration}
+              onMakeNonRegistration={makeNonRegistration}/>} />
+            <Route exact path="/profile" element={<Profile frames={frames} 
+              onLogIn={makeLoggedIn} onLoggedIn={isLoggedIn} onFill={makeFill} 
+              onFilled={isFill} onAdd={addFrame} onAdd1={addFrame1}
+              onOnline={isOnline} onMakeRegistration={makeRegistration}
+              onRegistarion={isRegistration}/>} />
+          </Routes>
+        </>
+      </Router>
  );
 }
 
-ReactDOM.render(<App />, document.getElementById("app"));
+const root = document.getElementById("app");
+createRoot(root).render(<App />);
