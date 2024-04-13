@@ -22,7 +22,7 @@ def get_users():
 def get_user():
     user_id = get_jwt_identity()
     user = User.query.filter(User.id == user_id)
-    return user.to_json()
+    return jsonify({"user": user}), 200
 
 
 # Обновление юзера
