@@ -17,11 +17,12 @@ def get_users():
 
 
 # Получение юзера
-@app.route("/get_user_id", methods=["GET"])
+@app.route("/get_user", methods=["GET"])
 @jwt_required()
-def get_user_id():
+def get_user():
     user_id = get_jwt_identity()
-    return jsonify({"user_id": user_id}), 200
+    user = User.query.filter(User.id == user_id)
+    return jsonify({"user": user}), 200
 
 
 # Обновление юзера
