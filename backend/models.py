@@ -15,14 +15,14 @@ class User(db.Model):
     first_name = db.Column(db.String(100), nullable=False)
     last_name = db.Column(db.String(100), nullable=False)
 
-    institute = db.Column(db.String(100), nullable=False)
-    study_direction = db.Column(db.String(100), nullable=False)
-    course = db.Column(db.Integer, nullable=False)
-    profession = db.Column(db.String(100), nullable=False)
-    search_aim = db.Column(db.String(100), nullable=False)
+    institute = db.Column(db.String(100))
+    study_direction = db.Column(db.String(100))
+    course = db.Column(db.Integer)
+    profession = db.Column(db.String(100))
+    search_aim = db.Column(db.String(100))
     about = db.Column(db.Text())
-    skill_level = db.Column(db.String(100), nullable=False)
-    team_search_state = db.Column(db.String(100), nullable=False)
+    skill_level = db.Column(db.String(100))
+    team_search_state = db.Column(db.Boolean)
     projects = db.relationship('Project', backref='user', lazy=True)
 
     def __init__(self, **kwargs):
