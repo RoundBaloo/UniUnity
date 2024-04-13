@@ -8,7 +8,8 @@ class Frames extends React.Component {
                 {this.props.frames.map((frame) => (
                     <Frame 
                     key={frame.id} 
-                    frame={frame} />
+                    frame={frame}
+                    frames={this.props.frames} />
                 ))}
             </div>
         );

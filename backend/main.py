@@ -1,7 +1,7 @@
 # CRUD - Create Read Update Delete
 from flask import jsonify, request
 from flask_cors import CORS
-from flask_jwt_extended import jwt_required, get_jwt_identity
+from flask_jwt_extended import jwt_required, get_jwt_identity, verify_jwt_in_request
 from config import app, db
 from models import User, Project
 
@@ -19,6 +19,7 @@ def get_users():
 # Обновление юзера
 @app.route("/update_user", methods=["PATCH"])
 def update_user():
+    verify_jwt_in_request()
     user_id = get_jwt_identity()
     user = User.query.get(user_id)
 
@@ -33,9 +34,10 @@ def update_user():
 
     user.first_name = data.get("firstName", user.first_name)
     user.last_name = data.get("lastName", user.last_name)
+    user.father_name = data.get("fatherName", user.father_name)
 
     user.institute = data.get("institute", user.institute)
-    user.study_direction = data.get("study_direction", user.study_direction)
+    user.study_direction = data.get("studyDirection", user.study_direction)
     user.course = data.get("course", user.course)
     user.profession = data.get("profession", user.profession)
     user.search_aim = data.get("searchAim")

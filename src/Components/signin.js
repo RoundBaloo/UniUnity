@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import styled from 'styled-components';
 import axios from 'axios';
+import { saveToken, setAuthHeader } from '../tokenService';
+
 
 const StyledForm = styled.form`
     display: flex;
@@ -73,11 +75,14 @@ export default class signin extends Component {
             </StyledForm>
             <StyledButton type="button" onClick={() => {
                 axios.post('http://127.0.0.1:5000/login', {
-                    "email": this.state.email,
-                    "password": this.state.password
+                    email: this.state.email,
+                    password: this.state.password
                 })
                 .then(response => {
                  console.log(response.data);
+                 const token = response.data.access_token;
+                 saveToken(token);
+                 setAuthHeader(token);
                  this.props.onLogIn()
                 })
                 .catch(error => {

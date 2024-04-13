@@ -5,12 +5,13 @@ import avatar from '../img/avatarPlaceholder.jpg'
 class Frame extends React.Component {
     render () {  
         const { frame } = this.props;
+        console.log(frame)
         return (
             <div className = "Frame">
                 <a className="Avatar Bigger"><img className="Avatar Bigger" src={avatar} width={210} height={210}/></a>
                 <p className = "UserName">{frame.lastName} {frame.firstName}</p>
                 <ul>
-                    <li className = "Direction">{frame.specialization}</li>
+                    <li className = "Direction">{frame.profession}</li>
                     <li className="Search">{frame.isLookinForTeam ? 
                         <span className="Search InSearch">В поисках команды</span> 
                         : <span className="NotInSearch">Не ищет команду</span>}
@@ -26,19 +27,19 @@ class Frame extends React.Component {
                     <li>
                         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                             <div className="naming">Направление</div>
-                            <div className="description">{frame.direction}</div>
+                            <div className="description">{frame.studyDirection}</div>
                         </div>
                     </li>
                     <li>
                         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                             <div className="naming">Курс</div>
-                            <div className="description">{frame.year}</div>
+                            <div className="description">{frame.course}</div>
                         </div>
                     </li>
                     <li>
                         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                             <div className="naming">Уровень</div>
-                            <div className="description">{frame.skill}</div>
+                            <div className="description">{frame.skillLevel}</div>
                         </div>
                     </li>
                 </ul>

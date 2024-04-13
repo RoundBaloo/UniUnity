@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import styled from 'styled-components';
 import axios from 'axios';
+import { getToken } from '../tokenService';
 
 const StyledForm = styled.form`
     display: flex;
@@ -20,7 +21,9 @@ const StyledForm = styled.form`
 const StyledP = styled.p`
 `;
 
-const StyledInput = styled.input`
+const StyledInput = styled.input.attrs({
+  maxLength: 50,
+})`
     background-color: white;
     border: 1px solid black;
     border-radius: 5px;
@@ -40,6 +43,8 @@ const StyledButton = styled.button`
     height: 40px;
     border-bottom-left-radius: 11px;
     border-bottom-right-radius: 11px;
+    padding-bottom: 20px;
+    line-height: 40px;
     &:hover {
         cursor: pointer;
         color: white;
@@ -48,13 +53,15 @@ const StyledButton = styled.button`
 `;
 
 const FormContainer = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: center; // Выравнивание по центру по горизонтали
-    justify-content: center; // Выравнивание по центру по вертикали
-    width: 300px;
-    margin: auto;
-    height: 80vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center; // Выравнивание по центру по горизонтали
+  justify-content: center; // Выравнивание по центру по вертикали
+  width: 300px;
+  margin: auto;
+  height: 100vh;
+  margin-top: 170px;
+  margin-bottom: 170px;
 `;
 
 const StyledSelect = styled.select`
@@ -77,17 +84,33 @@ const StyledOption = styled.option`
   border-radius: 5px;
 `;
 
+const StyledTextarea = styled.textarea.attrs({
+  maxLength: 200,
+})`
+  background-color: white;
+  border: 1px solid black;
+  border-radius: 5px;
+  padding: 10px;
+  width: 100%;
+  height: 100px;
+  box-sizing: border-box;
+  resize: none; 
+`;
+
 export default class form extends Component {
   constructor(props){
     super(props)
     this.state ={
-      firstName: "",
+      firstName: this.props.frames[],
       secondName: "",
       fatherName: "",
       institute: "",
       direction: "",
       year: 0,
-      skill: ""
+      skill: "",
+      profession: "",
+      searchAim: "",
+      about: ""
     }
   }
   render() {
@@ -95,16 +118,22 @@ export default class form extends Component {
       !this.props.onFilled ? (
         <FormContainer>
           <StyledForm>
-            <StyledInput placeholder='Фамилия' onChange={(e) => this.setState({secondName: e.target.value})}/>
-            <StyledInput placeholder='Имя' onChange={(e) => this.setState({firstName: e.target.value})}/>
-            <StyledInput placeholder='Отчество' onChange={(e) => this.setState({fatherName: e.target.value})}/>
-            <StyledInput placeholder='Институт' onChange={(e) => this.setState({institute: e.target.value})}/>
-            <StyledSelect onChange={(e) => this.setState({direction: e.target.value})}>
-              <StyledOption value="">Выберите направление</StyledOption>
-              <StyledOption value="direction1">Направление 1</StyledOption>
-              <StyledOption value="direction2">Направление 2</StyledOption>
-              <StyledOption value="direction3">Направление 3</StyledOption>
-            </StyledSelect>
+            <StyledP>Фамилия</StyledP>
+            <StyledInput placeholder='' onChange={(e) => this.setState({secondName: e.target.value})}/>
+            <StyledP>Имя</StyledP>
+            <StyledInput placeholder='' onChange={(e) => this.setState({firstName: e.target.value})}/>
+            <StyledP>Отчество</StyledP>
+            <StyledInput placeholder='' onChange={(e) => this.setState({fatherName: e.target.value})}/>
+            <StyledP>Институт</StyledP>
+            <StyledInput placeholder='' onChange={(e) => this.setState({institute: e.target.value})}/>
+            <StyledP>Направление обучения</StyledP>
+            <StyledInput placeholder='' onChange={(e) => this.setState({direction: e.target.value})}/>
+            <StyledP>Специальность</StyledP>
+            <StyledInput placeholder='' onChange={(e) => {this.setState({profession: e.target.value})}}/>
+            <StyledP>Цель поиска команды</StyledP>
+            <StyledInput placeholder='' onChange={(e) => {this.setState({searchAim: e.target.value})}}/>
+            <StyledP>О себе</StyledP>
+            <StyledTextarea placeholder='' onChange={(e) => this.setState({about: e.target.value})}/>
             <StyledSelect onChange={(e) => this.setState({year: e.target.value})}>
               <StyledOption value="">Курс</StyledOption>
               <StyledOption value="1">1</StyledOption>
@@ -116,28 +145,45 @@ export default class form extends Component {
             </StyledSelect>
             <StyledSelect onChange={(e) => this.setState({skill: e.target.value})}>
               <StyledOption value="">Уровень</StyledOption>
-              <StyledOption value="skill1">Начинающий</StyledOption>
-              <StyledOption value="skill2">Junior</StyledOption>
-              <StyledOption value="skill3">Middle</StyledOption>
-              <StyledOption value="skill4">Senior</StyledOption>
+              <StyledOption value="Начинающий">Начинающий</StyledOption>
+              <StyledOption value="Junior">Junior</StyledOption>
+              <StyledOption value="Middle">Middle</StyledOption>
+              <StyledOption value="Senior">Senior</StyledOption>
             </StyledSelect>
           </StyledForm>
           <StyledButton type="button" onClick={() => {
+              console.log(this.state)
               if (this.state.firstName.length < 3)
                 console.log('error')
               else {
-                  this.props.onAdd1({
-                  firstName: this.state.firstName,
-                  secondName: this.state.secondName,
-                  fatherName: this.state.fatherName,
-                  institute: this.state.institute,
-                  direction: this.state.direction,
-                  year: this.state.year,
-                  skill: this.state.skill
-              })
-              this.props.onFill()
+                const token = getToken();
+                if (token) {
+                    axios.patch('http://127.0.0.1:5000/update_user', {
+                        "firstName": this.state.firstName,
+                        "lastName": this.state.secondName,
+                        "fatherName": this.state.fatherName,
+                        "institute": this.state.institute,
+                        "studyDirection": this.state.direction,
+                        "course": this.state.year,
+                        "skillLevel": this.state.skill,
+                        "profession": this.state.profession,
+                        "searchAim": this.state.searchAim,
+                        "about": this.state.about
+                      }, {
+                        headers: {
+                            'Authorization': `Bearer ${token}`
+                        }
+                    })
+                    .then(response => {
+                        console.log(response.data);
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                    });
+                    this.props.onFill()
+                }
             }
-            }}>Добавить</StyledButton>
+            }}>обновить</StyledButton>
         </FormContainer>
       ) : (<span>Форма заполнена</span>)
     )

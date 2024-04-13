@@ -17,7 +17,9 @@ export default class Profile extends Component {
       <div>
         <div>
           {this.props.onLoggedIn
-            ? (<Form onAdd={this.props.onAdd} onFill={this.props.onFill} onFilled={this.props.onFilled} onAdd1={this.props.onAdd1}/>)
+            ? (<Form onAdd={this.props.onAdd} onFill={this.props.onFill} 
+              onFilled={this.props.onFilled} onAdd1={this.props.onAdd1}
+              frames={this.props.frames}/>)
             : (this.props.onRegistarion 
               ? (<Registration onLogIn={this.props.onLogIn}/>) 
               : (<Signin onMakeRegistration={this.props.onMakeRegistration} onRegistarion={this.props.onRegistarion} 
