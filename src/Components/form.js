@@ -97,20 +97,36 @@ const StyledTextarea = styled.textarea.attrs({
   resize: none; 
 `;
 
+const token = getToken();
+var userInfo;
+
+axios.get('http://127.0.0.1:5000/get_user_id', {
+  headers: {
+      'Authorization': `Bearer ${token}`
+  }
+})
+.then(response => {
+  console.log(response.data);
+  userInfo = response.data;
+})
+.catch(error => {
+  console.error('Error:', error);
+});
+
 export default class form extends Component {
   constructor(props){
     super(props)
     this.state ={
-      firstName: this.props.frames[],
-      secondName: "",
-      fatherName: "",
-      institute: "",
-      direction: "",
-      year: 0,
-      skill: "",
-      profession: "",
-      searchAim: "",
-      about: ""
+      firstName: this.props.frames[0].firstName,
+      secondName: this.props.frames[0].lastName,
+      fatherName: this.props.frames[0].fatherName,
+      institute: this.props.frames[0].institute,
+      direction: this.props.frames[0].studyDirection,
+      year: this.props.frames[0].year,
+      skill: this.props.frames[0].skillLevel,
+      profession: this.props.frames[0].profession,
+      searchAim: this.props.frames[0].searchAim,
+      about: this.props.frames[0].about
     }
   }
   render() {
@@ -119,23 +135,23 @@ export default class form extends Component {
         <FormContainer>
           <StyledForm>
             <StyledP>Фамилия</StyledP>
-            <StyledInput placeholder='' onChange={(e) => this.setState({secondName: e.target.value})}/>
+            <StyledInput value={this.state.secondName} onChange={(e) => this.setState({secondName: e.target.value})}/>
             <StyledP>Имя</StyledP>
-            <StyledInput placeholder='' onChange={(e) => this.setState({firstName: e.target.value})}/>
+            <StyledInput value={this.state.firstName} onChange={(e) => this.setState({firstName: e.target.value})}/>
             <StyledP>Отчество</StyledP>
-            <StyledInput placeholder='' onChange={(e) => this.setState({fatherName: e.target.value})}/>
+            <StyledInput value={this.state.fatherName} onChange={(e) => this.setState({fatherName: e.target.value})}/>
             <StyledP>Институт</StyledP>
-            <StyledInput placeholder='' onChange={(e) => this.setState({institute: e.target.value})}/>
+            <StyledInput value={this.state.institute} onChange={(e) => this.setState({institute: e.target.value})}/>
             <StyledP>Направление обучения</StyledP>
-            <StyledInput placeholder='' onChange={(e) => this.setState({direction: e.target.value})}/>
+            <StyledInput value={this.state.direction} onChange={(e) => this.setState({direction: e.target.value})}/>
             <StyledP>Специальность</StyledP>
-            <StyledInput placeholder='' onChange={(e) => {this.setState({profession: e.target.value})}}/>
+            <StyledInput value={this.state.profession} onChange={(e) => {this.setState({profession: e.target.value})}}/>
             <StyledP>Цель поиска команды</StyledP>
-            <StyledInput placeholder='' onChange={(e) => {this.setState({searchAim: e.target.value})}}/>
+            <StyledInput value={this.state.searchAim} onChange={(e) => {this.setState({searchAim: e.target.value})}}/>
             <StyledP>О себе</StyledP>
-            <StyledTextarea placeholder='' onChange={(e) => this.setState({about: e.target.value})}/>
+            <StyledTextarea value={this.state.about} onChange={(e) => this.setState({about: e.target.value})}/>
             <StyledSelect onChange={(e) => this.setState({year: e.target.value})}>
-              <StyledOption value="">Курс</StyledOption>
+              <StyledOption value={this.state.year}>Курс</StyledOption>
               <StyledOption value="1">1</StyledOption>
               <StyledOption value="2">2</StyledOption>
               <StyledOption value="3">3</StyledOption>
@@ -144,7 +160,7 @@ export default class form extends Component {
               <StyledOption value="6">6</StyledOption>
             </StyledSelect>
             <StyledSelect onChange={(e) => this.setState({skill: e.target.value})}>
-              <StyledOption value="">Уровень</StyledOption>
+              <StyledOption value={this.state.skill}>Уровень</StyledOption>
               <StyledOption value="Начинающий">Начинающий</StyledOption>
               <StyledOption value="Junior">Junior</StyledOption>
               <StyledOption value="Middle">Middle</StyledOption>
@@ -156,7 +172,6 @@ export default class form extends Component {
               if (this.state.firstName.length < 3)
                 console.log('error')
               else {
-                const token = getToken();
                 if (token) {
                     axios.patch('http://127.0.0.1:5000/update_user', {
                         "firstName": this.state.firstName,
@@ -168,7 +183,8 @@ export default class form extends Component {
                         "skillLevel": this.state.skill,
                         "profession": this.state.profession,
                         "searchAim": this.state.searchAim,
-                        "about": this.state.about
+                        "about": this.state.about,
+                        "teamSearchState": true
                       }, {
                         headers: {
                             'Authorization': `Bearer ${token}`

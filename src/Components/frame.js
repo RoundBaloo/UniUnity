@@ -12,7 +12,7 @@ class Frame extends React.Component {
                 <p className = "UserName">{frame.lastName} {frame.firstName}</p>
                 <ul>
                     <li className = "Direction">{frame.profession}</li>
-                    <li className="Search">{frame.isLookinForTeam ? 
+                    <li className="Search">{frame.teamSearchState ? 
                         <span className="Search InSearch">В поисках команды</span> 
                         : <span className="NotInSearch">Не ищет команду</span>}
                     </li>
