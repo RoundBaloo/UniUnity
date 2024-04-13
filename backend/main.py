@@ -89,7 +89,7 @@ def login():
 # Получение проектов юзера
 @app.route("/get_user_projects/<int:user_id>", methods=["GET"])
 def get_projects(user_id):
-    projects = Project.query.filter(Project.user_id == user_id )
+    projects = Project.query.filter(Project.user_id == user_id)
     json_projects = list(map(lambda x: x.to_json(), projects))
     return jsonify({"projects": json_projects}), 200
 
