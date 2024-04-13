@@ -16,6 +16,15 @@ def get_users():
     return jsonify({"users": json_users}), 200
 
 
+# Получение юзера
+@app.route("/get_user", methods=["GET"])
+@jwt_required()
+def get_user():
+    user_id = get_jwt_identity()
+    user = User.query.filter(User.id == user_id)
+    return user.to_json()
+
+
 # Обновление юзера
 @app.route("/update_user", methods=["PATCH"])
 def update_user():
