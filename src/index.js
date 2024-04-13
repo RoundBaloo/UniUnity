@@ -1,51 +1,44 @@
 import React, { useState, useEffect } from "react";
-import ReactDOM from "react-dom";
 import { createRoot } from 'react-dom/client';
 import './css/style.css';
 import logo from './img/LogoPlaceholder.png';
 import notification from './img/NotificationButton.svg';
 import avatar from './img/avatarPlaceholder.jpg';
-import Frames from './Components/frames.js';
-import { Link, useSearchParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Profile from './Pages/profile';
 import Main from './Pages/main';
 import axios from 'axios';
 
-
 const baseUrl = 'http://127.0.0.1:5000/users';
 
 function App() {
- const [frames, setFrames] = useState([]);
- const [isLoggedIn, setIsLoggedIn] = useState(false);
- const [isFill, setIsFill] = useState(false);
- const [isOnline, setOnline] = useState(false);
- const [isRegistration, setRegistration] = useState(false);
+  const [frames, setFrames] = useState([]);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isFill, setIsFill] = useState(false);
+  const [isOnline, setOnline] = useState(false);
+  const [isRegistration, setRegistration] = useState(false);
 
- useEffect(() => {
-  axios.get(baseUrl).then((res) => {
-    console.log(res.data.users);
-    let arr = res.data.users;
-    addFrame(arr);
-  });
- }, []);
+  useEffect(() => {
+    axios.get(baseUrl).then((res) => {
+      console.log(res.data.users);
+      let arr = res.data.users;
+      addFrame(arr);
+    });
+  }, []);
 
- const addFrame = (data) => {
-      const id = frames.length + 1;
-      const specialization = "default";
-      const isLookingForTeam = true;
-
-      setFrames(data);
- };
-
- const makeOnline = () => {
-  setOnline(true);
- }
-
- const addFrame1 = (frame) => {
-  setFrames(prevFrames => [...prevFrames, [{frame}]])
- };
+  const addFrame = (data) => {
+        setFrames(data);
+  };
   
+  const addFrame1 = (frame) => {
+    setFrames(prevFrames => [...prevFrames, [{frame}]])
+  };
+
+    const makeOnline = () => {
+    setOnline(true);
+  }
+    
   const makeLoggedIn = () => {
     setIsLoggedIn(true);
   };

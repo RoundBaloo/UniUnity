@@ -94,7 +94,6 @@ export default class registration extends Component {
                       })
                         .then(response => {
                             console.log('User added successfully:', response.data);
-                            this.props.onHandleRegister()
                             this.props.onLogIn()
                         })
                         .catch(error => {

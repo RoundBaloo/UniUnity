@@ -16,15 +16,15 @@ class User(db.Model):
     last_name = db.Column(db.String(100))
     father_name = db.Column(db.String(100))
 
-    # institute = db.Column(db.String(100))
-    # study_direction = db.Column(db.String(100))
-    # course = db.Column(db.Integer)
-    # profession = db.Column(db.String(100))
-    # search_aim = db.Column(db.String(100))
-    # about = db.Column(db.Text())
-    # skill_level = db.Column(db.String(100))
-    # team_search_state = db.Column(db.Boolean(100))
-    # projects = db.relationship('Project', backref='user', lazy=True)
+    institute = db.Column(db.String(100))
+    study_direction = db.Column(db.String(100))
+    course = db.Column(db.Integer)
+    profession = db.Column(db.String(100))
+    search_aim = db.Column(db.String(100))
+    about = db.Column(db.Text())
+    skill_level = db.Column(db.String(100))
+    team_search_state = db.Column(db.Boolean(100))
+    projects = db.relationship('Project', backref='user', lazy=True)
 
     def __init__(self, **kwargs):
         self.email = kwargs.get('email')
@@ -32,6 +32,14 @@ class User(db.Model):
         self.first_name = kwargs.get('firstName')
         self.last_name = kwargs.get('lastName')
         self.father_name = kwargs.get('fatherName')
+        self.institute = kwargs.get('institute')
+        self.study_direction = kwargs.get('studyDirection')
+        self.course = kwargs.get('course')
+        self.profession = kwargs.get('profession')
+        self.search_aim = kwargs.get('searchAim')
+        self.about = kwargs.get('about')
+        self.skill_level = kwargs.get('skillLevel')
+        self.team_search_state = kwargs.get('teamSearchState')
 
     def get_token(self, expire_time=24):
         expire_delta = timedelta(expire_time)
@@ -54,17 +62,17 @@ class User(db.Model):
 
             "firstName": self.first_name,
             "lastName": self.last_name,
-            "fatherName": self.father_name
+            "fatherName": self.father_name,
 
-            # "institute": self.institute,
-            # "studyDirection": self.study_direction,
-            # "course": str(self.course),
-            # "profession": self.profession,
-            # "searchAim": self.search_aim,
-            # "about": self.about,
-            # "skillLevel": self.skill_level,
-            # "teamSearchState": self.team_search_state,
-            # "projects": self.projects
+            "institute": self.institute,
+            "studyDirection": self.study_direction,
+            "course": str(self.course),
+            "profession": self.profession,
+            "searchAim": self.search_aim,
+            "about": self.about,
+            "skillLevel": self.skill_level,
+            "teamSearchState": self.team_search_state,
+            "projects": self.projects
         }
 
 

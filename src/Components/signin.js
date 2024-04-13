@@ -72,8 +72,17 @@ export default class signin extends Component {
                 }}>зарегистрироваться</p>
             </StyledForm>
             <StyledButton type="button" onClick={() => {
-                this.props.onHandleRegister()
-                this.props.onLogIn()
+                axios.post('http://127.0.0.1:5000/login', {
+                    "email": this.state.email,
+                    "password": this.state.password
+                })
+                .then(response => {
+                 console.log(response.data);
+                 this.props.onLogIn()
+                })
+                .catch(error => {
+                 console.error('Error:', error);
+                });
             }}>
             войти</StyledButton> 
         </FormContainer>

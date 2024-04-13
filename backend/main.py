@@ -86,7 +86,6 @@ def login():
     token = user.get_token()
     return {'access_token': token}  # доступ к аккаунту
 
-
 # Получение проектов юзера
 @app.route("/get_user_projects/<int:user_id>", methods=["GET"])
 def get_projects(user_id):
