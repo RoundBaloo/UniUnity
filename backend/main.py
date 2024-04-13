@@ -7,6 +7,7 @@ from models import User, Project
 
 CORS(app)
 
+
 # Получение юзеров
 @app.route("/users", methods=["GET"])
 def get_users():
@@ -17,7 +18,6 @@ def get_users():
 
 # Обновление юзера
 @app.route("/update_user", methods=["PATCH"])
-@jwt_required
 def update_user():
     user_id = get_jwt_identity()
     user = User.query.get(user_id)
@@ -49,8 +49,7 @@ def update_user():
 
 
 # Удаление юзера
-@app.route("/delete_user", methods=["DELETE"])
-@jwt_required
+@app.route("/delete_user>", methods=["DELETE"])
 def delete_user():
     user_id = get_jwt_identity()
     user = User.query.get(user_id)
@@ -90,6 +89,7 @@ def login():
     token = user.get_token()
     return {'access_token': token}  # доступ к аккаунту
 
+
 # Получение проектов юзера
 @app.route("/get_user_projects/<int:user_id>", methods=["GET"])
 def get_projects(user_id):
@@ -99,7 +99,7 @@ def get_projects(user_id):
 
 
 # добавление проекта юзером
-@app.route("/post_project")
+@app.route("/post_project", methods=["POST"])
 @jwt_required
 def post_project():
     user_id = get_jwt_identity()
