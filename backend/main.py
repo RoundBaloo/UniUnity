@@ -16,8 +16,10 @@ def get_users():
 
 
 # Обновление юзера
-@app.route("/update_user/<int:user_id>", methods=["PATCH"])
-def update_user(user_id):
+@app.route("/update_user", methods=["PATCH"])
+@jwt_required
+def update_user():
+    user_id = get_jwt_identity()
     user = User.query.get(user_id)
 
     # Существует ли юзер
@@ -47,8 +49,10 @@ def update_user(user_id):
 
 
 # Удаление юзера
-@app.route("/delete_user/<int:user_id>", methods=["DELETE"])
-def delete_user(user_id):
+@app.route("/delete_user", methods=["DELETE"])
+@jwt_required
+def delete_user():
+    user_id = get_jwt_identity()
     user = User.query.get(user_id)
 
     if not user:
