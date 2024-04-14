@@ -14,7 +14,7 @@ CORS(app)
 @app.route("/users", methods=["GET"])
 def get_users():
     try:
-        users = User.query.all()
+        users = User.get_users_list()
         json_users = list(map(lambda x: x.to_json(), users))
     except Exception as e:
         logger.warning(f'Error while getting users: {e}')
@@ -42,18 +42,10 @@ def update_user():
     try:
         verify_jwt_in_request()
         user_id = get_jwt_identity()
-        user = User.query.get(user_id)
-
-        # Существует ли юзер
-        if not user:
-            logger.warning(f'Пользователь с id: {user_id} не найден ')
-            return jsonify({"message": "Пользователь не найден"}), 404
+        user = User.get_user_by_id(user_id=user_id)
 
         data = request.json  # Словарь
-        for key, value in data.items():
-            setattr(user, key, value)
-
-        db.session.commit()
+        user.update_user(**data)
     except Exception as e:
         logger.warning(f'Error while updating user: {get_jwt_identity()}: {e}')
         return jsonify({"message": str(e)}), 401
@@ -66,14 +58,8 @@ def update_user():
 def delete_user():
     try:
         user_id = get_jwt_identity()
-        user = User.query.get(user_id)
-
-        if not user:
-            logger.warning(f'Пользователь с id: {user_id} не найден ')
-            return jsonify({"message": "Пользователь не найден"}), 404
-
-        db.session.delete(user)
-        db.session.commit()
+        user = User.get_user_by_id(user_id=user_id)
+        user.delete_user()
     except Exception as e:
         logger.warning(f'Error while deleting user {get_jwt_identity()}: {e}')
         return jsonify({"message": str(e)}), 401
@@ -87,9 +73,7 @@ def register():
     try:
         params = request.json
         user = User(**params)
-
-        db.session.add(user)  # подготовка к добавлению в БД
-        db.session.commit()  # добавление в БД
+        user.save_user()
         token = user.get_token()
     except Exception as e:
         logger.warning(f'Error while registering user: {e}')
@@ -106,7 +90,7 @@ def login():
         user = User.authenticate(**params)
         token = user.get_token()
     except Exception as e:
-        logger.warning(f'Error while login {request.json.get("email")}: {e}')
+        logger.warning(f'Error while login with email: {request.json.get("email")}: {e}')
         return jsonify({"message": str(e)}), 400
 
     return {'access_token': token}  # доступ к аккаунту
@@ -117,7 +101,7 @@ def login():
 @marshal_with(ProjectSchema(many=True))
 def get_projects(user_id):
     try:
-        projects = Project.query.filter(Project.user_id == user_id)
+        projects = Project.get_projects_by_user_id(user_id=user_id)
     except Exception as e:
         logger.warning(f'Error while getting projects {user_id}: {e}')
         return jsonify({"message": str(e)}), 404
@@ -134,8 +118,7 @@ def post_project(**kwargs):
     try:
         user_id = get_jwt_identity()
         new_one = Project(user_id=user_id, **kwargs)
-        db.session.add(new_one)  # подготовка к добавлению в БД
-        db.session.commit()  # добавление в БД
+        new_one.save_project()  # добавление в БД
     except Exception as e:
         logger.warning(f'Error while posting project {get_jwt_identity()}: {e}')
         return jsonify({"message": str(e)}), 400
@@ -151,18 +134,8 @@ def post_project(**kwargs):
 def update_project(project_id, **kwargs):
     try:
         user_id = get_jwt_identity()
-        project = Project.query.filter(
-            Project.user_id == user_id,
-            Project.id == project_id).first()
-
-        # Существует ли проект
-        if not project:
-            logger.warning(f'Проект с user_id: {user_id} и id: {project_id} не найден ')
-            return jsonify({"message": "Проект не найден или вы не имеете к нему доступа"}), 404
-
-        for key, value in kwargs.items():
-            setattr(project, key, value)
-        db.session.commit()
+        project = Project.get_project(user_id=user_id, project_id=project_id)
+        project.update_project(**kwargs)
     except Exception as e:
         logger.warning(
             f'Error while updating project user:{get_jwt_identity()} project:{project_id}: {e}')
@@ -177,16 +150,8 @@ def update_project(project_id, **kwargs):
 def delete_project(project_id):
     try:
         user_id = get_jwt_identity()
-        project = Project.query.filter(
-            Project.user_id == user_id,
-            Project.id == project_id).first()
-
-        if not project:
-            logger.warning(f'Проект с user_id: {user_id} и id: {project_id} не найден ')
-            return jsonify({"message": "Проект не найден или вы не имеете к нему доступа"}), 404
-
-        db.session.delete(project)
-        db.session.commit()
+        project = Project.get_project(user_id=user_id, project_id=project_id)
+        project.save_project()
     except Exception as e:
         logger.warning(
             f'Error while deleting project user:{get_jwt_identity()} project:{project_id}: {e}')
@@ -199,6 +164,7 @@ def delete_project(project_id):
 def error_handlesr(err):
     headers = err.data.get("headers", None)
     messages = err.data.get("messages", ["Invalid Request"])
+    logger.warning(f'Invalid Input params: {messages}')
     if headers:
         return jsonify({"message": messages}), 400, headers
     else:
