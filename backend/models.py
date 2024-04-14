@@ -82,8 +82,9 @@ class Project(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
 
-    type = db.Column(db.String(70), nullable=False)
-    description = db.Column(db.String(300), nullable=False)
+    name = db.Column(db.String(150))
+    type = db.Column(db.String(100))
+    description = db.Column(db.String(300))
 
     def to_json(self):
         return {

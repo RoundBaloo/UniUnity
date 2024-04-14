@@ -2,8 +2,10 @@
 from flask import jsonify, request
 from flask_cors import CORS
 from flask_jwt_extended import jwt_required, get_jwt_identity, verify_jwt_in_request
-from config import app, db
+from config import app, db, docs
 from models import User, Project
+from schemas import ProjectSchema
+from flask_apispec import use_kwargs, marshal_with
 
 CORS(app)
 
@@ -16,13 +18,12 @@ def get_users():
     return jsonify({"users": json_users}), 200
 
 
-# Получение юзера
-@app.route("/get_user", methods=["GET"])
+# Получение id юзера
+@app.route("/get_user_id", methods=["GET"])
 @jwt_required()
-def get_user():
+def get_user_id():
     user_id = get_jwt_identity()
-    user = User.query.filter(User.id == user_id)
-    return jsonify({"user": user}), 200
+    return jsonify({"user_id": user_id}), 200
 
 
 # Обновление юзера
@@ -38,21 +39,8 @@ def update_user():
 
     data = request.json  # Словарь
 
-    user.email = data.get("email", user.email)
-    user.password = data.get("password", user.password)
-
-    user.first_name = data.get("firstName", user.first_name)
-    user.last_name = data.get("lastName", user.last_name)
-    user.father_name = data.get("fatherName", user.father_name)
-
-    user.institute = data.get("institute", user.institute)
-    user.study_direction = data.get("studyDirection", user.study_direction)
-    user.course = data.get("course", user.course)
-    user.profession = data.get("profession", user.profession)
-    user.search_aim = data.get("searchAim")
-    user.about = data.get("about", user.about)
-    user.skill_level = data.get("skillLevel", user.skill_level)
-    user.team_search_state = data.get("teamSearchState", user.team_search_state)
+    for key, value in data.items():
+        setattr(user, key, value)
 
     db.session.commit()
 
@@ -103,30 +91,34 @@ def login():
 
 # Получение проектов юзера
 @app.route("/get_user_projects/<int:user_id>", methods=["GET"])
+@marshal_with(ProjectSchema(many=True))
 def get_projects(user_id):
     projects = Project.query.filter(Project.user_id == user_id)
-    json_projects = list(map(lambda x: x.to_json(), projects))
-    return jsonify({"projects": json_projects}), 200
+    return projects, 200
 
 
 # добавление проекта юзером
 @app.route("/post_project", methods=["POST"])
 @jwt_required
-def post_project():
+@use_kwargs(ProjectSchema)
+@marshal_with(ProjectSchema)
+def post_project(**kwargs):
     user_id = get_jwt_identity()
-    new_one = Project(user_id=user_id, **request.json)
+    new_one = Project(user_id=user_id, **kwargs)
     try:
         db.session.add(new_one)  # подготовка к добавлению в БД
         db.session.commit()  # добавление в БД
     except Exception as e:
         return jsonify({"message": str(e)}), 400
-    return jsonify({"message": "Проект успешно создан"}), 201
+    return new_one, 201
 
 
 # изменение проекта юзером
 @app.route("/update_project/<int:project_id>", methods=["PUT"])
 @jwt_required()
-def update_project(project_id):
+@use_kwargs(ProjectSchema)
+@marshal_with(ProjectSchema)
+def update_project(project_id, **kwargs):
     user_id = get_jwt_identity()
     project = Project.query.filter(
         Project.user_id == user_id,
@@ -137,14 +129,11 @@ def update_project(project_id):
     if not project:
         return jsonify({"message": "Проект не найден или вы не имеете к нему доступа"}), 404
 
-    data = request.json  # Словарь
-
-    project.type = data.get("type", project.type)
-    project.description = data.get("description", project.description)
+    for key, value in kwargs.items():
+        setattr(project, key, value)
 
     db.session.commit()
-
-    return jsonify({"message": "Данные о проекте обновлены"}), 201
+    return project, 201
 
 
 # удаление проекта юзером
@@ -165,6 +154,10 @@ def delete_project(project_id):
 
     return jsonify({"message": "Проект удален"}), 200
 
+
+docs.register(get_projects)
+docs.register(post_project)
+docs.register(update_project)
 
 # Запуск сайта
 if __name__ == '__main__':
