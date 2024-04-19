@@ -86,8 +86,20 @@ class User(db.Model):
 
     def update_user(self, **data):
         try:
-            for key, value in data.items():
-                setattr(self, key, value)
+            self.email = data.get("email", self.email)
+            self.password = data.get("password", self.password)
+
+            self.first_name = data.get("firstName", self.first_name)
+            self.last_name = data.get("lastName", self.last_name)
+
+            self.institute = data.get("institute", self.institute)
+            self.study_direction = data.get("studyDirection", self.study_direction)
+            self.course = data.get("course", self.course)
+            self.profession = data.get("profession", self.profession)
+            self.search_aim = data.get("searchAim")
+            self.about = data.get("about", self.about)
+            self.skill_level = data.get("skillLevel", self.skill_level)
+            self.team_search_state = data.get("teamSearchState", self.team_search_state)
             db.session.commit()
         except Exception:
             db.session.rollback()

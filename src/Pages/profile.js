@@ -2,28 +2,80 @@ import React, { Component } from "react";
 import Form from '../Components/form'
 import Registration from "../Components/registration";
 import Signin from "../Components/signin"
+import styled from "styled-components";
+import axios from 'axios';
+import { getToken } from '../tokenService';
+import ProfilePlate from "../Components/profilePlate";
+import ProfilePlateEditor from "../Components/profilePlateEditor";
+
+const StyledFormContainer = styled.div`
+  width: 30%;
+  left: 0px;
+  position: sticky;
+  top: 0px;
+  padding: 0px;
+`;
 
 export default class Profile extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      isEditing: false,
+      frame: this.props.frames[0],
+      userId: -1,
     };
 
+    this.makeEditing = this.makeEditing.bind(this);
+    this.updateToken = this.updateToken.bind(this);
+  }
+  
+  componentDidMount() {
+    this.updateToken();
   }
 
+  makeEditing() {
+    this.setState(prevState => ({
+      isEditing: !prevState.isEditing,
+    }));
+  }
 
-  render () {
+  updateToken = () => {
+    var token = getToken();
+    axios.get('http://127.0.0.1:5000/get_user_id', {
+    headers: {
+        'Authorization': `Bearer ${token}`
+    }
+  })
+  .then(response => {
+    this.setState({
+      userId: response.data.user_id,
+      frame: this.props.frames[response.data.user_id - 1],
+    });
+  })
+  .catch(error => {
+    console.error('Error:', error);
+  });
+  }
+
+  render () { 
     return (
       <div>
         <div>
           {this.props.onLoggedIn
-            ? (<Form onAdd={this.props.onAdd} onFill={this.props.onFill} 
-              onFilled={this.props.onFilled} onAdd1={this.props.onAdd1}
-              frames={this.props.frames}/>)
+            ? (
+              <>
+                <StyledFormContainer>
+                  {!this.state.isEditing 
+                    ? <ProfilePlate thisFrame={this.props.thisFrame} frames={this.props.frames} makeEditing={this.makeEditing} userId={this.state.userId}/>
+                    : <ProfilePlateEditor thisFrame={this.props.thisFrame} makeEditing={this.makeEditing} onUpdateUsers={this.props.onUpdateUsers} userId={this.state.userId}/>}
+                </StyledFormContainer>
+              </>
+            )
             : (this.props.onRegistarion 
-              ? (<Registration onLogIn={this.props.onLogIn}/>) 
+              ? (<Registration onLogIn={this.props.onLogIn} onUpdateThisFrame={this.props.onUpdateThisFrame} onUpdateUsers={this.props.onUpdateUsers}
+                onAdd={this.props.onAdd} updateToken={this.props.updateToken}/>) 
               : (<Signin onMakeRegistration={this.props.onMakeRegistration} onRegistarion={this.props.onRegistarion} 
-                  onLogIn={this.props.onLogIn}/>))}
+                  onLogIn={this.props.onLogIn} onUpdateThisFrame={this.props.onUpdateThisFrame}/>))}
         </div>
       </div>
     )
