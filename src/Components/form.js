@@ -56,12 +56,9 @@ const FormContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center; // Выравнивание по центру по горизонтали
-  justify-content: center; // Выравнивание по центру по вертикали
   width: 300px;
   margin: auto;
-  height: 100vh;
-  margin-top: 170px;
-  margin-bottom: 170px;
+  height: 1000px;
 `;
 
 const StyledSelect = styled.select`
@@ -98,7 +95,7 @@ const StyledTextarea = styled.textarea.attrs({
 `;
 
 const token = getToken();
-var userInfo;
+var userId;
 
 axios.get('http://127.0.0.1:5000/get_user_id', {
   headers: {
@@ -106,8 +103,7 @@ axios.get('http://127.0.0.1:5000/get_user_id', {
   }
 })
 .then(response => {
-  console.log(response.data);
-  userInfo = response.data;
+  userId = response.data.user_id;
 })
 .catch(error => {
   console.error('Error:', error);
@@ -117,16 +113,16 @@ export default class form extends Component {
   constructor(props){
     super(props)
     this.state ={
-      firstName: this.props.frames[0].firstName,
-      secondName: this.props.frames[0].lastName,
-      fatherName: this.props.frames[0].fatherName,
-      institute: this.props.frames[0].institute,
-      direction: this.props.frames[0].studyDirection,
-      year: this.props.frames[0].year,
-      skill: this.props.frames[0].skillLevel,
-      profession: this.props.frames[0].profession,
-      searchAim: this.props.frames[0].searchAim,
-      about: this.props.frames[0].about
+      firstName: this.props.frames[userId - 1].firstName,
+      secondName: this.props.frames[userId - 1].lastName,
+      fatherName: this.props.frames[userId - 1].fatherName,
+      institute: this.props.frames[userId - 1].institute,
+      direction: this.props.frames[userId - 1].studyDirection,
+      year: this.props.frames[userId - 1].year,
+      skill: this.props.frames[userId - 1].skillLevel,
+      profession: this.props.frames[userId - 1].profession,
+      searchAim: this.props.frames[userId - 1].searchAim,
+      about: this.props.frames[userId - 1].about
     }
   }
   render() {

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import '../css/registration.css';
 import styled from 'styled-components';
 import axios from 'axios';
+import { saveToken, setAuthHeader, getToken } from '../tokenService';
 
 const apiUrl = 'http://127.0.0.1:5000/register'
 
@@ -93,8 +94,15 @@ export default class registration extends Component {
                         "fatherName": this.state.FIO.split(" ")[2]
                       })
                         .then(response => {
+                            this.props.updateToken(response.data.access_token);
                             console.log('User added successfully:', response.data);
-                            this.props.onLogIn()
+                            const token = response.data.access_token;
+                            saveToken(token);
+                            setAuthHeader(token);
+                            console.log(getToken());
+                            this.props.onUpdateThisFrame();
+                            this.props.onUpdateUsers();
+                            this.props.onLogIn();
                         })
                         .catch(error => {
                           console.error('Error adding user:', error);

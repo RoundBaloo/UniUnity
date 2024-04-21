@@ -9,8 +9,10 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Profile from './Pages/profile';
 import Main from './Pages/main';
 import axios from 'axios';
+import { saveToken, setAuthHeader, getToken } from './tokenService';
 
 const baseUrl = 'http://127.0.0.1:5000/users';
+var token = getToken();
 
 function App() {
   const [frames, setFrames] = useState([]);
@@ -18,17 +20,32 @@ function App() {
   const [isFill, setIsFill] = useState(false);
   const [isOnline, setOnline] = useState(false);
   const [isRegistration, setRegistration] = useState(false);
+  const [userId, setUserId] = useState(-1);
 
   useEffect(() => {
     axios.get(baseUrl).then((res) => {
-      console.log(res.data.users);
       let arr = res.data.users;
       addFrame(arr);
     });
-  }, []);
+    updateThisFrame();
+    }, []);
 
+  const updateThisFrame = () => {
+    axios.get('http://127.0.0.1:5000/get_user_id', {
+    headers: {
+        'Authorization': `Bearer ${token}`
+    }
+    })
+    .then(response => {
+      setUserId(response.data.user_id);
+    })
+    .catch(error => {
+      console.error('Error:', error);
+    });
+  }
+  
   const addFrame = (data) => {
-        setFrames(data);
+    setFrames(data);
   };
   
   const addFrame1 = (frame) => {
@@ -49,10 +66,14 @@ function App() {
 
   const updateUsersArray = () => {
     axios.get(baseUrl).then((res) => {
-      console.log(res.data.users);
       let arr = res.data.users;
       addFrame(arr);
     });
+  }
+
+  const updateToken = (data) => {
+    saveToken(data);
+    setAuthHeader(data);
   }
 
   const makeRegistration = () => {
@@ -62,7 +83,8 @@ function App() {
   const makeNonRegistration = () => {
     setRegistration(false);
   }
-
+console.log(frames[userId - 1])
+console.log(userId)
  return (
       <Router>
         <>
@@ -82,7 +104,9 @@ function App() {
               onLogIn={makeLoggedIn} onLoggedIn={isLoggedIn} onFill={makeFill} 
               onFilled={isFill} onAdd={addFrame} onAdd1={addFrame1}
               onOnline={isOnline} onMakeRegistration={makeRegistration}
-              onRegistarion={isRegistration}/>} />
+              onRegistarion={isRegistration} onUpdateUsers={updateUsersArray}
+              thisFrame={frames[userId - 1]} onUpdateThisFrame={updateThisFrame}
+              updateToken={updateToken}/>} />
           </Routes>
         </>
       </Router>

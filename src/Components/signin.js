@@ -79,14 +79,19 @@ export default class signin extends Component {
                     password: this.state.password
                 })
                 .then(response => {
-                 console.log(response.data);
-                 const token = response.data.access_token;
-                 saveToken(token);
-                 setAuthHeader(token);
-                 this.props.onLogIn()
+                    console.log(response.data.access_token);
+                    const token = response.data.access_token;
+                    saveToken(token);
+                    setAuthHeader(token);
+                    this.props.onUpdateThisFrame();
+                    setTimeout(() => {
+                        // Код, который будет выполнен после задержки
+                        this.props.onLogIn();
+                        console.log("Вывод после задержки");
+                       }, 1000);
                 })
                 .catch(error => {
-                 console.error('Error:', error);
+                    console.error('Error:', error);
                 });
             }}>
             войти</StyledButton> 

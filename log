@@ -1,0 +1,15 @@
+2024-04-16 23:46:45,809:config:WARNING:Error while login with email: 123: No row was found when one was required
+2024-04-16 23:46:47,634:config:WARNING:Error while login with email: 123: No row was found when one was required
+2024-04-16 23:46:48,080:config:WARNING:Error while login with email: 123: No row was found when one was required
+2024-04-16 23:46:48,250:config:WARNING:Error while login with email: 123: No row was found when one was required
+2024-04-16 23:55:38,544:config:WARNING:Error while updating user: 2: User does not exist
+2024-04-17 00:02:33,113:config:WARNING:Error while updating user: 2: User does not exist
+2024-04-17 00:07:42,138:config:WARNING:Error while updating user: 1: name 'a' is not defined
+2024-04-18 10:15:02,417:config:WARNING:Error while login with email: 1234: No row was found when one was required
+2024-04-18 10:38:44,097:config:WARNING:Error while login with email: t : No row was found when one was required
+2024-04-18 15:26:39,262:config:WARNING:Error while login with email: ttt: No row was found when one was required
+2024-04-18 16:38:12,144:config:WARNING:Error while registering user: (sqlite3.IntegrityError) UNIQUE constraint failed: users.email
+[SQL: INSERT INTO users (email, password, first_name, last_name, father_name, institute, study_direction, course, profession, search_aim, about, skill_level, team_search_state) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)]
+[parameters: ('y', '$2b$12$E4opFiyZ2lre9x/Es4IvI.WJn1pce9FUro4wr7s1eeCdBBKZRZ8xa', 'y', 'y', 'y', None, None, None, None, None, None, None, None)]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+2024-04-18 16:48:39,256:config:WARNING:Error while login with email: j : No row was found when one was required
