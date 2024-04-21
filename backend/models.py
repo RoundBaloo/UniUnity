@@ -20,26 +20,40 @@ class User(db.Model):
     study_direction = db.Column(db.String(100))
     course = db.Column(db.Integer)
     profession = db.Column(db.String(100))
-    search_aim = db.Column(db.String(100))
+    search_aim = db.Column(db.String(200))
+
+    what_want_from_command = db.Column(db.String(300))
     about = db.Column(db.Text())
     skill_level = db.Column(db.String(100))
     team_search_state = db.Column(db.Boolean)
     projects = db.relationship('Project', backref='user', lazy=True)
 
+    VK_link = db.Column(db.String(500))
+    TG_link = db.Column(db.String(500))
+    mail = db.Column(db.String(500))
+
     def __init__(self, **kwargs):
         self.email = kwargs.get('email')
         self.password = bcrypt.hash(kwargs.get('password'))
+
         self.first_name = kwargs.get('firstName')
         self.last_name = kwargs.get('lastName')
         self.father_name = kwargs.get('fatherName')
+
         self.institute = kwargs.get('institute')
         self.study_direction = kwargs.get('studyDirection')
         self.course = kwargs.get('course')
         self.profession = kwargs.get('profession')
         self.search_aim = kwargs.get('searchAim')
+
+        self.what_want_from_command = kwargs.get('what_want_from_command')
         self.about = kwargs.get('about')
         self.skill_level = kwargs.get('skillLevel')
         self.team_search_state = kwargs.get('teamSearchState')
+
+        self.VK_link = kwargs.get('VK_link')
+        self.TG_link = kwargs.get('TG_link')
+        self.mail = kwargs.get('mail')
 
     def get_token(self, expire_time=24):
         expire_delta = timedelta(expire_time)
@@ -57,7 +71,8 @@ class User(db.Model):
     @classmethod
     def get_users_list(cls):
         try:
-            users = cls.query.all()
+            users = cls.query.filter(
+                cls.team_search_state is True)
             db.session.commit()
         except Exception:
             db.session.rollback()
@@ -86,8 +101,26 @@ class User(db.Model):
 
     def update_user(self, **data):
         try:
-            for key, value in data.items():
-                setattr(self, key, value)
+            self.email = data.get("email", self.email)
+            self.password = data.get("password", self.password)
+
+            self.first_name = data.get("firstName", self.first_name)
+            self.last_name = data.get("lastName", self.last_name)
+
+            self.institute = data.get("institute", self.institute)
+            self.study_direction = data.get("studyDirection", self.study_direction)
+            self.course = data.get("course", self.course)
+            self.profession = data.get("profession", self.profession)
+            self.search_aim = data.get("searchAim", self.search_aim)
+
+            self.what_want_from_command = data.get("what_want_from_command", self.what_want_from_command)
+            self.about = data.get("about", self.about)
+            self.skill_level = data.get("skillLevel", self.skill_level)
+            self.team_search_state = data.get("teamSearchState", self.team_search_state)
+
+            self.VK_link = data.get("VK_link", self.VK_link)
+            self.TG_link = data.get("TG_link", self.TG_link)
+            self.mail = data.get("mail", self.mail)
             db.session.commit()
         except Exception:
             db.session.rollback()
@@ -116,10 +149,16 @@ class User(db.Model):
             "course": str(self.course),
             "profession": self.profession,
             "searchAim": self.search_aim,
+
+            "what_want_from_command": self.what_want_from_command,
             "about": self.about,
             "skillLevel": self.skill_level,
             "teamSearchState": self.team_search_state,
-            "projects": self.projects
+            "projects": self.projects,
+
+            "VK_link": self.VK_link,
+            "TG_link": self.TG_link,
+            "mail": self.mail
         }
 
 
@@ -131,7 +170,8 @@ class Project(db.Model):
 
     name = db.Column(db.String(150))
     type = db.Column(db.String(100))
-    description = db.Column(db.String(300))
+    description = db.Column(db.String(400))
+    project_link = db.Column(db.String(500))
 
     @classmethod
     def get_projects_by_user_id(cls, user_id):
@@ -166,8 +206,10 @@ class Project(db.Model):
 
     def update_project(self, **kwargs):
         try:
-            for key, value in kwargs.items():
-                setattr(self, key, value)
+            self.name = kwargs.get("name")
+            self.type = kwargs.get("type")
+            self.description = kwargs.get("description")
+            self.project_link = kwargs.get("project_link")
             db.session.commit()
         except Exception:
             db.session.rollback()
@@ -185,6 +227,9 @@ class Project(db.Model):
         return {
             "id": self.id,
             "user_id": self.user_id,
+
+            "name": self.name,
             "type": self.type,
-            "description": self.description
+            "description": self.description,
+            "project_link": self.project_link
         }

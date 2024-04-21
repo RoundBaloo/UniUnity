@@ -2,10 +2,10 @@
 from flask import jsonify, request
 from flask_cors import CORS
 from flask_jwt_extended import jwt_required, get_jwt_identity, verify_jwt_in_request
+from flask_apispec import use_kwargs, marshal_with
 from config import app, db, docs, logger
 from models import User, Project
 from schemas import ProjectSchema
-from flask_apispec import use_kwargs, marshal_with
 
 CORS(app)
 
