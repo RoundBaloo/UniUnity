@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { createRoot } from 'react-dom/client';
+import './css/reset.css';
 import './css/style.css';
 import logo from './img/LogoPlaceholder.png';
 import notification from './img/NotificationButton.svg';
@@ -46,13 +47,13 @@ function App() {
       console.error('Error:', error);
     });
   }
-  
+
   const addFrame = (data) => {
     console.log(data);
     setFrames(data);
     console.log(frames); // Выведет обновленное значение frames
   };
-  
+
   const addFrame1 = (frame) => {
     setFrames(prevFrames => [...prevFrames, [{frame}]])
   };
@@ -60,7 +61,7 @@ function App() {
     const makeOnline = () => {
     setOnline(true);
   }
-    
+
   const makeLoggedIn = () => {
     setIsLoggedIn(true);
   };
@@ -104,8 +105,8 @@ console.log(frames)
             <Route exact path="/" element={<Main frames={frames} onAdd={addFrame} onLogIn={isLoggedIn}
               onMakeRegistration={makeRegistration} onRegistarion={isRegistration}
               onMakeNonRegistration={makeNonRegistration}/>} />
-            <Route exact path="/profile" element={<Profile frames={frames} 
-              onLogIn={makeLoggedIn} onLoggedIn={isLoggedIn} onFill={makeFill} 
+            <Route exact path="/profile" element={<Profile frames={frames}
+              onLogIn={makeLoggedIn} onLoggedIn={isLoggedIn} onFill={makeFill}
               onFilled={isFill} onAdd={addFrame} onAdd1={addFrame1}
               onOnline={isOnline} onMakeRegistration={makeRegistration}
               onRegistarion={isRegistration} onUpdateUsers={updateUsersArray}

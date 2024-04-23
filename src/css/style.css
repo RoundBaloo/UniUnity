@@ -4,6 +4,8 @@
 }
 
 body{
+    font-family: 'Rubik', sans-serif;
+    margin: 0;
     font-size: 20px;
     font-weight: 400;
     color: black;
@@ -88,7 +90,7 @@ ul{
 .Notification:hover {
     animation: swing 0.5s ease-in-out;
 }
-   
+
 
 .PublishProject{
     font-size: 19px;
@@ -104,7 +106,7 @@ ul{
     right: 145px;
     top: 30%;
 }
-   
+
 .Filter {
     font-size: 20px;
     text-align: center;
@@ -164,6 +166,3 @@ ul{
     flex-wrap: wrap;
     justify-content: flex-start;
 }
-
-
-
