@@ -54,7 +54,7 @@ def update_user():
 
 
 # Удаление юзера
-@app.route("/delete_user>", methods=["DELETE"])
+@app.route("/delete_user", methods=["DELETE"])
 def delete_user():
     try:
         user_id = get_jwt_identity()

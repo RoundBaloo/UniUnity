@@ -71,8 +71,7 @@ class User(db.Model):
     @classmethod
     def get_users_list(cls):
         try:
-            users = cls.query.filter(
-                cls.team_search_state is True)
+            users = cls.query
             db.session.commit()
         except Exception:
             db.session.rollback()
@@ -95,6 +94,7 @@ class User(db.Model):
         try:
             db.session.add(self)
             db.session.commit()
+            print(1)
         except Exception:
             db.session.rollback()
             raise

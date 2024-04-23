@@ -31,3 +31,7 @@
 (Background on this error at: https://sqlalche.me/e/20/gkpj)
 2024-04-23 21:25:57,396:config:WARNING:Error while login with email: tyr: Incorrect password
 2024-04-23 21:25:59,278:config:WARNING:Error while login with email: tyr: Incorrect password
+2024-04-24 00:21:30,634:config:WARNING:Error while registering user: (sqlite3.IntegrityError) UNIQUE constraint failed: users.email
+[SQL: INSERT INTO users (email, password, first_name, last_name, father_name, institute, study_direction, course, profession, search_aim, what_want_from_command, about, skill_level, team_search_state, "VK_link", "TG_link", mail) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)]
+[parameters: ('123', '$2b$12$.w9s5JG4OHopAhy6FEBtt.5hZftoeT5XOroTDFvFKM7z4aKFiIksC', '123', '123', '123', None, None, None, None, None, None, None, None, None, None, None, None)]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)

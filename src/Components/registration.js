@@ -101,12 +101,8 @@ export default class registration extends Component {
                             const token = response.data.access_token;
                             saveToken(token);
                             setAuthHeader(token);
-                            console.log(getToken());
                             this.props.onUpdateThisFrame(token);
-                            console.log(this.props.frames);
-                            console.log(1111111111111111111111111111111111111);
                             axios.get(baseUrl).then((res) => {
-                                console.log(res.data.users);
                                 this.props.updateFrames(res.data.users);
                               });
                         })

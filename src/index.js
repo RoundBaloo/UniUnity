@@ -27,7 +27,6 @@ function App() {
       let arr = res.data.users;
       addFrame(arr);
     });
-    console.log(frames);
     }, []);
 
   const updateThisFrame = (token) => {
@@ -37,10 +36,8 @@ function App() {
     }
     })
     .then(response => {
-      console.log(response.data.user_id)
       setUserId(response.data.user_id);
       updateUsersArray();
-      console.log(frames);
       makeLoggedIn();
     })
     .catch(error => {
@@ -49,9 +46,7 @@ function App() {
   }
 
   const addFrame = (data) => {
-    console.log(data);
     setFrames(data);
-    console.log(frames); // Выведет обновленное значение frames
   };
 
   const addFrame1 = (frame) => {
@@ -88,8 +83,7 @@ function App() {
   const makeNonRegistration = () => {
     setRegistration(false);
   }
-  console.log(userId)
-console.log(frames)
+
  return (
       <Router>
         <>
