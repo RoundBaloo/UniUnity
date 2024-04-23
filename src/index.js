@@ -12,7 +12,6 @@ import axios from 'axios';
 import { saveToken, setAuthHeader, getToken } from './tokenService';
 
 const baseUrl = 'http://127.0.0.1:5000/users';
-var token = getToken();
 
 function App() {
   const [frames, setFrames] = useState([]);
@@ -27,17 +26,21 @@ function App() {
       let arr = res.data.users;
       addFrame(arr);
     });
-    updateThisFrame();
+    console.log(frames);
     }, []);
 
-  const updateThisFrame = () => {
+  const updateThisFrame = (token) => {
     axios.get('http://127.0.0.1:5000/get_user_id', {
     headers: {
         'Authorization': `Bearer ${token}`
     }
     })
     .then(response => {
+      console.log(response.data.user_id)
       setUserId(response.data.user_id);
+      updateUsersArray();
+      console.log(frames);
+      makeLoggedIn();
     })
     .catch(error => {
       console.error('Error:', error);
@@ -45,7 +48,9 @@ function App() {
   }
   
   const addFrame = (data) => {
+    console.log(data);
     setFrames(data);
+    console.log(frames); // Выведет обновленное значение frames
   };
   
   const addFrame1 = (frame) => {
@@ -66,8 +71,7 @@ function App() {
 
   const updateUsersArray = () => {
     axios.get(baseUrl).then((res) => {
-      let arr = res.data.users;
-      addFrame(arr);
+      addFrame(res.data.users);
     });
   }
 
@@ -83,8 +87,8 @@ function App() {
   const makeNonRegistration = () => {
     setRegistration(false);
   }
-console.log(frames[userId - 1])
-console.log(userId)
+  console.log(userId)
+console.log(frames)
  return (
       <Router>
         <>
@@ -106,7 +110,8 @@ console.log(userId)
               onOnline={isOnline} onMakeRegistration={makeRegistration}
               onRegistarion={isRegistration} onUpdateUsers={updateUsersArray}
               thisFrame={frames[userId - 1]} onUpdateThisFrame={updateThisFrame}
-              updateToken={updateToken}/>} />
+              updateToken={updateToken} setFrames={setFrames}
+              userId={userId}/>} />
           </Routes>
         </>
       </Router>

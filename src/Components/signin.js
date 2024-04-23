@@ -83,12 +83,8 @@ export default class signin extends Component {
                     const token = response.data.access_token;
                     saveToken(token);
                     setAuthHeader(token);
-                    this.props.onUpdateThisFrame();
-                    setTimeout(() => {
-                        // Код, который будет выполнен после задержки
-                        this.props.onLogIn();
-                        console.log("Вывод после задержки");
-                       }, 1000);
+                    this.props.onUpdateThisFrame(token);
+
                 })
                 .catch(error => {
                     console.error('Error:', error);
