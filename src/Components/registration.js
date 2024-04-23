@@ -4,7 +4,8 @@ import styled from 'styled-components';
 import axios from 'axios';
 import { saveToken, setAuthHeader, getToken } from '../tokenService';
 
-const apiUrl = 'http://127.0.0.1:5000/register'
+const apiUrl = 'http://127.0.0.1:5000/register';
+const baseUrl = 'http://127.0.0.1:5000/users';
 
 const StyledForm = styled.form`
     display: flex;
@@ -94,15 +95,20 @@ export default class registration extends Component {
                         "fatherName": this.state.FIO.split(" ")[2]
                       })
                         .then(response => {
+                            this.props.onUpdateUsers();
                             this.props.updateToken(response.data.access_token);
                             console.log('User added successfully:', response.data);
                             const token = response.data.access_token;
                             saveToken(token);
                             setAuthHeader(token);
                             console.log(getToken());
-                            this.props.onUpdateThisFrame();
-                            this.props.onUpdateUsers();
-                            this.props.onLogIn();
+                            this.props.onUpdateThisFrame(token);
+                            console.log(this.props.frames);
+                            console.log(1111111111111111111111111111111111111);
+                            axios.get(baseUrl).then((res) => {
+                                console.log(res.data.users);
+                                this.props.updateFrames(res.data.users);
+                              });
                         })
                         .catch(error => {
                           console.error('Error adding user:', error);

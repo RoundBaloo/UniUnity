@@ -7,6 +7,7 @@ import axios from 'axios';
 import { getToken } from '../tokenService';
 import ProfilePlate from "../Components/profilePlate";
 import ProfilePlateEditor from "../Components/profilePlateEditor";
+import userEvent from "@testing-library/user-event";
 
 const StyledFormContainer = styled.div`
   width: 30%;
@@ -22,11 +23,19 @@ export default class Profile extends Component {
     this.state = {
       isEditing: false,
       frame: this.props.frames[0],
-      userId: -1,
+      userId: this.props.userId,
+      frames: [],
     };
 
     this.makeEditing = this.makeEditing.bind(this);
     this.updateToken = this.updateToken.bind(this);
+    this.updateFrames = this.updateFrames.bind(this);
+  }
+
+  updateFrames(data) {
+    this.setState(prevState => ({
+      frames: data,
+    }))
   }
   
   componentDidMount() {
@@ -72,8 +81,10 @@ export default class Profile extends Component {
               </>
             )
             : (this.props.onRegistarion 
-              ? (<Registration onLogIn={this.props.onLogIn} onUpdateThisFrame={this.props.onUpdateThisFrame} onUpdateUsers={this.props.onUpdateUsers}
-                onAdd={this.props.onAdd} updateToken={this.props.updateToken}/>) 
+              ? (<Registration onLogIn={this.props.onLogIn} onUpdateThisFrame={this.props.onUpdateThisFrame} 
+                onUpdateUsers={this.props.onUpdateUsers} updateFrames={this.updateFrames}
+                onAdd={this.props.onAdd} updateToken={this.props.updateToken} 
+                frames={this.props.frames} setFrames={this.props.setFrames}/>) 
               : (<Signin onMakeRegistration={this.props.onMakeRegistration} onRegistarion={this.props.onRegistarion} 
                   onLogIn={this.props.onLogIn} onUpdateThisFrame={this.props.onUpdateThisFrame}/>))}
         </div>

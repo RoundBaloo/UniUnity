@@ -13,3 +13,21 @@
 [parameters: ('y', '$2b$12$E4opFiyZ2lre9x/Es4IvI.WJn1pce9FUro4wr7s1eeCdBBKZRZ8xa', 'y', 'y', 'y', None, None, None, None, None, None, None, None)]
 (Background on this error at: https://sqlalche.me/e/20/gkpj)
 2024-04-18 16:48:39,256:config:WARNING:Error while login with email: j : No row was found when one was required
+2024-04-23 19:06:34,316:config:WARNING:Error while registering user: (sqlite3.IntegrityError) UNIQUE constraint failed: users.email
+[SQL: INSERT INTO users (email, password, first_name, last_name, father_name, institute, study_direction, course, profession, search_aim, about, skill_level, team_search_state) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)]
+[parameters: ('1', '$2b$12$t/YMvMosSB39hX6dn1qEcuzk3f35gxj8IN4O6F4nhzEWiDW5UXdpG', '1', '1', '1', None, None, None, None, None, None, None, None)]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+2024-04-23 19:06:38,294:config:WARNING:Error while registering user: (sqlite3.IntegrityError) UNIQUE constraint failed: users.email
+[SQL: INSERT INTO users (email, password, first_name, last_name, father_name, institute, study_direction, course, profession, search_aim, about, skill_level, team_search_state) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)]
+[parameters: ('12', '$2b$12$ZeRenIGVn7hLyUtFb2OyM.8UF8aqG6koZK8MDa1XexzBh12rWGq1e', '1', '1', '1', None, None, None, None, None, None, None, None)]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+2024-04-23 20:16:46,315:config:WARNING:Error while registering user: (sqlite3.IntegrityError) UNIQUE constraint failed: users.email
+[SQL: INSERT INTO users (email, password, first_name, last_name, father_name, institute, study_direction, course, profession, search_aim, about, skill_level, team_search_state) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)]
+[parameters: ('asd', '$2b$12$k9/1QQ/XcH25U7YCFKD5FueDcevVV9m0zta9SxF5DSo8w0Y00fUZa', 'asd', 'asd', 'asd', None, None, None, None, None, None, None, None)]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+2024-04-23 20:37:49,517:config:WARNING:Error while registering user: (sqlite3.IntegrityError) UNIQUE constraint failed: users.email
+[SQL: INSERT INTO users (email, password, first_name, last_name, father_name, institute, study_direction, course, profession, search_aim, about, skill_level, team_search_state) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)]
+[parameters: ('t', '$2b$12$yD1it2MguC1hRmUR5SCaXOY8Crb87Mz1Rj3aKLK2hIidgt2IaboNK', 't', 't', 't', None, None, None, None, None, None, None, None)]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+2024-04-23 21:25:57,396:config:WARNING:Error while login with email: tyr: Incorrect password
+2024-04-23 21:25:59,278:config:WARNING:Error while login with email: tyr: Incorrect password
