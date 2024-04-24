@@ -5,14 +5,17 @@ import styled from 'styled-components';
 const StyledBottomButton = styled.button`
     background-color: white;
     color: black;
-    border: 3px solid black; // Убираем стандартные границы
+    border: 4px solid black; // Убираем стандартные границы
     border-top: none;
     outline: none; // Убираем стандартный контур при фокусе
     box-shadow: none;
     width: 100%;
-    height: 70px;
-    border-bottom-left-radius: 20px;
-    border-bottom-right-radius: 20px;
+    height: 50%;
+    border-bottom-left-radius: 36px;
+    border-bottom-right-radius: 36px;
+    font-size: 35px;
+    text-align: left;
+    padding-left: 60px;
 
     &:hover {
         cursor: pointer;
@@ -24,13 +27,16 @@ const StyledBottomButton = styled.button`
 const StyledTopButton = styled.button`
     background-color: white;
     color: black;
-    border: 3px solid black; // Убираем стандартные границы
+    border: 4px solid black; // Убираем стандартные границы
     outline: none; // Убираем стандартный контур при фокусе
     box-shadow: none;
     width: 100%;
-    height: 70px;
-    border-top-left-radius: 20px;
-    border-top-right-radius: 20px;
+    height: 50%;
+    border-top-left-radius: 36px;
+    border-top-right-radius: 36px;
+    font-size: 35px;
+    text-align: left;
+    padding-left: 60px;
 
     &:hover {
         cursor: pointer;
@@ -50,25 +56,40 @@ const LargeContainer = styled.div`
 
 const BigContainer = styled.div`
     display: flex;
-    justify-content: normal; // Распределяет компоненты равномерно вдоль оси контейнера
+    flex-direction: row;
+    justify-content: flex-start; // Распределяет компоненты равномерно вдоль оси контейнера
+    flex-flow: row nowrap;
+    margin-left: 65px;
+    margin-top: 75px;
     align-items: center; // Выравнивает компоненты по центру по вертикали
-    margin-top: 90px;
+`;
+
+const TrianglesContainer = styled.div`
+    display: flex;
+    justify-content: flex-start; // Распределяет компоненты равномерно вдоль оси контейнера
+    flex-flow: row nowrap;
+    margin-top: 60px;
+    //align-items: center; // Выравнивает компоненты по центру по вертикали
+    //margin-top: 90px;
 `;
 
 const SmallContainer = styled.div`
-    margin: 70px 60px 0px 300px;
+    width: 394px;
+    height: 219px;
+    margin-left: auto;
+    margin-right: 65px;
+    //margin: 70px 60px 0px 300px;
     // display: flex;
     // flex-direction: column; // Указывает, что компоненты должны располагаться в ряд
     // justify-content: space-between; // Распределяет компоненты равномерно вдоль оси контейнера
     // align-items: center; // Выравнивает компоненты по центру по вертикали
+
 `;
 
 const StyledP = styled.p`
-    margin-top: 90px;
-    margin-left: 0px;
-    font-size: 128px;
+    font-size: 93px;
     line-height: 117%;
-    letter-spacing: 13px;
+    letter-spacing: 11px;
 `;
 
 const TriangleWithBorder = styled.div`
@@ -78,7 +99,7 @@ const TriangleWithBorder = styled.div`
     border-right: 30px solid transparent;
     border-top: 50px solid white; // Белый фон треугольника
     position: relative; // Позиционирование для псевдоэлемента
-    margin: 0px 100px 0px 100px;
+    margin: 0px 120px 0px 100px;
 
     &::before {
         content: "";
@@ -96,30 +117,28 @@ export default class newUserAgitation extends Component {
     render() {
         return (
             <>
-                <LargeContainer>
-                    <BigContainer>
-                        <StyledP>
-                            Собери <br/>команду <br/>мечты
-                        </StyledP>
-                        <SmallContainer>
-                            <StyledTopButton onClick={() => {
-                                this.props.onGoToin()
-                                this.props.onMakeNonRegistration()
-                            }}>ВОЙТИ</StyledTopButton>
-                            <StyledBottomButton onClick={() => {
-                                this.props.onGoToin()
-                                this.props.onMakeRegistration()
-                            }}>ЗАРЕГИСТРИРОВАТЬСЯ</StyledBottomButton>
-                        </SmallContainer>
-                    </BigContainer>
-                    <BigContainer>
-                        <TriangleWithBorder/>
-                        <TriangleWithBorder/>
-                        <TriangleWithBorder/>
-                        <TriangleWithBorder/>
-                        <TriangleWithBorder/>
-                    </BigContainer>
-                </LargeContainer>
+                <BigContainer>
+                    <StyledP>
+                        Собери <br/>команду <br/>мечты
+                    </StyledP>
+                    <SmallContainer>
+                        <StyledTopButton onClick={() => {
+                            this.props.onGoToin()
+                            this.props.onMakeNonRegistration()
+                        }}>вход</StyledTopButton>
+                        <StyledBottomButton onClick={() => {
+                            this.props.onGoToin()
+                            this.props.onMakeRegistration()
+                        }}>регистрация</StyledBottomButton>
+                    </SmallContainer>
+                </BigContainer>
+                <TrianglesContainer>
+                    <TriangleWithBorder/>
+                    <TriangleWithBorder/>
+                    <TriangleWithBorder/>
+                    <TriangleWithBorder/>
+                    <TriangleWithBorder/>
+                </TrianglesContainer>
             </>
         )
     }

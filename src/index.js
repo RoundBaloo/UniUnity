@@ -88,10 +88,10 @@ function App() {
       <Router>
         <>
           <header className="header">
-            <Link to="/" className="Logo"><img src={logo} width={200} height={69} onClick={updateUsersArray}/></Link>
+            <Link to="/" className="Logo"><img src={logo} width={145} height={50} onClick={updateUsersArray}/></Link>
             <a href="#"><p className="PublishProject">Опубликовать проект</p></a>
-            <a href="#" className="Notification"><img className="Notification" src={notification} width={45} /></a>
-            <Link to="/profile" className="Avatar" onClick={makeNonRegistration}>
+            <a href="#" ><img className="Notification" src={notification} width={45} /></a>
+            <Link to="/profile" onClick={makeNonRegistration}>
               <img className="Avatar" src={avatar} width={90}/>
             </Link>
           </header>

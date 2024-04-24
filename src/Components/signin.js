@@ -5,43 +5,51 @@ import { saveToken, setAuthHeader } from '../tokenService';
 
 
 const StyledForm = styled.form`
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 10px; /* Расстояние между элементами формы */
-    border: 3px solid black;
-    padding: 20px;
-    border-top-left-radius: 11px;
-    border-top-right-radius: 11px;
+    border: 4px solid black;
+    padding-right: 43px;
+    padding-left: 43px;
+    padding-top: 24px;
+    border-top-left-radius: 22px;
+    border-top-right-radius: 22px;
     width: 100%; /* Ширина формы */
     box-sizing: border-box;
     justify-content: flex-end;
-`;  
+`;
+
+const ContainerTwoElements = styled.form`
+    margin-bottom: 22px;
+`;
 
 const StyledP = styled.p`
+    font-size: 23px;
+    margin-right: auto;
+    margin-bottom: 15px;
 `;
 
 const StyledInput = styled.input`
     background-color: white;
-    border: 1px solid black;
-    border-radius: 5px;
+    height: 44px;
+    border: 2px solid black;
+    border-radius: 7px;
     padding: 10px;
     width: 100%;
     box-sizing: border-box;
 `;
 
 const StyledButton = styled.button`
+    font-size: 35px;
+    text-align: left;
+    padding-left: 43px;
     background-color: white;
     color: black;
-    border: 3px solid black; // Убираем стандартные границы
+    border: 4px solid black; // Убираем стандартные границы
     border-top: none; 
     outline: none; // Убираем стандартный контур при фокусе
     box-shadow: none;
     width: 100%;
-    height: 40px;
-    border-bottom-left-radius: 11px;
-    border-bottom-right-radius: 11px;
+    height: 85px;
+    border-bottom-left-radius: 22px;
+    border-bottom-right-radius: 22px;
     &:hover {
         cursor: pointer;
         color: white;
@@ -54,9 +62,10 @@ const FormContainer = styled.div`
     flex-direction: column;
     align-items: center; // Выравнивание по центру по горизонтали
     justify-content: center; // Выравнивание по центру по вертикали
-    width: 300px;
-    margin: auto;
-    height: 80vh;
+    width: 656px;
+    margin-top: 65px;
+    margin-left: auto;
+    margin-right: auto;
 `;
 
 export default class signin extends Component {
@@ -64,10 +73,14 @@ export default class signin extends Component {
     return (
         <FormContainer>
             <StyledForm className='registration'>
-                <StyledP>Логин</StyledP>
-                <StyledInput onChange={(e) => this.setState({email: e.target.value})} />
-                <StyledP>Пароль</StyledP>
-                <StyledInput onChange={(e) => this.setState({password: e.target.value})} />
+                <ContainerTwoElements>
+                    <StyledP>Логин</StyledP>
+                    <StyledInput onChange={(e) => this.setState({email: e.target.value})}/>
+                </ContainerTwoElements>
+                <ContainerTwoElements>
+                    <StyledP>Пароль</StyledP>
+                    <StyledInput onChange={(e) => this.setState({password: e.target.value})}/>
+                </ContainerTwoElements>
                 <p onClick={() => {
                     console.log(1)
                     this.props.onMakeRegistration()
@@ -90,7 +103,7 @@ export default class signin extends Component {
                     console.error('Error:', error);
                 });
             }}>
-            войти</StyledButton> 
+            Войти</StyledButton>
         </FormContainer>
     )
   }
