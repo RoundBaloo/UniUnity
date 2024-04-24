@@ -66,7 +66,7 @@ const FormContainer = styled.div`
     align-items: center; // Выравнивание по центру по горизонтали
     justify-content: center; // Выравнивание по центру по вертикали
     width: 656px;
-    margin-top: 65px;
+    margin-top: 40px;
     margin-left: auto;
     margin-right: auto;
 `;

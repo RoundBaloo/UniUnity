@@ -99,7 +99,7 @@ const TriangleWithBorder = styled.div`
     border-right: 30px solid transparent;
     border-top: 50px solid white; // Белый фон треугольника
     position: relative; // Позиционирование для псевдоэлемента
-    margin: 0px 120px 0px 100px;
+    margin: 0px 120px 30px 100px;
 
     &::before {
         content: "";
