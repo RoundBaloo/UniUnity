@@ -9,7 +9,9 @@ class ProjectSchema(Schema):
     type = fields.String(validate=[
         validate.Length(max=100)])
     description = fields.String(validate=[
-        validate.Length(max=300)])
+        validate.Length(max=400)])
+    project_link = fields.String(validate=[
+        validate.Length(max=500)])
     message = fields.String(dump_only=True)
 
 
