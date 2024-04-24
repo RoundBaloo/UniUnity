@@ -9,10 +9,12 @@ import { Link } from 'react-router-dom';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Profile from './Pages/profile';
 import Main from './Pages/main';
+import OtherManProfile from "./Pages/otherManProfile";
 import axios from 'axios';
 import { saveToken, setAuthHeader, getToken } from './tokenService';
 
 const baseUrl = 'http://127.0.0.1:5000/users';
+var selfId;
 
 function App() {
   const [frames, setFrames] = useState([]);
@@ -37,6 +39,7 @@ function App() {
     })
     .then(response => {
       setUserId(response.data.user_id);
+      selfId = response.data.user_id;
       updateUsersArray();
       makeLoggedIn();
     })
@@ -71,6 +74,10 @@ function App() {
     });
   }
 
+  const updateUserId = (_userId) => {
+    setUserId(_userId);
+  }
+
   const updateToken = (data) => {
     saveToken(data);
     setAuthHeader(data);
@@ -91,14 +98,15 @@ function App() {
             <Link to="/" className="Logo"><img src={logo} width={145} height={50} onClick={updateUsersArray}/></Link>
             <a href="#"><p className="PublishProject">Опубликовать проект</p></a>
             <a href="#" ><img className="Notification" src={notification} width={45} /></a>
-            <Link to="/profile" onClick={makeNonRegistration}>
+            <Link to="/profile" onClick={() => { makeNonRegistration(); updateUserId(selfId); }}>
               <img className="Avatar" src={avatar} width={90}/>
             </Link>
           </header>
           <Routes>
             <Route exact path="/" element={<Main frames={frames} onAdd={addFrame} onLogIn={isLoggedIn}
               onMakeRegistration={makeRegistration} onRegistarion={isRegistration}
-              onMakeNonRegistration={makeNonRegistration}/>} />
+              onMakeNonRegistration={makeNonRegistration} 
+              updateUserId={updateUserId}/>} />
             <Route exact path="/profile" element={<Profile frames={frames}
               onLogIn={makeLoggedIn} onLoggedIn={isLoggedIn} onFill={makeFill}
               onFilled={isFill} onAdd={addFrame} onAdd1={addFrame1}
@@ -106,6 +114,9 @@ function App() {
               onRegistarion={isRegistration} onUpdateUsers={updateUsersArray}
               thisFrame={frames[userId - 1]} onUpdateThisFrame={updateThisFrame}
               updateToken={updateToken} setFrames={setFrames}
+              userId={userId}/>} />
+            <Route exact path="/otherManProfile" element={<OtherManProfile 
+              frames={frames} thisFrame={frames[userId - 1]}
               userId={userId}/>} />
           </Routes>
         </>

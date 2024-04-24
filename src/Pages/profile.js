@@ -7,6 +7,7 @@ import axios from 'axios';
 import { getToken } from '../tokenService';
 import ProfilePlate from "../Components/profilePlate";
 import ProfilePlateEditor from "../Components/profilePlateEditor";
+import LinkPlates from "../Components/linkPlates";
 import userEvent from "@testing-library/user-event";
 
 const StyledFormContainer = styled.div`
@@ -16,6 +17,11 @@ const StyledFormContainer = styled.div`
   top: 0px;
   padding: 0px;
 `;
+
+const linkPlates = [
+  {link: 'https://www.figma.com/file/mSz4gxJqueGlF5fCOPwyXm/JK-Design?type=design&node-id=0%3A1&mode=design&t=elom4elklqmaw5KM-1'},
+  {link: 'https://docs.google.com/spreadsheets/d/1rnA7xzo0WsVo06zh0uTALMNhucMQrtfowltOAJH-y1I/edit'}
+]
 
 export default class Profile extends Component {
   constructor(props) {
@@ -78,6 +84,7 @@ export default class Profile extends Component {
                     ? <ProfilePlate thisFrame={this.props.thisFrame} frames={this.props.frames} makeEditing={this.makeEditing} userId={this.state.userId}/>
                     : <ProfilePlateEditor thisFrame={this.props.thisFrame} makeEditing={this.makeEditing} onUpdateUsers={this.props.onUpdateUsers} userId={this.state.userId}/>}
                 </StyledFormContainer>
+                {/* <LinkPlates linkPlates={linkPlates}/> */}
               </>
             )
             : (this.props.onRegistarion 

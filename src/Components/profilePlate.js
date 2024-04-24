@@ -104,6 +104,7 @@ export default class profilePlate extends Component {
   render() {
     const frame = this.props.thisFrame;
     if (!frame) {
+      console.log(frame)
         return <div>Loading...</div>; // Или любой другой компонент загрузки
     }  
     return (

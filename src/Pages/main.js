@@ -17,7 +17,7 @@ const Main = (props) => {
         <div className="Filter">
           <p className="button-text">Фильтр и поиск</p>
         </div>
-        <Frames frames={props.frames}/>
+        <Frames frames={props.frames} updateUserId={props.updateUserId}/>
       </>
   );
 };
