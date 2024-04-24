@@ -12,8 +12,13 @@ import Main from './Pages/main';
 import OtherManProfile from "./Pages/otherManProfile";
 import axios from 'axios';
 import { saveToken, setAuthHeader, getToken } from './tokenService';
+import UploadProject from "./Pages/uploadProject";
 
 const baseUrl = 'http://127.0.0.1:5000/users';
+const projects = 'http://127.0.0.1:5000/post_project';
+const getprojs = 'http://127.0.0.1:5000/get_user_projects/${userId}';
+
+var token = getToken();
 var selfId;
 
 function App() {
@@ -23,6 +28,7 @@ function App() {
   const [isOnline, setOnline] = useState(false);
   const [isRegistration, setRegistration] = useState(false);
   const [userId, setUserId] = useState(-1);
+  const [linkPlates, setLinkPlates] = useState();
 
   useEffect(() => {
     axios.get(baseUrl).then((res) => {
@@ -42,12 +48,23 @@ function App() {
       selfId = response.data.user_id;
       updateUsersArray();
       makeLoggedIn();
+      getUserProjects(response.data.user_id);
     })
     .catch(error => {
       console.error('Error:', error);
     });
   }
 
+  const getUserProjects = (_userId) => {
+    axios.get(`http://127.0.0.1:5000/get_user_projects/${_userId}`)
+    .then(response => {
+      setLinkPlates(response.data)
+    })
+    .catch(error => {
+      console.error('Ошибка при выполнении запроса:', error);
+   });
+  }
+ 
   const addFrame = (data) => {
     setFrames(data);
   };
@@ -96,9 +113,9 @@ function App() {
         <>
           <header className="header">
             <Link to="/" className="Logo"><img src={logo} width={145} height={50} onClick={updateUsersArray}/></Link>
-            <a href="#"><p className="PublishProject">Опубликовать проект</p></a>
+            <Link to='/uploadProject'><p className="PublishProject">Опубликовать проект</p></Link>
             <a href="#" ><img className="Notification" src={notification} width={45} /></a>
-            <Link to="/profile" onClick={() => { makeNonRegistration(); updateUserId(selfId); }}>
+            <Link to="/profile" onClick={() => { makeNonRegistration(); updateUserId(selfId); updateThisFrame(token)}}>
               <img className="Avatar" src={avatar} width={90}/>
             </Link>
           </header>
@@ -114,10 +131,12 @@ function App() {
               onRegistarion={isRegistration} onUpdateUsers={updateUsersArray}
               thisFrame={frames[userId - 1]} onUpdateThisFrame={updateThisFrame}
               updateToken={updateToken} setFrames={setFrames}
-              userId={userId}/>} />
+              userId={userId} linkPlates={linkPlates}
+              getUserProjects={getUserProjects}/>} />
             <Route exact path="/otherManProfile" element={<OtherManProfile 
               frames={frames} thisFrame={frames[userId - 1]}
               userId={userId}/>} />
+            <Route exact path="/uploadProject" element={<UploadProject token={token} updateThisFrame={updateThisFrame}/>} /> 
           </Routes>
         </>
       </Router>

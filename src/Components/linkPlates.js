@@ -3,6 +3,9 @@ import LinkPlate from './linkPlate'
 
 export default class linkPlates extends Component {
   render() {
+    if (!this.props.linkPlates) {
+      return <div>Loading...</div>;
+    }
     return (
         <>
             {this.props.linkPlates.map((linkPlate) => (

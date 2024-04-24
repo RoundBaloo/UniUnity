@@ -18,11 +18,6 @@ const StyledFormContainer = styled.div`
   padding: 0px;
 `;
 
-const linkPlates = [
-  {link: 'https://www.figma.com/file/mSz4gxJqueGlF5fCOPwyXm/JK-Design?type=design&node-id=0%3A1&mode=design&t=elom4elklqmaw5KM-1'},
-  {link: 'https://docs.google.com/spreadsheets/d/1rnA7xzo0WsVo06zh0uTALMNhucMQrtfowltOAJH-y1I/edit'}
-]
-
 export default class Profile extends Component {
   constructor(props) {
     super(props);
@@ -79,21 +74,23 @@ export default class Profile extends Component {
           {this.props.onLoggedIn
             ? (
               <>
-                <StyledFormContainer>
+                {/* <StyledFormContainer>
                   {!this.state.isEditing 
                     ? <ProfilePlate thisFrame={this.props.thisFrame} frames={this.props.frames} makeEditing={this.makeEditing} userId={this.state.userId}/>
                     : <ProfilePlateEditor thisFrame={this.props.thisFrame} makeEditing={this.makeEditing} onUpdateUsers={this.props.onUpdateUsers} userId={this.state.userId}/>}
-                </StyledFormContainer>
-                {/* <LinkPlates linkPlates={linkPlates}/> */}
+                </StyledFormContainer> */}
+                <LinkPlates linkPlates={this.props.linkPlates}/>
               </>
             )
             : (this.props.onRegistarion 
               ? (<Registration onLogIn={this.props.onLogIn} onUpdateThisFrame={this.props.onUpdateThisFrame} 
                 onUpdateUsers={this.props.onUpdateUsers} updateFrames={this.updateFrames}
                 onAdd={this.props.onAdd} updateToken={this.props.updateToken} 
-                frames={this.props.frames} setFrames={this.props.setFrames}/>) 
+                frames={this.props.frames} setFrames={this.props.setFrames}
+                getUserProjects={this.props.getUserProjects}/>) 
               : (<Signin onMakeRegistration={this.props.onMakeRegistration} onRegistarion={this.props.onRegistarion} 
-                  onLogIn={this.props.onLogIn} onUpdateThisFrame={this.props.onUpdateThisFrame}/>))}
+                  onLogIn={this.props.onLogIn} onUpdateThisFrame={this.props.onUpdateThisFrame}
+                  getUserProjects={this.props.getUserProjects}/>))}
         </div>
       </div>
     )

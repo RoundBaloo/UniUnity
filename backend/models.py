@@ -71,7 +71,7 @@ class User(db.Model):
     @classmethod
     def get_users_list(cls):
         try:
-            users = cls.query
+            users = cls.query.all()
             db.session.commit()
         except Exception:
             db.session.rollback()
@@ -154,7 +154,6 @@ class User(db.Model):
             "about": self.about,
             "skillLevel": self.skill_level,
             "teamSearchState": self.team_search_state,
-            "projects": self.projects,
 
             "VK_link": self.VK_link,
             "TG_link": self.TG_link,

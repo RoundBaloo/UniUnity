@@ -126,6 +126,7 @@ export default class registration extends Component {
                             axios.get(baseUrl).then((res) => {
                                 this.props.updateFrames(res.data.users);
                               });
+                            this.props.getUserProjects();
                         })
                         .catch(error => {
                           console.error('Error adding user:', error);

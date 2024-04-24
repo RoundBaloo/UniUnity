@@ -19,7 +19,6 @@ def get_users():
     except Exception as e:
         logger.warning(f'Error while getting users: {e}')
         return jsonify({"message": str(e)}), 400
-
     return jsonify({"users": json_users}), 200
 
 
@@ -111,19 +110,18 @@ def get_projects(user_id):
 
 # добавление проекта юзером
 @app.route("/post_project", methods=["POST"])
-@jwt_required
-@use_kwargs(ProjectSchema)
-@marshal_with(ProjectSchema)
-def post_project(**kwargs):
+def post_project():
     try:
+        verify_jwt_in_request()
+        params = request.json
         user_id = get_jwt_identity()
-        new_one = Project(user_id=user_id, **kwargs)
+        new_one = Project(user_id=user_id, **params)
         new_one.save_project()  # добавление в БД
     except Exception as e:
         logger.warning(f'Error while posting project {get_jwt_identity()}: {e}')
         return jsonify({"message": str(e)}), 400
 
-    return new_one, 201
+    return jsonify({"message": "Проект добавлен"})
 
 
 # изменение проекта юзером

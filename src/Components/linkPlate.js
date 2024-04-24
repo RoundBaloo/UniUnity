@@ -10,7 +10,7 @@ const StyledPlate = styled.div`
 export default class linkPlate extends Component {
   render() {
     return (
-        <a href={this.props.linkPlate.link} target="_blank">
+        <a href={this.props.linkPlate.project_link} target="_blank">
             <StyledPlate>
                 <p>Ваш проект</p>
             </StyledPlate>

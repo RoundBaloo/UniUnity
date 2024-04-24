@@ -92,12 +92,11 @@ export default class signin extends Component {
                     password: this.state.password
                 })
                 .then(response => {
-                    console.log(response.data.access_token);
+                    console.log(response.data);
                     const token = response.data.access_token;
                     saveToken(token);
                     setAuthHeader(token);
                     this.props.onUpdateThisFrame(token);
-
                 })
                 .catch(error => {
                     console.error('Error:', error);
