@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 import styled from 'styled-components';
 
 const StyledPlate = styled.div`
-    width: 100px;
-    height: 100px;
+    width: 200px;
+    height: 200px;
     border: 3px solid black;
 `;
 

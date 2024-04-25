@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import avatar from '../img/avatarPlaceholder.jpg';
 import axios from 'axios';
 import { getToken } from '../tokenService';
+import { Link } from 'react-router-dom';
 
 const StyledContainer = styled.div`
  display: flex;
@@ -135,7 +136,9 @@ export default class profilePlate extends Component {
           </StyledForm>
           <StyledButtonContainer>
             <StyledButton style={{borderBottomLeftRadius: '11px', borderRight: '1px'}} onClick={this.props.makeEditing}>редактировать</StyledButton>
-            <StyledButton style={{borderBottomRightRadius: '11px'}}>добавить проект</StyledButton>
+            <Link to='/uploadProject'>
+              <StyledButton style={{borderBottomRightRadius: '11px'}}>добавить проект</StyledButton>
+            </Link>
           </StyledButtonContainer>
         </StyledContainer>
     )

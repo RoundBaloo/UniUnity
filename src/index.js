@@ -113,7 +113,7 @@ function App() {
         <>
           <header className="header">
             <Link to="/" className="Logo"><img src={logo} width={145} height={50} onClick={updateUsersArray}/></Link>
-            <Link to='/uploadProject'><p className="PublishProject">Опубликовать проект</p></Link>
+            {/* <Link to='/uploadProject'><p className="PublishProject">Опубликовать проект</p></Link> */}
             <a href="#" ><img className="Notification" src={notification} width={45} /></a>
             <Link to="/profile" onClick={() => { makeNonRegistration(); updateUserId(selfId); updateThisFrame(token)}}>
               <img className="Avatar" src={avatar} width={90}/>

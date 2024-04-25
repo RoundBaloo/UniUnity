@@ -18,6 +18,23 @@ const StyledFormContainer = styled.div`
   padding: 0px;
 `;
 
+const StyledProjectsContainer = styled.div`
+  width: 60%;
+  position: absolute;
+  right: 0px;
+  top: 120px;
+  margin: 5px;
+  padding: 0px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+`;
+
+const StyledDiv = styled.div`
+  width: 100%;
+  height: 100px;
+`;
+
 export default class Profile extends Component {
   constructor(props) {
     super(props);
@@ -69,30 +86,30 @@ export default class Profile extends Component {
 
   render () { 
     return (
-      <div>
-        <div>
-          {this.props.onLoggedIn
-            ? (
-              <>
-                {/* <StyledFormContainer>
-                  {!this.state.isEditing 
-                    ? <ProfilePlate thisFrame={this.props.thisFrame} frames={this.props.frames} makeEditing={this.makeEditing} userId={this.state.userId}/>
-                    : <ProfilePlateEditor thisFrame={this.props.thisFrame} makeEditing={this.makeEditing} onUpdateUsers={this.props.onUpdateUsers} userId={this.state.userId}/>}
-                </StyledFormContainer> */}
+      <StyledDiv>
+        {this.props.onLoggedIn
+          ? (
+            <>
+              <StyledFormContainer>
+                {!this.state.isEditing 
+                  ? <ProfilePlate thisFrame={this.props.thisFrame} frames={this.props.frames} makeEditing={this.makeEditing} userId={this.state.userId}/>
+                  : <ProfilePlateEditor thisFrame={this.props.thisFrame} makeEditing={this.makeEditing} onUpdateUsers={this.props.onUpdateUsers} userId={this.state.userId}/>}
+              </StyledFormContainer>
+              <StyledProjectsContainer>
                 <LinkPlates linkPlates={this.props.linkPlates}/>
-              </>
-            )
-            : (this.props.onRegistarion 
-              ? (<Registration onLogIn={this.props.onLogIn} onUpdateThisFrame={this.props.onUpdateThisFrame} 
-                onUpdateUsers={this.props.onUpdateUsers} updateFrames={this.updateFrames}
-                onAdd={this.props.onAdd} updateToken={this.props.updateToken} 
-                frames={this.props.frames} setFrames={this.props.setFrames}
-                getUserProjects={this.props.getUserProjects}/>) 
-              : (<Signin onMakeRegistration={this.props.onMakeRegistration} onRegistarion={this.props.onRegistarion} 
-                  onLogIn={this.props.onLogIn} onUpdateThisFrame={this.props.onUpdateThisFrame}
-                  getUserProjects={this.props.getUserProjects}/>))}
-        </div>
-      </div>
+              </StyledProjectsContainer>
+            </>
+          )
+          : (this.props.onRegistarion 
+            ? (<Registration onLogIn={this.props.onLogIn} onUpdateThisFrame={this.props.onUpdateThisFrame} 
+              onUpdateUsers={this.props.onUpdateUsers} updateFrames={this.updateFrames}
+              onAdd={this.props.onAdd} updateToken={this.props.updateToken} 
+              frames={this.props.frames} setFrames={this.props.setFrames}
+              getUserProjects={this.props.getUserProjects}/>) 
+            : (<Signin onMakeRegistration={this.props.onMakeRegistration} onRegistarion={this.props.onRegistarion} 
+                onLogIn={this.props.onLogIn} onUpdateThisFrame={this.props.onUpdateThisFrame}
+                getUserProjects={this.props.getUserProjects}/>))}
+      </StyledDiv>
     )
   }
 }
