@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import styled from 'styled-components';
+import avatar from '../img/avatarPlaceholder.jpg';
 
 const StyledPlate = styled.div`
     width: 200px;
@@ -12,7 +13,10 @@ export default class linkPlate extends Component {
     return (
         <a href={this.props.linkPlate.project_link} target="_blank">
             <StyledPlate>
-                <p>Ваш проект</p>
+                <img src={avatar} alt="Лого проекта" />
+                <p>{this.props.linkPlate.name}</p>
+                <p>{this.props.linkPlate.type}</p>
+                <p>{this.props.linkPlate.description}</p>
             </StyledPlate>
         </a>
     )
