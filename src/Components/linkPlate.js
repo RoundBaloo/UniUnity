@@ -1,11 +1,23 @@
 import React, { Component } from 'react'
 import styled from 'styled-components';
 import avatar from '../img/avatarPlaceholder.jpg';
+//import project from '../img/projectZaglushka.jpg';
 
 const StyledPlate = styled.div`
-    width: 200px;
-    height: 200px;
-    border: 3px solid black;
+    width: 254px;
+    height: 254px;
+    margin-top: 64px;
+    margin-right: 13px;
+`;
+
+const StyledImg = styled.img`
+    border-radius: 7px;
+    width: 100%;
+    height: 100%;
+`;
+
+const StyledP = styled.p`
+    position: absolute;
 `;
 
 export default class linkPlate extends Component {
@@ -13,10 +25,8 @@ export default class linkPlate extends Component {
     return (
         <a href={this.props.linkPlate.project_link} target="_blank">
             <StyledPlate>
-                <img src={avatar} alt="Лого проекта" />
-                <p>{this.props.linkPlate.name}</p>
-                <p>{this.props.linkPlate.type}</p>
-                <p>{this.props.linkPlate.description}</p>
+                <StyledImg src={avatar} alt="Лого проекта" />
+                <StyledP>{this.props.linkPlate.name}</StyledP>
             </StyledPlate>
         </a>
     )
