@@ -8,6 +8,7 @@ import { getToken } from '../tokenService';
 import OtherManProfilePlate from "../Components/otherManProfilePlate";
 import ProfilePlateEditor from "../Components/profilePlateEditor";
 import userEvent from "@testing-library/user-event";
+import LinkPlates from "../Components/linkPlates";
 
 const StyledFormContainer = styled.div`
   width: 30%;
@@ -15,6 +16,18 @@ const StyledFormContainer = styled.div`
   position: sticky;
   top: 0px;
   padding: 0px;
+`;
+
+const StyledProjectsContainer = styled.div`
+  width: 60%;
+  position: absolute;
+  right: 0px;
+  top: 120px;
+  margin: 5px;
+  padding: 0px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
 `;
 
 export default class otherManProfile extends Component {
@@ -62,6 +75,9 @@ export default class otherManProfile extends Component {
             <StyledFormContainer> 
                 <OtherManProfilePlate thisFrame={this.props.thisFrame} frames={this.props.frames} userId={this.state.userId}/>
             </StyledFormContainer>
+            <StyledProjectsContainer>
+              <LinkPlates linkPlates={this.props.linkPlates}/>
+            </StyledProjectsContainer>
         </>
     )
   }

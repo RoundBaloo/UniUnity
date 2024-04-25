@@ -59,6 +59,7 @@ function App() {
     axios.get(`http://127.0.0.1:5000/get_user_projects/${_userId}`)
     .then(response => {
       setLinkPlates(response.data)
+      console.log(response.data)
     })
     .catch(error => {
       console.error('Ошибка при выполнении запроса:', error);
@@ -93,6 +94,8 @@ function App() {
 
   const updateUserId = (_userId) => {
     setUserId(_userId);
+    getUserProjects(_userId);
+    console.log("good")
   }
 
   const updateToken = (data) => {
@@ -135,7 +138,7 @@ function App() {
               getUserProjects={getUserProjects}/>} />
             <Route exact path="/otherManProfile" element={<OtherManProfile 
               frames={frames} thisFrame={frames[userId - 1]}
-              userId={userId}/>} />
+              userId={userId} linkPlates={linkPlates}/>} />
             <Route exact path="/uploadProject" element={<UploadProject token={token} updateThisFrame={updateThisFrame}/>} /> 
           </Routes>
         </>

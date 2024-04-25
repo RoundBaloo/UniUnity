@@ -141,6 +141,9 @@ export default class otherManProfilePlate extends Component {
                         <StyledP>Что хочу от команды</StyledP>
                         <StyledP>Хочу быть частью динамичной и технологичной продвинутой команды для создания
                             действительно проработанной визуальной новеллы.</StyledP>
+                        <StyledP>{frame.TG_link}</StyledP>
+                        <StyledP>{frame.VK_link}</StyledP>
+                        <StyledP>{frame.mail}</StyledP>
                     </StyledOtherInfoContainer>
                 </StyledForm>
             </StyledContainer>

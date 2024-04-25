@@ -25,7 +25,7 @@ const StyledForm = styled.form`
     border-top-left-radius: 11px;
     border-top-right-radius: 11px;
     width: 100%; /* Ширина формы */
-    height: 800px;
+    height: 850px;
     box-sizing: border-box;
     justify-content: flex-end;
     margin: 20px 0px 0px 20px;
@@ -143,7 +143,11 @@ export default class profilePlateEditor extends Component {
       profession: this.props.thisFrame.profession,
       searchAim: this.props.thisFrame.searchAim,
       about: this.props.thisFrame.about,
-      teamSearchState: this.props.thisFrame.teamSearchState
+      teamSearchState: this.props.thisFrame.teamSearchState,
+      TG_link: this.props.thisFrame.TG_link,
+      VK_lnk: this.props.thisFrame.VK_lnk,
+      mail: this.props.thisFrame.mail,
+      what_want_from_command: this.props.thisFrame.what_want_from_command,
     }
   }
   render() {
@@ -152,11 +156,11 @@ export default class profilePlateEditor extends Component {
           <StyledForm>
               <StyledImg className="Avatar" src={avatar} width={90}/>
               <StyledMainInfoContainer>
-                <StyledInput value={this.state.lastName} style={{width: "40%", height: "30px"}} onChange={(e) => {this.setState({lastName: e.target.value})}}></StyledInput>
-                <StyledInput value={this.state.firstName} style={{width: "40%", height: "30px"}} onChange={(e) => {this.setState({firstName: e.target.value})}}></StyledInput>
+                <StyledInput placeholder='Фамилия' value={this.state.lastName} style={{width: "40%", height: "30px"}} onChange={(e) => {this.setState({lastName: e.target.value})}}></StyledInput>
+                <StyledInput placeholder='Имя' value={this.state.firstName} style={{width: "40%", height: "30px"}} onChange={(e) => {this.setState({firstName: e.target.value})}}></StyledInput>
                 <ul>
                     <li className = "Direction">
-                      <StyledInput value={this.state.profession} onChange={(e) => this.setState({profession: e.target.value})}></StyledInput>
+                      <StyledInput placeholder='Роль в команде' value={this.state.profession} onChange={(e) => this.setState({profession: e.target.value})}></StyledInput>
                     </li>
                     <li className="Search">
                       <input 
@@ -169,16 +173,19 @@ export default class profilePlateEditor extends Component {
                 </ul>
               </StyledMainInfoContainer>
               <StyledOtherInfoContainer>
-                <StyledInput value={this.state.institute} onChange={(e) => this.setState({institute: e.target.value})}></StyledInput>
-                <StyledInput value={this.state.studyDirection} onChange={(e) => this.setState({studyDirection: e.target.value})}></StyledInput>
-                <StyledInput value={this.state.course} onChange={(e) => this.setState({course: e.target.value})}></StyledInput>
-                <StyledInput value={this.state.skillLevel} onChange={(e) => this.setState({skillLevel: e.target.value})}></StyledInput>
-                <StyledInput value={this.state.searchAim} onChange={(e) => this.setState({searchAim: e.target.value})}></StyledInput>
+                <StyledInput placeholder='Институт' value={this.state.institute} onChange={(e) => this.setState({institute: e.target.value})}></StyledInput>
+                <StyledInput placeholder='Направление обучения' value={this.state.studyDirection} onChange={(e) => this.setState({studyDirection: e.target.value})}></StyledInput>
+                <StyledInput placeholder='Курс' value={this.state.course} onChange={(e) => this.setState({course: e.target.value})}></StyledInput>
+                <StyledInput placeholder='Уровень навыка' value={this.state.skillLevel} onChange={(e) => this.setState({skillLevel: e.target.value})}></StyledInput>
+                <StyledInput placeholder='Цель поиска команды' value={this.state.searchAim} onChange={(e) => this.setState({searchAim: e.target.value})}></StyledInput>
                 <StyledP>О себе</StyledP>
                 <StyledTextarea value={this.state.about} onChange={(e) => this.setState({about: e.target.value})}></StyledTextarea>
                 <StyledP>Что хочу от команды</StyledP>
-                <StyledTextarea value={'Хочу быть частью динамичной и технологичной продвинутой команды для создания действительно проработанной визуальной новеллы.'}
+                <StyledTextarea value={this.state.what_want_from_command}
                   style={{height: "110px"}}></StyledTextarea>
+                <StyledInput placeholder='Ссылка на ТГ' value={this.state.TG_link} onChange={(e) => this.setState({TG_link: e.target.value})}></StyledInput>
+                <StyledInput placeholder='Ссылка на ВК' value={this.state.VK_link} onChange={(e) => this.setState({VK_link: e.target.value})}></StyledInput>
+                <StyledInput placeholder='Контактная почта' value={this.state.mail} onChange={(e) => this.setState({mail: e.target.value})}></StyledInput>
               </StyledOtherInfoContainer>
           </StyledForm>
           <StyledButtonContainer>
@@ -196,7 +203,11 @@ export default class profilePlateEditor extends Component {
                     "profession": this.state.profession,
                     "searchAim": this.state.searchAim,
                     "about": this.state.about,
-                    "teamSearchState": this.state.teamSearchState
+                    "what_want_from_command": this.state.what_want_from_command,
+                    "teamSearchState": this.state.teamSearchState,
+                    "TG_link": this.state.TG_link,
+                    "VK_link": this.state.VK_link,
+                    "mail": this.state.mail
                   }, {
                     headers: {
                         'Authorization': `Bearer ${token}`
