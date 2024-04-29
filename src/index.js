@@ -55,6 +55,23 @@ function App() {
     });
   }
 
+  const updateThisFrame1 = (token) => {
+    axios.get('http://127.0.0.1:5000/get_user_id', {
+    headers: {
+        'Authorization': `Bearer ${token}`
+    }
+    })
+    .then(response => {
+      setUserId(response.data.user_id);
+      selfId = response.data.user_id;
+      updateUsersArray();
+      getUserProjects(response.data.user_id);
+    })
+    .catch(error => {
+      console.error('Error:', error);
+    });
+  }
+
   const getUserProjects = (_userId) => {
     axios.get(`http://127.0.0.1:5000/get_user_projects/${_userId}`)
     .then(response => {
@@ -81,6 +98,10 @@ function App() {
   const makeLoggedIn = () => {
     setIsLoggedIn(true);
   };
+
+  const makeNotLoggedIn = () => {
+    setIsLoggedIn(false);
+  }
 
   const makeFill = () => {
     setIsFill(true);
@@ -118,7 +139,7 @@ function App() {
             <Link to="/" className="Logo"><img src={logo} width={145} height={50} onClick={updateUsersArray}/></Link>
             {/* <Link to='/uploadProject'><p className="PublishProject">Опубликовать проект</p></Link> */}
             <a href="#" ><img className="Notification" src={notification} width={45} /></a>
-            <Link to="/profile" onClick={() => { makeNonRegistration(); updateUserId(selfId); updateThisFrame(token)}}>
+            <Link to="/profile" onClick={() => { makeNonRegistration(); updateUserId(selfId); updateThisFrame1(token)}}>
               <img className="Avatar" src={avatar} width={90}/>
             </Link>
           </header>
@@ -128,7 +149,8 @@ function App() {
               onMakeNonRegistration={makeNonRegistration} 
               updateUserId={updateUserId}/>} />
             <Route exact path="/profile" element={<Profile frames={frames}
-              onLogIn={makeLoggedIn} onLoggedIn={isLoggedIn} onFill={makeFill}
+              onLogIn={makeLoggedIn} makeNotLoggedIn={makeNotLoggedIn}
+              onLoggedIn={isLoggedIn} onFill={makeFill}
               onFilled={isFill} onAdd={addFrame} onAdd1={addFrame1}
               onOnline={isOnline} onMakeRegistration={makeRegistration}
               onRegistarion={isRegistration} onUpdateUsers={updateUsersArray}

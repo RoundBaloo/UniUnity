@@ -9,6 +9,7 @@ import ProfilePlate from "../Components/profilePlate";
 import ProfilePlateEditor from "../Components/profilePlateEditor";
 import LinkPlates from "../Components/linkPlates";
 import userEvent from "@testing-library/user-event";
+import avatar from '../img/avatarPlaceholder.jpg'
 
 const StyledFormContainer = styled.div`
   width: 30%;
@@ -35,6 +36,17 @@ const StyledDiv = styled.div`
   height: 100px;
 `;
 
+const StyledBut = styled.button`
+  width: 100px;
+  height: 50px;
+  position: absolute;
+  top: 110px;
+  right: 10px;
+  border: 3px solid black;
+  border-radius: 11px;
+  z-index: 10;
+`;
+
 export default class Profile extends Component {
   constructor(props) {
     super(props);
@@ -43,11 +55,13 @@ export default class Profile extends Component {
       frame: this.props.frames[0],
       userId: this.props.userId,
       frames: [],
+      avatar: avatar,
     };
 
     this.makeEditing = this.makeEditing.bind(this);
     this.updateToken = this.updateToken.bind(this);
     this.updateFrames = this.updateFrames.bind(this);
+    this.handleAvatar = this.handleAvatar.bind(this);
   }
 
   updateFrames(data) {
@@ -84,16 +98,28 @@ export default class Profile extends Component {
   });
   }
 
+  handleAvatar = (selectedAvatar) => {
+    this.setState({avatar: selectedAvatar})
+  }
+
   render () { 
     return (
       <StyledDiv>
         {this.props.onLoggedIn
           ? (
             <>
+              <StyledBut type='button' onClick={() => {this.props.makeNotLoggedIn()}}>
+                выйти
+              </StyledBut>
               <StyledFormContainer>
                 {!this.state.isEditing 
-                  ? <ProfilePlate thisFrame={this.props.thisFrame} frames={this.props.frames} makeEditing={this.makeEditing} userId={this.state.userId}/>
-                  : <ProfilePlateEditor thisFrame={this.props.thisFrame} makeEditing={this.makeEditing} onUpdateUsers={this.props.onUpdateUsers} userId={this.state.userId}/>}
+                  ? <ProfilePlate thisFrame={this.props.thisFrame} frames={this.props.frames} 
+                  makeEditing={this.makeEditing} userId={this.state.userId}
+                  avatar={this.state.avatar}/>
+                  : <ProfilePlateEditor thisFrame={this.props.thisFrame} makeEditing={this.makeEditing} 
+                  onUpdateUsers={this.props.onUpdateUsers} userId={this.state.userId}
+                  handleAvatar={this.handleAvatar}
+                  avatar={this.state.avatar}/>}
               </StyledFormContainer>
               <StyledProjectsContainer>
                 <LinkPlates linkPlates={this.props.linkPlates}/>

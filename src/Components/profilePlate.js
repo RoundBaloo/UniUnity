@@ -150,7 +150,7 @@ export default class profilePlate extends Component {
         return (
             <StyledContainer>
                 <StyledForm>
-                    <StyledImg className="Avatar" src={avatar} width={90}/>
+                    <StyledImg className="Avatar" src={this.props.avatar} width={90}/>
                     <StyledMainInfoContainer>
                         <UserName>{frame.lastName} {frame.firstName}</UserName>
                         <ul>

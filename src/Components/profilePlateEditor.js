@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import avatar from '../img/avatarPlaceholder.jpg';
 import axios from 'axios';
 import { getToken } from '../tokenService';
+import ImageSelect from './avatarSelect'; 
 
 const StyledContainer = styled.div`
  display: flex;
@@ -36,6 +37,7 @@ const StyledImg = styled.img`
   left: 10px;
   width: 100px;
   height: 100px;
+  cursor: pointer;
 `;
 
 const StyledMainInfoContainer = styled.div`
@@ -113,22 +115,6 @@ const StyledTextarea = styled.textarea.attrs({
   overflow: hidden;
 `;
 
-// var token;
-// var userId;
-
-// axios.get('http://127.0.0.1:5000/get_user_id', {
-//   headers: {
-//       'Authorization': `Bearer ${token}`
-//   }
-// })
-// .then(response => {
-//   console.log(response.data.user_id);
-//   userId = response.data.user_id;
-// })
-// .catch(error => {
-//   console.error('Error:', error);
-// });
-
 export default class profilePlateEditor extends Component {
   constructor(props){
     super(props)
@@ -148,13 +134,23 @@ export default class profilePlateEditor extends Component {
       VK_lnk: this.props.thisFrame.VK_lnk,
       mail: this.props.thisFrame.mail,
       what_want_from_command: this.props.thisFrame.what_want_from_command,
+      showImageSelector: false,
     }
+
+    this.handleImageSelect = this.handleImageSelect.bind(this);
   }
+
+  handleImageSelect = (selectedImage) => {
+    this.setState({ showImageSelector: false });
+    this.props.handleAvatar(selectedImage);
+  }
+
   render() {
     return (
         <StyledContainer>
+          {this.state.showImageSelector && <ImageSelect handleImageSelect={this.handleImageSelect}/>}
           <StyledForm>
-              <StyledImg className="Avatar" src={avatar} width={90}/>
+              <StyledImg className="Avatar" src={this.props.avatar} width={90} onClick={() => this.setState({ showImageSelector: true })}/>
               <StyledMainInfoContainer>
                 <StyledInput placeholder='Фамилия' value={this.state.lastName} style={{width: "40%", height: "30px"}} onChange={(e) => {this.setState({lastName: e.target.value})}}></StyledInput>
                 <StyledInput placeholder='Имя' value={this.state.firstName} style={{width: "40%", height: "30px"}} onChange={(e) => {this.setState({firstName: e.target.value})}}></StyledInput>

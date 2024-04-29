@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import styled from 'styled-components';
-import avatar from '../img/avatarPlaceholder.jpg';
-//import project from '../img/projectZaglushka.jpg';
+import project from '../img/projectZaglushka.jpg';
 
 const StyledPlate = styled.div`
     width: 254px;
@@ -25,7 +24,7 @@ export default class linkPlate extends Component {
     return (
         <a href={this.props.linkPlate.project_link} target="_blank">
             <StyledPlate>
-                <StyledImg src={avatar} alt="Лого проекта" />
+                <StyledImg src={project} alt="Лого проекта" />
                 <StyledP>{this.props.linkPlate.name}</StyledP>
             </StyledPlate>
         </a>

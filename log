@@ -40,3 +40,5 @@
 [SQL: INSERT INTO users (email, password, first_name, last_name, father_name, institute, study_direction, course, profession, search_aim, what_want_from_command, about, skill_level, team_search_state, "VK_link", "TG_link", mail) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)]
 [parameters: ('123', '$2b$12$KcJefv5vnGA44yqJTt1xo.goe4uns3sV99vRnTs6LSrM04/e60XZ2', None, '123', None, None, None, None, None, None, None, None, None, None, None, None, None)]
 (Background on this error at: https://sqlalche.me/e/20/gkpj)
+2024-04-25 20:37:51,596:config:WARNING:Error while login with email: 123: No row was found when one was required
+2024-04-29 16:33:55,110:config:WARNING:Error while login with email: 123: No row was found when one was required
