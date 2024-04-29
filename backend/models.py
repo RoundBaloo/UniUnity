@@ -32,6 +32,8 @@ class User(db.Model):
     TG_link = db.Column(db.String(500))
     mail = db.Column(db.String(500))
 
+    image_link = db.Column(db.String(500))
+
     def __init__(self, **kwargs):
         self.email = kwargs.get('email')
         self.password = bcrypt.hash(kwargs.get('password'))
@@ -54,6 +56,8 @@ class User(db.Model):
         self.VK_link = kwargs.get('VK_link')
         self.TG_link = kwargs.get('TG_link')
         self.mail = kwargs.get('mail')
+
+        self.image_link = kwargs.get('image_link')
 
     def get_token(self, expire_time=24):
         expire_delta = timedelta(expire_time)
@@ -121,6 +125,8 @@ class User(db.Model):
             self.VK_link = data.get("VK_link", self.VK_link)
             self.TG_link = data.get("TG_link", self.TG_link)
             self.mail = data.get("mail", self.mail)
+
+            self.image_link = data.get("image_link", self.image_link)
             db.session.commit()
         except Exception:
             db.session.rollback()
@@ -157,7 +163,9 @@ class User(db.Model):
 
             "VK_link": self.VK_link,
             "TG_link": self.TG_link,
-            "mail": self.mail
+            "mail": self.mail,
+
+            "image_link": self.image_link
         }
 
 
@@ -171,6 +179,8 @@ class Project(db.Model):
     type = db.Column(db.String(100))
     description = db.Column(db.String(400))
     project_link = db.Column(db.String(500))
+
+    project_image_link = db.Column(db.String(500))
 
     @classmethod
     def get_projects_by_user_id(cls, user_id):
@@ -209,6 +219,7 @@ class Project(db.Model):
             self.type = kwargs.get("type")
             self.description = kwargs.get("description")
             self.project_link = kwargs.get("project_link")
+            self.project_image_link = kwargs.get("project_image_link")
             db.session.commit()
         except Exception:
             db.session.rollback()
@@ -230,5 +241,7 @@ class Project(db.Model):
             "name": self.name,
             "type": self.type,
             "description": self.description,
-            "project_link": self.project_link
+            "project_link": self.project_link,
+
+            "project_image_link": self.project_image_link
         }
