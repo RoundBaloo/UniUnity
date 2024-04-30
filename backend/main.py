@@ -10,11 +10,11 @@ from schemas import ProjectSchema
 CORS(app)
 
 
-# Получение юзеров
-@app.route("/users", methods=["GET"])
-def get_users():
+# Получение юзеров по страницам
+@app.route("/users/<int:page_number>", methods=["GET"])
+def get_users(page_number):
     try:
-        users = User.get_users_list()
+        users = User.get_users_list(page_number=page_number)
         json_users = list(map(lambda x: x.to_json(), users))
     except Exception as e:
         logger.warning(f'Error while getting users: {e}')
@@ -22,17 +22,20 @@ def get_users():
     return jsonify({"users": json_users}), 200
 
 
-# Получение id юзера
-@app.route("/get_user_id", methods=["GET"])
+# Получение юзера с проектами
+@app.route("/get_user_with_projects", methods=["GET"])
 @jwt_required()
-def get_user_id():
+def get_user_with_projects():
     try:
         user_id = get_jwt_identity()
+        user = User.get_user_by_id(user_id=user_id)
+        projects = Project.get_user_projects(user_id=user_id)
+        json_projects = list(map(lambda x: x.to_json(), projects))
     except Exception as e:
         logger.warning(f'Error while getting user_id:{get_jwt_identity()}: {e}')
         return jsonify({"message": str(e)}), 401
 
-    return jsonify({"user_id": user_id}), 200
+    return jsonify({"user": user.to_json, "projects": json_projects}), 200
 
 
 # Обновление юзера

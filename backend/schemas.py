@@ -13,6 +13,3 @@ class ProjectSchema(Schema):
     project_link = fields.String(validate=[
         validate.Length(max=500)])
     message = fields.String(dump_only=True)
-
-
-

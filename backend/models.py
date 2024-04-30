@@ -73,9 +73,12 @@ class User(db.Model):
         return user
 
     @classmethod
-    def get_users_list(cls):
+    def get_users_list(cls, page_number):
         try:
-            users = cls.query.all()
+            all_users = cls.query.all()
+            users = []
+            for i in range(4 * (page_number - 1), 4 * page_number):
+                users.append(all_users[i])
             db.session.commit()
         except Exception:
             db.session.rollback()
