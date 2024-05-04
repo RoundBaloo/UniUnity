@@ -24,18 +24,23 @@ def get_users(page_number):
 
 # Получение юзера с проектами
 @app.route("/get_user_with_projects", methods=["GET"])
-@jwt_required()
 def get_user_with_projects():
     try:
+        verify_jwt_in_request()
+        print(1)
         user_id = get_jwt_identity()
+        print(2)
         user = User.get_user_by_id(user_id=user_id)
-        projects = Project.get_user_projects(user_id=user_id)
+        print(3)
+        projects = Project.get_projects_by_user_id(user_id=user_id)
+        print(4)
         json_projects = list(map(lambda x: x.to_json(), projects))
+        print(5)
     except Exception as e:
         logger.warning(f'Error while getting user_id:{get_jwt_identity()}: {e}')
         return jsonify({"message": str(e)}), 401
 
-    return jsonify({"user": user.to_json, "projects": json_projects}), 200
+    return jsonify({"user": user.to_json(), "projects": json_projects}), 200
 
 
 # Обновление юзера

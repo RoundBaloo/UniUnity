@@ -92,21 +92,6 @@ const NotInSearch = styled.span`
     color: red;
 `;
 
-var token;
-var userId;
-
-// axios.get('http://127.0.0.1:5000/get_user_id', {
-//   headers: {
-//       'Authorization': `Bearer ${token}`
-//   }
-// })
-// .then(response => {
-//   console.log(response.data.user_id);
-//   userId = response.data.user_id;
-// })
-// .catch(error => {
-//   console.error('Error:', error);
-// });
 
 
 export default class otherManProfilePlate extends Component {

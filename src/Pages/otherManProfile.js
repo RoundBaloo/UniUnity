@@ -37,8 +37,6 @@ export default class otherManProfile extends Component {
       frame: this.props.frames[0],
       userId: this.props.userId,
     };
-
-    this.updateToken = this.updateToken.bind(this);
   }
 
   updateFrames(data) {
@@ -47,27 +45,7 @@ export default class otherManProfile extends Component {
     }))
   }
   
-  componentDidMount() {
-    this.updateToken();
-  }
 
-  updateToken = () => {
-    var token = getToken();
-    axios.get('http://127.0.0.1:5000/get_user_id', {
-    headers: {
-        'Authorization': `Bearer ${token}`
-    }
-  })
-  .then(response => {
-    this.setState({
-      userId: response.data.user_id,
-      frame: this.props.frames[response.data.user_id - 1],
-    });
-  })
-  .catch(error => {
-    console.error('Error:', error);
-  });
-  }
 
   render () { 
     return (

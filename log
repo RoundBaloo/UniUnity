@@ -42,3 +42,36 @@
 (Background on this error at: https://sqlalche.me/e/20/gkpj)
 2024-04-25 20:37:51,596:config:WARNING:Error while login with email: 123: No row was found when one was required
 2024-04-29 16:33:55,110:config:WARNING:Error while login with email: 123: No row was found when one was required
+2024-05-04 15:04:56,038:config:WARNING:Error while getting users: list index out of range
+2024-05-04 15:04:58,873:config:WARNING:Error while getting users: list index out of range
+2024-05-04 15:05:01,742:config:WARNING:Error while getting users: list index out of range
+2024-05-04 15:05:04,052:config:WARNING:Error while getting users: list index out of range
+2024-05-04 15:05:11,172:config:WARNING:Error while getting users: list index out of range
+2024-05-04 15:05:25,499:config:WARNING:Error while getting users: list index out of range
+2024-05-04 15:05:27,847:config:WARNING:Error while getting users: list index out of range
+2024-05-04 15:08:22,985:config:WARNING:Error while getting users: list index out of range
+2024-05-04 15:08:24,503:config:WARNING:Error while getting users: list index out of range
+2024-05-04 15:08:26,784:config:WARNING:Error while getting users: list index out of range
+2024-05-04 15:08:29,401:config:WARNING:Error while getting users: list index out of range
+2024-05-04 15:09:05,055:config:WARNING:Error while getting users: list index out of range
+2024-05-04 15:09:22,343:config:WARNING:Error while getting users: list index out of range
+2024-05-04 15:12:01,758:config:WARNING:Error while getting users: list index out of range
+2024-05-04 15:13:32,084:config:WARNING:Error while registering user: (sqlite3.IntegrityError) UNIQUE constraint failed: users.email
+[SQL: INSERT INTO users (email, password, first_name, last_name, father_name, institute, study_direction, course, profession, search_aim, what_want_from_command, about, skill_level, team_search_state, "VK_link", "TG_link", mail, image_link) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)]
+[parameters: ('1', '$2b$12$FlSYN86k6scuRa97D.JSD.QC.ns5hHcmKo3Es/4WdVZYTTEyecigS', None, '', None, None, None, None, None, None, None, None, None, None, None, None, None, None)]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+2024-05-04 15:13:34,395:config:WARNING:Error while registering user: (sqlite3.IntegrityError) UNIQUE constraint failed: users.email
+[SQL: INSERT INTO users (email, password, first_name, last_name, father_name, institute, study_direction, course, profession, search_aim, what_want_from_command, about, skill_level, team_search_state, "VK_link", "TG_link", mail, image_link) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)]
+[parameters: ('1', '$2b$12$zPxlGYOGckWmZ8GKp.mYf.t3nmv154W31JDAmn8FD1i3wY.g9n4R.', '1', '1', '1', None, None, None, None, None, None, None, None, None, None, None, None, None)]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+2024-05-04 15:16:01,203:config:WARNING:Error while getting user_id:2: type object 'Project' has no attribute 'get_user_projects'
+2024-05-04 15:17:05,019:config:WARNING:Error while getting user_id:2: type object 'Project' has no attribute 'get_user_projects'
+2024-05-04 15:19:51,397:config:WARNING:Error while getting user_id:2: type object 'Project' has no attribute 'get_user_projects'
+2024-05-04 15:19:56,133:config:WARNING:Error while getting user_id:2: type object 'Project' has no attribute 'get_user_projects'
+2024-05-04 15:20:50,786:config:WARNING:Error while getting user_id:2: type object 'Project' has no attribute 'get_user_projects'
+2024-05-04 15:23:18,494:config:WARNING:Error while getting user_id:2: type object 'Project' has no attribute 'get_user_projects'
+2024-05-04 15:23:22,060:config:WARNING:Error while getting user_id:2: type object 'Project' has no attribute 'get_user_projects'
+2024-05-04 15:23:24,337:config:WARNING:Error while getting user_id:2: type object 'Project' has no attribute 'get_user_projects'
+2024-05-04 15:23:53,862:config:WARNING:Error while getting user_id:2: type object 'Project' has no attribute 'get_user_projects'
+2024-05-04 15:23:55,976:config:WARNING:Error while getting user_id:2: type object 'Project' has no attribute 'get_user_projects'
+2024-05-04 15:24:30,208:config:WARNING:Error while getting user_id:2: type object 'Project' has no attribute 'get_user_projects'

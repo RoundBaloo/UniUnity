@@ -78,7 +78,8 @@ class User(db.Model):
             all_users = cls.query.all()
             users = []
             for i in range(4 * (page_number - 1), 4 * page_number):
-                users.append(all_users[i])
+                if i < len(all_users):
+                    users.append(all_users[i])
             db.session.commit()
         except Exception:
             db.session.rollback()

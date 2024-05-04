@@ -16,7 +16,7 @@ const StyledForm = styled.form`
     justify-content: flex-end;
 `;
 
-const ContainerTwoElements = styled.form`
+const ContainerTwoElements = styled.div`
     margin-bottom: 22px;
 `;
 

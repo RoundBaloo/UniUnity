@@ -18,6 +18,10 @@ const Main = (props) => {
           <p className="button-text">Фильтр и поиск</p>
         </div>
         <Frames frames={props.frames} updateUserId={props.updateUserId}/>
+        <div>
+          <p onClick={() => {props.scrollBack()}}>назад</p>
+          <p onClick={() => {props.scrollForward()}}>вперед</p>
+        </div>
       </>
   );
 };

@@ -82,15 +82,15 @@ export default class Profile extends Component {
 
   updateToken = () => {
     var token = getToken();
-    axios.get('http://127.0.0.1:5000/get_user_id', {
+    axios.get('http://127.0.0.1:5000/get_user_with_projects', {
     headers: {
         'Authorization': `Bearer ${token}`
     }
   })
   .then(response => {
     this.setState({
-      userId: response.data.user_id,
-      frame: this.props.frames[response.data.user_id - 1],
+      userId: response.data.user.id,
+      frame: this.props.frames[response.data.user.id - 1],
     });
   })
   .catch(error => {

@@ -14,9 +14,7 @@ import axios from 'axios';
 import { saveToken, setAuthHeader, getToken } from './tokenService';
 import UploadProject from "./Pages/uploadProject";
 
-const baseUrl = 'http://127.0.0.1:5000/users';
-const projects = 'http://127.0.0.1:5000/post_project';
-const getprojs = 'http://127.0.0.1:5000/get_user_projects/${userId}';
+const baseUrl = 'http://127.0.0.1:5000/users/';
 
 var token = getToken();
 var selfId;
@@ -29,26 +27,27 @@ function App() {
   const [isRegistration, setRegistration] = useState(false);
   const [userId, setUserId] = useState(-1);
   const [linkPlates, setLinkPlates] = useState();
+  const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
-    axios.get(baseUrl).then((res) => {
+    axios.get(`http://127.0.0.1:5000/users/${currentPage}`).then((res) => {
       let arr = res.data.users;
       addFrame(arr);
     });
     }, []);
 
   const updateThisFrame = (token) => {
-    axios.get('http://127.0.0.1:5000/get_user_id', {
+    axios.get('http://127.0.0.1:5000/get_user_with_projects', {
     headers: {
         'Authorization': `Bearer ${token}`
     }
     })
     .then(response => {
-      setUserId(response.data.user_id);
-      selfId = response.data.user_id;
+      setUserId(response.data.user.id);
+      selfId = response.data.user.id;
       updateUsersArray();
       makeLoggedIn();
-      getUserProjects(response.data.user_id);
+      getUserProjects(response.data.user.id);
     })
     .catch(error => {
       console.error('Error:', error);
@@ -56,16 +55,16 @@ function App() {
   }
 
   const updateThisFrame1 = (token) => {
-    axios.get('http://127.0.0.1:5000/get_user_id', {
+    axios.get('http://127.0.0.1:5000/get_user_with_projects', {
     headers: {
         'Authorization': `Bearer ${token}`
     }
     })
     .then(response => {
-      setUserId(response.data.user_id);
-      selfId = response.data.user_id;
+      setUserId(response.data.user.id);
+      selfId = response.data.user.id;
       updateUsersArray();
-      getUserProjects(response.data.user_id);
+      getUserProjects(response.data.user.id);
     })
     .catch(error => {
       console.error('Error:', error);
@@ -108,7 +107,7 @@ function App() {
   };
 
   const updateUsersArray = () => {
-    axios.get(baseUrl).then((res) => {
+    axios.get(`http://127.0.0.1:5000/users/${currentPage}`).then((res) => {
       addFrame(res.data.users);
     });
   }
@@ -132,6 +131,17 @@ function App() {
     setRegistration(false);
   }
 
+  const scrollForward = () => {
+    setCurrentPage(currentPage + 1);
+    console.log(currentPage)
+  }
+
+  const scrollBack = () => {
+    if (currentPage > 1)
+      setCurrentPage(currentPage - 1);
+    console.log(currentPage)
+  }
+
  return (
       <Router>
         <>
@@ -147,7 +157,8 @@ function App() {
             <Route exact path="/" element={<Main frames={frames} onAdd={addFrame} onLogIn={isLoggedIn}
               onMakeRegistration={makeRegistration} onRegistarion={isRegistration}
               onMakeNonRegistration={makeNonRegistration} 
-              updateUserId={updateUserId}/>} />
+              updateUserId={updateUserId}
+              scrollBack={scrollBack} scrollForward={scrollForward}/>} />
             <Route exact path="/profile" element={<Profile frames={frames}
               onLogIn={makeLoggedIn} makeNotLoggedIn={makeNotLoggedIn}
               onLoggedIn={isLoggedIn} onFill={makeFill}
