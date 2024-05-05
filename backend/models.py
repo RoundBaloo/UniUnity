@@ -33,6 +33,7 @@ class User(db.Model):
     mail = db.Column(db.String(500))
 
     image_link = db.Column(db.String(500))
+    fill_percentage = db.Column(db.Integer)
 
     def __init__(self, **kwargs):
         self.email = kwargs.get('email')
@@ -58,6 +59,7 @@ class User(db.Model):
         self.mail = kwargs.get('mail')
 
         self.image_link = kwargs.get('image_link')
+        self.fill_percentage = kwargs.get('fillPercentage')
 
     def get_token(self, expire_time=24):
         expire_delta = timedelta(expire_time)
@@ -102,7 +104,6 @@ class User(db.Model):
         try:
             db.session.add(self)
             db.session.commit()
-            print(1)
         except Exception:
             db.session.rollback()
             raise
@@ -131,6 +132,7 @@ class User(db.Model):
             self.mail = data.get("mail", self.mail)
 
             self.image_link = data.get("image_link", self.image_link)
+            self.fill_percentage = data.get("fillPercentage", self.fill_percentage)
             db.session.commit()
         except Exception:
             db.session.rollback()
@@ -169,7 +171,8 @@ class User(db.Model):
             "TG_link": self.TG_link,
             "mail": self.mail,
 
-            "image_link": self.image_link
+            "image_link": self.image_link,
+            "fillPercentage": self.fill_percentage
         }
 
 
