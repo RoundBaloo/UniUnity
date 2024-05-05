@@ -75,3 +75,18 @@
 2024-05-04 15:23:53,862:config:WARNING:Error while getting user_id:2: type object 'Project' has no attribute 'get_user_projects'
 2024-05-04 15:23:55,976:config:WARNING:Error while getting user_id:2: type object 'Project' has no attribute 'get_user_projects'
 2024-05-04 15:24:30,208:config:WARNING:Error while getting user_id:2: type object 'Project' has no attribute 'get_user_projects'
+2024-05-05 17:44:03,004:config:WARNING:Error while getting users: (sqlite3.OperationalError) no such column: users.fill_percentage
+[SQL: SELECT users.id AS users_id, users.email AS users_email, users.password AS users_password, users.first_name AS users_first_name, users.last_name AS users_last_name, users.father_name AS users_father_name, users.institute AS users_institute, users.study_direction AS users_study_direction, users.course AS users_course, users.profession AS users_profession, users.search_aim AS users_search_aim, users.what_want_from_command AS users_what_want_from_command, users.about AS users_about, users.skill_level AS users_skill_level, users.team_search_state AS users_team_search_state, users."VK_link" AS "users_VK_link", users."TG_link" AS "users_TG_link", users.mail AS users_mail, users.image_link AS users_image_link, users.fill_percentage AS users_fill_percentage 
+FROM users]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2024-05-05 17:44:06,848:config:WARNING:Error while getting users: (sqlite3.OperationalError) no such column: users.fill_percentage
+[SQL: SELECT users.id AS users_id, users.email AS users_email, users.password AS users_password, users.first_name AS users_first_name, users.last_name AS users_last_name, users.father_name AS users_father_name, users.institute AS users_institute, users.study_direction AS users_study_direction, users.course AS users_course, users.profession AS users_profession, users.search_aim AS users_search_aim, users.what_want_from_command AS users_what_want_from_command, users.about AS users_about, users.skill_level AS users_skill_level, users.team_search_state AS users_team_search_state, users."VK_link" AS "users_VK_link", users."TG_link" AS "users_TG_link", users.mail AS users_mail, users.image_link AS users_image_link, users.fill_percentage AS users_fill_percentage 
+FROM users]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2024-05-05 17:45:12,768:config:WARNING:Error while getting user_id:1: User does not exist
+2024-05-05 17:51:40,814:config:WARNING:Error while login with email: 4: No row was found when one was required
+2024-05-05 18:15:51,538:config:WARNING:Error while getting user_id:14: User does not exist
+2024-05-05 18:19:37,193:config:WARNING:Error while registering user: (sqlite3.IntegrityError) UNIQUE constraint failed: users.email
+[SQL: INSERT INTO users (email, password, first_name, last_name, father_name, institute, study_direction, course, profession, search_aim, what_want_from_command, about, skill_level, team_search_state, "VK_link", "TG_link", mail, image_link, fill_percentage) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)]
+[parameters: ('12', '$2b$12$yOqMCiSAMVqWw3rSFb.DAuWdTek/.VtsOYG9dnXFcRSYBVZBzY6KG', None, '12', None, None, None, None, None, None, None, None, None, None, None, None, None, None, None)]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)

@@ -27,15 +27,10 @@ def get_users(page_number):
 def get_user_with_projects():
     try:
         verify_jwt_in_request()
-        print(1)
         user_id = get_jwt_identity()
-        print(2)
         user = User.get_user_by_id(user_id=user_id)
-        print(3)
         projects = Project.get_projects_by_user_id(user_id=user_id)
-        print(4)
         json_projects = list(map(lambda x: x.to_json(), projects))
-        print(5)
     except Exception as e:
         logger.warning(f'Error while getting user_id:{get_jwt_identity()}: {e}')
         return jsonify({"message": str(e)}), 401
@@ -80,6 +75,7 @@ def register():
     try:
         params = request.json
         user = User(**params)
+        
         user.save_user()
         token = user.get_token()
     except Exception as e:

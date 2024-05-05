@@ -87,7 +87,6 @@ const TwoElementsContainer = styled.div`
 class Frame extends React.Component {
     render() {
         const {frame} = this.props;
-        console.log(frame)
         return (
             <Link to="/otherManProfile" onClick={() => this.props.updateUserId(frame.id)}>
                 <FrameContainer>

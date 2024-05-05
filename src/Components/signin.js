@@ -82,7 +82,6 @@ export default class signin extends Component {
                     <StyledInput onChange={(e) => this.setState({password: e.target.value})}/>
                 </ContainerTwoElements>
                 <p onClick={() => {
-                    console.log(1)
                     this.props.onMakeRegistration()
                 }}>зарегистрироваться</p>
             </StyledForm>

@@ -178,7 +178,7 @@ export default class profilePlateEditor extends Component {
                 <StyledTextarea value={this.state.about} onChange={(e) => this.setState({about: e.target.value})}></StyledTextarea>
                 <StyledP>Что хочу от команды</StyledP>
                 <StyledTextarea value={this.state.what_want_from_command}
-                  style={{height: "110px"}}></StyledTextarea>
+                  style={{height: "110px"}} onChange={(e) => {this.setState({what_want_from_command: e.target.value})}}></StyledTextarea>
                 <StyledInput placeholder='Ссылка на ТГ' value={this.state.TG_link} onChange={(e) => this.setState({TG_link: e.target.value})}></StyledInput>
                 <StyledInput placeholder='Ссылка на ВК' value={this.state.VK_link} onChange={(e) => this.setState({VK_link: e.target.value})}></StyledInput>
                 <StyledInput placeholder='Контактная почта' value={this.state.mail} onChange={(e) => this.setState({mail: e.target.value})}></StyledInput>
@@ -203,7 +203,8 @@ export default class profilePlateEditor extends Component {
                     "teamSearchState": this.state.teamSearchState,
                     "TG_link": this.state.TG_link,
                     "VK_link": this.state.VK_link,
-                    "mail": this.state.mail
+                    "mail": this.state.mail,
+                    "fillPercentage": "123",
                   }, {
                     headers: {
                         'Authorization': `Bearer ${token}`
@@ -213,6 +214,7 @@ export default class profilePlateEditor extends Component {
                     console.log(response.data);
                     this.props.makeEditing();
                     this.props.onUpdateUsers();
+                    this.props.onUpdateThisFrame(getToken());
                     console.log("123po")
                 })
                 .catch(error => {

@@ -14,13 +14,13 @@ import axios from 'axios';
 import { saveToken, setAuthHeader, getToken } from './tokenService';
 import UploadProject from "./Pages/uploadProject";
 
-const baseUrl = 'http://127.0.0.1:5000/users/';
 
 var token = getToken();
 var selfId;
 
 function App() {
   const [frames, setFrames] = useState([]);
+  const [thisFrame, setThisFrame] = useState();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isFill, setIsFill] = useState(false);
   const [isOnline, setOnline] = useState(false);
@@ -34,7 +34,7 @@ function App() {
       let arr = res.data.users;
       addFrame(arr);
     });
-    }, []);
+    }, [currentPage]);
 
   const updateThisFrame = (token) => {
     axios.get('http://127.0.0.1:5000/get_user_with_projects', {
@@ -45,6 +45,7 @@ function App() {
     .then(response => {
       setUserId(response.data.user.id);
       selfId = response.data.user.id;
+      setThisFrame(response.data.user);
       updateUsersArray();
       makeLoggedIn();
       getUserProjects(response.data.user.id);
@@ -75,7 +76,6 @@ function App() {
     axios.get(`http://127.0.0.1:5000/get_user_projects/${_userId}`)
     .then(response => {
       setLinkPlates(response.data)
-      console.log(response.data)
     })
     .catch(error => {
       console.error('Ошибка при выполнении запроса:', error);
@@ -115,7 +115,6 @@ function App() {
   const updateUserId = (_userId) => {
     setUserId(_userId);
     getUserProjects(_userId);
-    console.log("good")
   }
 
   const updateToken = (data) => {
@@ -132,15 +131,15 @@ function App() {
   }
 
   const scrollForward = () => {
-    setCurrentPage(currentPage + 1);
-    console.log(currentPage)
+    setCurrentPage(prevCurrentPage => prevCurrentPage + 1);
+    updateUsersArray();
   }
-
-  const scrollBack = () => {
-    if (currentPage > 1)
-      setCurrentPage(currentPage - 1);
-    console.log(currentPage)
-  }
+   
+const scrollBack = () => {
+  if (currentPage > 1)
+    setCurrentPage(prevCurrentPage => prevCurrentPage - 1);
+  updateUsersArray();
+}
 
  return (
       <Router>
@@ -165,10 +164,10 @@ function App() {
               onFilled={isFill} onAdd={addFrame} onAdd1={addFrame1}
               onOnline={isOnline} onMakeRegistration={makeRegistration}
               onRegistarion={isRegistration} onUpdateUsers={updateUsersArray}
-              thisFrame={frames[userId - 1]} onUpdateThisFrame={updateThisFrame}
+              thisFrame={thisFrame} onUpdateThisFrame={updateThisFrame}
               updateToken={updateToken} setFrames={setFrames}
               userId={userId} linkPlates={linkPlates}
-              getUserProjects={getUserProjects}/>} />
+              getUserProjects={getUserProjects} currentPage={currentPage}/>} />
             <Route exact path="/otherManProfile" element={<OtherManProfile 
               frames={frames} thisFrame={frames[userId - 1]}
               userId={userId} linkPlates={linkPlates}/>} />

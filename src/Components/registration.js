@@ -5,9 +5,9 @@ import axios from 'axios';
 import { saveToken, setAuthHeader, getToken } from '../tokenService';
 
 const apiUrl = 'http://127.0.0.1:5000/register';
-const baseUrl = 'http://127.0.0.1:5000/users';
 
-const StyledForm = styled.form`
+
+const StyledForm = styled.div`
     border: 4px solid black;
     padding-right: 43px;
     padding-left: 43px;
@@ -81,7 +81,6 @@ export default class registration extends Component {
             FIO: ""
         }
     }
-    
     render() {
         return (
             <FormContainer>
@@ -102,10 +101,6 @@ export default class registration extends Component {
                         <StyledP>ФИО</StyledP>
                         <StyledInput onChange={(e) => this.setState({FIO: e.target.value})} />
                     </ContainerTwoElements>
-
-
-
-
                 </StyledForm>
                 <StyledButton type="button" onClick={() => {
                     axios.post(apiUrl, {
@@ -116,16 +111,13 @@ export default class registration extends Component {
                         "fatherName": this.state.FIO.split(" ")[2]
                       })
                         .then(response => {
-                            this.props.onUpdateUsers();
-                            this.props.updateToken(response.data.access_token);
+                            this.props.onUpdateUsers(); // mbd
+                            this.props.updateToken(response.data.access_token); //mbd 
                             console.log('User added successfully:', response.data);
-                            const token = response.data.access_token;
+                            const token = response.data.access_token; 
                             saveToken(token);
                             setAuthHeader(token);
                             this.props.onUpdateThisFrame(token);
-                            axios.get(baseUrl).then((res) => {
-                                this.props.updateFrames(res.data.users);
-                              });
                             this.props.getUserProjects();
                         })
                         .catch(error => {
@@ -133,7 +125,6 @@ export default class registration extends Component {
                         });
                 }}>
                 Зарегистрироваться</StyledButton>
-                
             </FormContainer> 
         )
     }
