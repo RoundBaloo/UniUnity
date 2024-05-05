@@ -1,17 +1,19 @@
 import React, { Component } from 'react'
 import styled from 'styled-components';
-import avatar from '../img/avatarPlaceholder.jpg';
 import axios from 'axios';
 import { getToken } from '../tokenService';
 import ImageSelect from './avatarSelect'; 
+import avatar from '../img/Avatars/Avatar-1.svg'
 
 const StyledContainer = styled.div`
  display: flex;
+ width: 438px;
  flex-direction: column;
  align-items: center;
  justify-content: center;
  height: auto;
- margin-bottom-20px;
+ padding-bottom: 65px;
+ margin-left: 65px;
 `;
 
 const StyledForm = styled.form`
@@ -135,6 +137,7 @@ export default class profilePlateEditor extends Component {
       mail: this.props.thisFrame.mail,
       what_want_from_command: this.props.thisFrame.what_want_from_command,
       showImageSelector: false,
+      image_link: this.props.thisFrame.image_link,
     }
 
     this.handleImageSelect = this.handleImageSelect.bind(this);
@@ -143,6 +146,7 @@ export default class profilePlateEditor extends Component {
   handleImageSelect = (selectedImage) => {
     this.setState({ showImageSelector: false });
     this.props.handleAvatar(selectedImage);
+    this.setState({ image_link: selectedImage });
   }
 
   render() {
@@ -150,7 +154,7 @@ export default class profilePlateEditor extends Component {
         <StyledContainer>
           {this.state.showImageSelector && <ImageSelect handleImageSelect={this.handleImageSelect}/>}
           <StyledForm>
-              <StyledImg className="Avatar" src={this.props.avatar} width={90} onClick={() => this.setState({ showImageSelector: true })}/>
+              <StyledImg className="Avatar" src={this.state.image_link ? this.state.image_link : avatar} width={90} onClick={() => this.setState({ showImageSelector: true })}/>
               <StyledMainInfoContainer>
                 <StyledInput placeholder='Фамилия' value={this.state.lastName} style={{width: "40%", height: "30px"}} onChange={(e) => {this.setState({lastName: e.target.value})}}></StyledInput>
                 <StyledInput placeholder='Имя' value={this.state.firstName} style={{width: "40%", height: "30px"}} onChange={(e) => {this.setState({firstName: e.target.value})}}></StyledInput>
@@ -205,6 +209,7 @@ export default class profilePlateEditor extends Component {
                     "VK_link": this.state.VK_link,
                     "mail": this.state.mail,
                     "fillPercentage": "123",
+                    "image_link": this.state.image_link,
                   }, {
                     headers: {
                         'Authorization': `Bearer ${token}`

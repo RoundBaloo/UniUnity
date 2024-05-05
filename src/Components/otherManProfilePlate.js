@@ -1,8 +1,6 @@
 import React, {Component} from 'react'
 import styled from 'styled-components';
-import avatar from '../img/avatarPlaceholder.jpg';
-import axios from 'axios';
-import {getToken} from '../tokenService';
+import avatar from '../img/Avatars/Avatar-1.svg'
 
 const StyledContainer = styled.div`
     display: flex;
@@ -103,7 +101,7 @@ export default class otherManProfilePlate extends Component {
         return (
             <StyledContainer>
                 <StyledForm>
-                    <StyledImg className="Avatar" src={avatar} width={90}/>
+                    <StyledImg className="Avatar" src={frame.image_link ? frame.image_link : avatar} width={90}/>
                     <StyledMainInfoContainer>
                         <UserName>{frame.lastName} {frame.firstName}</UserName>
                         <ul>

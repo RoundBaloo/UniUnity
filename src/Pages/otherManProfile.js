@@ -1,13 +1,6 @@
 import React, { Component } from "react";
-import Form from '../Components/form'
-import Registration from "../Components/registration";
-import Signin from "../Components/signin"
 import styled from "styled-components";
-import axios from 'axios';
-import { getToken } from '../tokenService';
 import OtherManProfilePlate from "../Components/otherManProfilePlate";
-import ProfilePlateEditor from "../Components/profilePlateEditor";
-import userEvent from "@testing-library/user-event";
 import LinkPlates from "../Components/linkPlates";
 
 const StyledFormContainer = styled.div`
@@ -44,8 +37,6 @@ export default class otherManProfile extends Component {
       frames: data,
     }))
   }
-  
-
 
   render () { 
     return (

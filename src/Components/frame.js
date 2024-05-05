@@ -1,6 +1,6 @@
 import React from "react"
 import '../css/style.css'
-import avatar from '../img/avatarPlaceholder.jpg'
+import avatar from '../img/Avatars/Avatar-1.svg'
 import {Link} from 'react-router-dom';
 import styled from "styled-components";
 
@@ -90,7 +90,7 @@ class Frame extends React.Component {
         return (
             <Link to="/otherManProfile" onClick={() => this.props.updateUserId(frame.id)}>
                 <FrameContainer>
-                    <Avatar src={avatar} width={210} height={210}/>
+                    <Avatar src={frame.image_link ? frame.image_link : avatar} width={210} height={210}/>
                     <FirstUl>
                         <UserName>{frame.lastName} {frame.firstName}</UserName>
                         <Direction>{frame.profession}</Direction>

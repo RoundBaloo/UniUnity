@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import Form from '../Components/form'
 import Registration from "../Components/registration";
 import Signin from "../Components/signin"
 import styled from "styled-components";
@@ -8,8 +7,7 @@ import { getToken } from '../tokenService';
 import ProfilePlate from "../Components/profilePlate";
 import ProfilePlateEditor from "../Components/profilePlateEditor";
 import LinkPlates from "../Components/linkPlates";
-import userEvent from "@testing-library/user-event";
-import avatar from '../img/avatarPlaceholder.jpg'
+import avatar from '../img/Avatars/Avatar-1.svg'
 
 const StyledFormContainer = styled.div`
   width: 30%;

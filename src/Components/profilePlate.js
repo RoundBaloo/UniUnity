@@ -1,9 +1,7 @@
 import React, {Component} from 'react'
-import styled from 'styled-components';
-import avatar from '../img/avatarPlaceholder.jpg';
-import axios from 'axios';
-import {getToken} from '../tokenService';
 import {Link} from 'react-router-dom';
+import styled from 'styled-components';
+import avatar from '../img/Avatars/Avatar-1.svg'
 
 const StyledContainer = styled.div`
     display: flex;
@@ -13,6 +11,7 @@ const StyledContainer = styled.div`
     height: 700px;
     margin-top: 65px;
     margin-left: 65px;
+    padding-bottom: 65px;
 `;
 
 const StyledForm = styled.form`
@@ -32,12 +31,12 @@ const StyledForm = styled.form`
     justify-content: flex-end;
 `;
 
-
 const StyledImg = styled.img`
     top: 21px;
     left: 21px;
     width: 110px;
     height: 110px;
+    border: 3px solid black;
 `;
 
 const StyledMainInfoContainer = styled.div`
@@ -122,24 +121,6 @@ const NotInSearch = styled.span`
 `;
 
 
-
-var token;
-var userId;
-
-// axios.get('http://127.0.0.1:5000/get_user_id', {
-//   headers: {
-//       'Authorization': `Bearer ${token}`
-//   }
-// })
-// .then(response => {
-//   console.log(response.data.user_id);
-//   userId = response.data.user_id;
-// })
-// .catch(error => {
-//   console.error('Error:', error);
-// });
-
-
 export default class profilePlate extends Component {
     render() {
         const frame = this.props.thisFrame;
@@ -149,7 +130,7 @@ export default class profilePlate extends Component {
         return (
             <StyledContainer>
                 <StyledForm>
-                    <StyledImg className="Avatar" src={this.props.avatar} width={90}/>
+                    <StyledImg className="Avatar" src={frame.image_link ? frame.image_link : avatar}/>
                     <StyledMainInfoContainer>
                         <UserName>{frame.lastName} {frame.firstName}</UserName>
                         <ul>

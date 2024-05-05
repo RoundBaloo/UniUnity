@@ -3,26 +3,58 @@ import '../css/style.css'
 import Frames from '../Components/frames.js'
 import NewUserAgitation from '../Components/newUserAgitation.js'
 import { useNavigate } from 'react-router-dom';
+import styled from 'styled-components';
+
+
+const StyledTurningPagesButtonsContainer = styled.div`
+  width: 100%;
+  display: flex;
+  gap: 30px;
+  justify-content: center;
+  align-items: center;
+  margin-top: 100px;
+  padding: 20px;
+`;
+
+const StyledTurningButton = styled.button`
+  border: 3px solid black;
+  border-radius: 25px;
+  padding: 2px 9px;
+
+  &:hover {
+    color: white;
+    background-color: black;
+  }
+`;
 
 const Main = (props) => {
   const navigate = useNavigate();
 
   const goToIn = () => {
     navigate('/profile');
-}
+  }
+
+
 
   return (
         <>
-        {!props.onLogIn && <NewUserAgitation onGoToin={goToIn} onMakeRegistration={props.onMakeRegistration} onMakeNonRegistration={props.onMakeNonRegistration}/>} 
-        <div className="Filter">
-          <p className="button-text">Фильтр и поиск</p>
-        </div>
-        <Frames frames={props.frames} updateUserId={props.updateUserId}/>
-        <div>
-          <p onClick={() => {props.scrollBack()}}>назад</p>
-          <p onClick={() => {props.scrollForward()}}>вперед</p>
-        </div>
-      </>
+          {!props.onLogIn && <NewUserAgitation onGoToin={goToIn} onMakeRegistration={props.onMakeRegistration} onMakeNonRegistration={props.onMakeNonRegistration}/>} 
+          <div className="Filter">
+            <p className="button-text">Фильтр и поиск</p>
+          </div>
+          <Frames frames={props.frames} updateUserId={props.updateUserId}/>
+          <StyledTurningPagesButtonsContainer>
+            <StyledTurningButton type='button' onClick={() => {
+              props.scrollBack(); 
+              window.scrollTo(0, 0); 
+            }}>назад</StyledTurningButton>
+            <p>{props.currentPage}</p>
+            <StyledTurningButton type='button' onClick={() => {
+              props.scrollForward();
+              window.scrollTo(0, 0);
+            }}>вперед</StyledTurningButton>
+          </StyledTurningPagesButtonsContainer>
+        </>
   );
 };
 

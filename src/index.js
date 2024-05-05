@@ -4,7 +4,7 @@ import './css/reset.css';
 import './css/style.css';
 import logo from './img/LogoPlaceholder.png';
 import notification from './img/NotificationButton.svg';
-import avatar from './img/avatarPlaceholder.jpg';
+import avatar from './img/Avatars/Avatar-1.svg'
 import { Link } from 'react-router-dom';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Profile from './Pages/profile';
@@ -23,7 +23,6 @@ function App() {
   const [thisFrame, setThisFrame] = useState();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isFill, setIsFill] = useState(false);
-  const [isOnline, setOnline] = useState(false);
   const [isRegistration, setRegistration] = useState(false);
   const [userId, setUserId] = useState(-1);
   const [linkPlates, setLinkPlates] = useState();
@@ -90,10 +89,6 @@ function App() {
     setFrames(prevFrames => [...prevFrames, [{frame}]])
   };
 
-    const makeOnline = () => {
-    setOnline(true);
-  }
-
   const makeLoggedIn = () => {
     setIsLoggedIn(true);
   };
@@ -145,11 +140,11 @@ const scrollBack = () => {
       <Router>
         <>
           <header className="header">
-            <Link to="/" className="Logo"><img src={logo} width={145} height={50} onClick={updateUsersArray}/></Link>
+            <Link to="/" className="Logo"><img src={logo} width={145} height={50} onClick={updateUsersArray} alt="Логотип"/></Link>
             {/* <Link to='/uploadProject'><p className="PublishProject">Опубликовать проект</p></Link> */}
-            <a href="#" ><img className="Notification" src={notification} width={45} /></a>
+            <img className="Notification" src={notification} width={45} alt="Уведомления"/>
             <Link to="/profile" onClick={() => { makeNonRegistration(); updateUserId(selfId); updateThisFrame1(token)}}>
-              <img className="Avatar" src={avatar} width={90}/>
+              <img className="Avatar" src={(isLoggedIn && thisFrame.image_link) ? thisFrame.image_link : avatar} width={90} alt='Профиль'/>
             </Link>
           </header>
           <Routes>
@@ -157,12 +152,13 @@ const scrollBack = () => {
               onMakeRegistration={makeRegistration} onRegistarion={isRegistration}
               onMakeNonRegistration={makeNonRegistration} 
               updateUserId={updateUserId}
-              scrollBack={scrollBack} scrollForward={scrollForward}/>} />
+              scrollBack={scrollBack} scrollForward={scrollForward}
+              currentPage={currentPage}/>} />
             <Route exact path="/profile" element={<Profile frames={frames}
               onLogIn={makeLoggedIn} makeNotLoggedIn={makeNotLoggedIn}
               onLoggedIn={isLoggedIn} onFill={makeFill}
               onFilled={isFill} onAdd={addFrame} onAdd1={addFrame1}
-              onOnline={isOnline} onMakeRegistration={makeRegistration}
+              onMakeRegistration={makeRegistration}
               onRegistarion={isRegistration} onUpdateUsers={updateUsersArray}
               thisFrame={thisFrame} onUpdateThisFrame={updateThisFrame}
               updateToken={updateToken} setFrames={setFrames}

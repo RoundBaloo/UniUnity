@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import '../css/registration.css';
 import styled from 'styled-components';
 import axios from 'axios';
-import { saveToken, setAuthHeader, getToken } from '../tokenService';
+import { saveToken, setAuthHeader } from '../tokenService';
 
 const apiUrl = 'http://127.0.0.1:5000/register';
 
