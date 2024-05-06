@@ -9,7 +9,7 @@ const StyledContainer = styled.div`
     align-items: flex-start;
     width: 438px;
     height: 700px;
-    margin-top: 65px;
+    margin-top: 81px;
     margin-left: 65px;
     padding-bottom: 65px;
 `;

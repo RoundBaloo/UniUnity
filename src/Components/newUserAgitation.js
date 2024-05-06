@@ -69,6 +69,7 @@ const TrianglesContainer = styled.div`
     justify-content: flex-start; // Распределяет компоненты равномерно вдоль оси контейнера
     flex-flow: row nowrap;
     margin-top: 60px;
+    margin-bottom: 55px;
     //align-items: center; // Выравнивает компоненты по центру по вертикали
     //margin-top: 90px;
 `;

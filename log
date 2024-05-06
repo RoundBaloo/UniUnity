@@ -90,3 +90,63 @@ FROM users]
 [SQL: INSERT INTO users (email, password, first_name, last_name, father_name, institute, study_direction, course, profession, search_aim, what_want_from_command, about, skill_level, team_search_state, "VK_link", "TG_link", mail, image_link, fill_percentage) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)]
 [parameters: ('12', '$2b$12$yOqMCiSAMVqWw3rSFb.DAuWdTek/.VtsOYG9dnXFcRSYBVZBzY6KG', None, '12', None, None, None, None, None, None, None, None, None, None, None, None, None, None, None)]
 (Background on this error at: https://sqlalche.me/e/20/gkpj)
+2024-05-06 12:20:34,569:config:WARNING:Error while login with email: sdf: No row was found when one was required
+2024-05-06 21:36:40,328:config:WARNING:Error while registering user: (sqlite3.IntegrityError) UNIQUE constraint failed: users.email
+[SQL: INSERT INTO users (email, password, first_name, last_name, father_name, institute, study_direction, course, profession, search_aim, what_want_from_command, about, skill_level, team_search_state, "VK_link", "TG_link", mail, image_link, fill_percentage) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)]
+[parameters: ('вап', '$2b$12$kpNOs/mZT3f.RQUoAeIWY.TxLCY5pI/tQ6I.lnx0ucb35ZdsDAMvy', 'вап', 'вап', 'вап', '', '', 0, '', '', '', '', '', 0, '', '', '', '', 0)]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+2024-05-06 21:36:41,338:config:WARNING:Error while registering user: (sqlite3.IntegrityError) UNIQUE constraint failed: users.email
+[SQL: INSERT INTO users (email, password, first_name, last_name, father_name, institute, study_direction, course, profession, search_aim, what_want_from_command, about, skill_level, team_search_state, "VK_link", "TG_link", mail, image_link, fill_percentage) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)]
+[parameters: ('вап', '$2b$12$kh9cNSR32qVlW48Ghsnpu.5egP8yg7VkgBIz7VQwlV5lz1dekXFmi', 'вап', 'вап', 'вап', '', '', 0, '', '', '', '', '', 0, '', '', '', '', 0)]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+2024-05-06 21:36:42,485:config:WARNING:Error while registering user: (sqlite3.IntegrityError) UNIQUE constraint failed: users.email
+[SQL: INSERT INTO users (email, password, first_name, last_name, father_name, institute, study_direction, course, profession, search_aim, what_want_from_command, about, skill_level, team_search_state, "VK_link", "TG_link", mail, image_link, fill_percentage) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)]
+[parameters: ('вап', '$2b$12$lNiVre30gap/ytGlfw.OoeKHI7/gSsE/SvM0X3ikoAXljSfw/ECra', 'вап', 'вап', 'вап', '', '', 0, '', '', '', '', '', 0, '', '', '', '', 0)]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+2024-05-06 21:36:43,674:config:WARNING:Error while registering user: (sqlite3.IntegrityError) UNIQUE constraint failed: users.email
+[SQL: INSERT INTO users (email, password, first_name, last_name, father_name, institute, study_direction, course, profession, search_aim, what_want_from_command, about, skill_level, team_search_state, "VK_link", "TG_link", mail, image_link, fill_percentage) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)]
+[parameters: ('вап', '$2b$12$tqHKIXwRmAui9qkZTKHsPue5SlP0mguCiPEX42HqEslq0G1Ne8dtK', 'вап', 'вап', 'вап', '', '', 0, '', '', '', '', '', 0, '', '', '', '', 0)]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+2024-05-06 22:18:46,639:config:WARNING:Error while login with email: вап: Incorrect password
+2024-05-06 22:18:47,467:config:WARNING:Error while login with email: вап: Incorrect password
+2024-05-06 22:18:50,771:config:WARNING:Error while login with email: вап: Incorrect password
+2024-05-06 22:32:55,898:config:WARNING:Error while registering user: (sqlite3.IntegrityError) UNIQUE constraint failed: users.email
+[SQL: INSERT INTO users (email, password, first_name, last_name, father_name, institute, study_direction, course, profession, search_aim, what_want_from_command, about, skill_level, team_search_state, "VK_link", "TG_link", mail, image_link, fill_percentage) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)]
+[parameters: ('df', '$2b$12$kQLQTJqYRaCeQWNpZSCTT.ttTtIgEvyZqA8b9FJ5iPcgPyxyekShG', 'sdf', 'ываыв', '', '', '', 0, '', '', '', '', '', 0, '', '', '', '', 0)]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+2024-05-06 22:32:58,200:config:WARNING:Error while registering user: (sqlite3.IntegrityError) UNIQUE constraint failed: users.email
+[SQL: INSERT INTO users (email, password, first_name, last_name, father_name, institute, study_direction, course, profession, search_aim, what_want_from_command, about, skill_level, team_search_state, "VK_link", "TG_link", mail, image_link, fill_percentage) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)]
+[parameters: ('df', '$2b$12$U5V7kLnx/wLFaYDmdp13OeGBBJuNPeh6b2DYMmsdWAax/1R8Oqyy6', 'sdfs', 'ываыв', '', '', '', 0, '', '', '', '', '', 0, '', '', '', '', 0)]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+2024-05-06 22:32:58,483:config:WARNING:Error while registering user: (sqlite3.IntegrityError) UNIQUE constraint failed: users.email
+[SQL: INSERT INTO users (email, password, first_name, last_name, father_name, institute, study_direction, course, profession, search_aim, what_want_from_command, about, skill_level, team_search_state, "VK_link", "TG_link", mail, image_link, fill_percentage) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)]
+[parameters: ('df', '$2b$12$LCs9d1.V1VjaOw6iThxfoeSa2iEjAOzXQ9r16azWHQecZEQM1ARHq', 'sdfs', 'ываыв', '', '', '', 0, '', '', '', '', '', 0, '', '', '', '', 0)]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+2024-05-06 22:32:58,644:config:WARNING:Error while registering user: (sqlite3.IntegrityError) UNIQUE constraint failed: users.email
+[SQL: INSERT INTO users (email, password, first_name, last_name, father_name, institute, study_direction, course, profession, search_aim, what_want_from_command, about, skill_level, team_search_state, "VK_link", "TG_link", mail, image_link, fill_percentage) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)]
+[parameters: ('df', '$2b$12$pPYTzY1iCjIFaywmVeH8uuzwAM6EX4ZufyTzjG2oBSiX6qL/0dKAq', 'sdfs', 'ываыв', '', '', '', 0, '', '', '', '', '', 0, '', '', '', '', 0)]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+2024-05-06 22:32:58,781:config:WARNING:Error while registering user: (sqlite3.IntegrityError) UNIQUE constraint failed: users.email
+[SQL: INSERT INTO users (email, password, first_name, last_name, father_name, institute, study_direction, course, profession, search_aim, what_want_from_command, about, skill_level, team_search_state, "VK_link", "TG_link", mail, image_link, fill_percentage) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)]
+[parameters: ('df', '$2b$12$8km3aIfMATVAUl5ElI4NneHg3F4PjJDtiAFTKqqMnBOPeNQtBEMd.', 'sdfs', 'ываыв', '', '', '', 0, '', '', '', '', '', 0, '', '', '', '', 0)]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+2024-05-06 22:33:10,765:config:WARNING:Error while registering user: (sqlite3.IntegrityError) UNIQUE constraint failed: users.email
+[SQL: INSERT INTO users (email, password, first_name, last_name, father_name, institute, study_direction, course, profession, search_aim, what_want_from_command, about, skill_level, team_search_state, "VK_link", "TG_link", mail, image_link, fill_percentage) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)]
+[parameters: ('df', '$2b$12$xWABwdwatAtzoYn/hqHLwOpfG0LgwOQvs96b84WDrfspPuMnUiFwO', 'sdfs', 'ываыв', '', '', '', 0, '', '', '', '', '', 0, '', '', '', '', 0)]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+2024-05-06 22:33:15,150:config:WARNING:Error while registering user: (sqlite3.IntegrityError) UNIQUE constraint failed: users.email
+[SQL: INSERT INTO users (email, password, first_name, last_name, father_name, institute, study_direction, course, profession, search_aim, what_want_from_command, about, skill_level, team_search_state, "VK_link", "TG_link", mail, image_link, fill_percentage) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)]
+[parameters: ('df', '$2b$12$MBOTKIzOZT3klkS1iQgj4uAqWt0.JCImIzDzRsNpjTq5NF3LW.F/C', 'sdfs', 'ываыв', '', '', '', 0, '', '', '', '', '', 0, '', '', '', '', 0)]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+2024-05-06 22:33:28,313:config:WARNING:Error while registering user: (sqlite3.IntegrityError) UNIQUE constraint failed: users.email
+[SQL: INSERT INTO users (email, password, first_name, last_name, father_name, institute, study_direction, course, profession, search_aim, what_want_from_command, about, skill_level, team_search_state, "VK_link", "TG_link", mail, image_link, fill_percentage) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)]
+[parameters: ('df', '$2b$12$FNOuKj1GwAaa9ftLCHMNwuWEJRdp.fo460oD1gRGqBdi1M.SH6mUK', '', 'sdf', '', '', '', 0, '', '', '', '', '', 0, '', '', '', '', 0)]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+2024-05-06 22:33:40,823:config:WARNING:Error while registering user: (sqlite3.IntegrityError) UNIQUE constraint failed: users.email
+[SQL: INSERT INTO users (email, password, first_name, last_name, father_name, institute, study_direction, course, profession, search_aim, what_want_from_command, about, skill_level, team_search_state, "VK_link", "TG_link", mail, image_link, fill_percentage) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)]
+[parameters: ('df', '$2b$12$BVa9.3mHX1ClJsfGq1di1.QSEy6r7Sd18FZo09GWox0zGJJVTwqHe', '', 'sdf', '', '', '', 0, '', '', '', '', '', 0, '', '', '', '', 0)]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+2024-05-06 22:33:42,060:config:WARNING:Error while registering user: (sqlite3.IntegrityError) UNIQUE constraint failed: users.email
+[SQL: INSERT INTO users (email, password, first_name, last_name, father_name, institute, study_direction, course, profession, search_aim, what_want_from_command, about, skill_level, team_search_state, "VK_link", "TG_link", mail, image_link, fill_percentage) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)]
+[parameters: ('df', '$2b$12$bchC/piKIsVRziCqW/oUIuYn6YURtstsbV0jpw04GedQrw7K9R8U6', '', 'sdf', '', '', '', 0, '', '', '', '', '', 0, '', '', '', '', 0)]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)

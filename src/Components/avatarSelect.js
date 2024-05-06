@@ -15,19 +15,18 @@ import avatar10 from '../img/Avatars/Avatar-10.svg';
 
 const StyledAvatarContainer = styled.div`
     margin-left: 20px;
+    margin-top: 20px;
     width: 100%;
-    height: 130px;
+    height: 100px;
     border: 3px solid black;
+    border-radius: 11px;
     display: flex;
     flex-wrap: wrap;
     overflow-y: auto;
-    padding: 10px;
     gap: 10px;
 `;
 
 const StyledImg = styled.img` 
-  top: 10px;
-  left: 10px;
   width: 95px;
   height: 95px;
   cursor: pointer;

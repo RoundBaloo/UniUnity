@@ -5,26 +5,36 @@ import {Link} from 'react-router-dom';
 import styled from "styled-components";
 
 const FrameContainer = styled.div`
+    box-sizing: border-box;
     position: relative;
-    top: 90px;
-    margin-left: 64px;
-    margin-top: 15px;
+    margin-left: 65px;
+    margin-top: 44px;
     margin-bottom: 47px;
     border: 3px solid black;
     border-radius: 11px;
-    width: 284px;
+    display: block;
+    width: 295px;
     height: 481px;
-    box-shadow: 0 0 4px 2px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 0 4px 2px rgba(0, 0, 0, 0.15);
     transition: transform 0.3s ease;
 `;
 
 const Avatar = styled.img`
+    position: absolute;
+    width: 170px;
+    height: 170px;
+    //top: 10px; смещение вниз
+`;
+
+const AvatarContainer = styled.div`
     border-radius: 100%;
     position: absolute;
     width: 153px;
     height: 153px;
     right: 65px;
     top: 22px;
+    border: 3px solid black;
+    overflow: hidden;
 `;
 
 const UserName = styled.p`
@@ -90,7 +100,10 @@ class Frame extends React.Component {
         return (
             <Link to="/otherManProfile" onClick={() => this.props.updateUserId(frame.id)}>
                 <FrameContainer>
-                    <Avatar src={frame.image_link ? frame.image_link : avatar} width={210} height={210}/>
+                    <AvatarContainer>
+                        <Avatar src={frame.image_link ? frame.image_link : avatar}/>
+                    </AvatarContainer>
+                    
                     <FirstUl>
                         <UserName>{frame.lastName} {frame.firstName}</UserName>
                         <Direction>{frame.profession}</Direction>
