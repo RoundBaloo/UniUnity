@@ -22,12 +22,26 @@ def get_users(page_number):
     return jsonify({"users": json_users}), 200
 
 
-# Получение юзера с проектами
+# Получение юзера с проектами по токену
 @app.route("/get_user_with_projects", methods=["GET"])
 def get_user_with_projects():
     try:
         verify_jwt_in_request()
         user_id = get_jwt_identity()
+        user = User.get_user_by_id(user_id=user_id)
+        projects = Project.get_projects_by_user_id(user_id=user_id)
+        json_projects = list(map(lambda x: x.to_json(), projects))
+    except Exception as e:
+        logger.warning(f'Error while getting user_id:{get_jwt_identity()}: {e}')
+        return jsonify({"message": str(e)}), 401
+
+    return jsonify({"user": user.to_json(), "projects": json_projects}), 200
+
+
+# Получение юзера с проектами по id
+@app.route("/get_user/<int:user_id>", methods=["GET"])
+def get_user_by_id(user_id):
+    try:
         user = User.get_user_by_id(user_id=user_id)
         projects = Project.get_projects_by_user_id(user_id=user_id)
         json_projects = list(map(lambda x: x.to_json(), projects))
