@@ -62,7 +62,7 @@ const Main = (props) => {
             <FilterContainer>
                 <FilterButtonP>Фильтр и поиск</FilterButtonP>
             </FilterContainer>
-            <Frames frames={props.frames} updateUserId={props.updateUserId}/>
+            <Frames frames={props.frames} updateUserId={props.updateUserId} onUpdateThisFrame={props.onUpdateThisFrame}/>
             <StyledTurningPagesButtonsContainer>
                 <StyledTurningButton type='button' onClick={() => {
                     props.scrollBack();

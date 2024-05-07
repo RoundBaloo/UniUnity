@@ -191,7 +191,8 @@ function App() {
                                                          onMakeNonRegistration={makeNonRegistration}
                                                          updateUserId={updateUserId}
                                                          scrollBack={scrollBack} scrollForward={scrollForward}
-                                                         currentPage={currentPage}/>}/>
+                                                         currentPage={currentPage}
+                                                         onUpdateThisFrame={updateThisFrame}/>}/>
                     <Route exact path="/profile" element={<Profile frames={frames}
                                                                    onLogIn={makeLoggedIn}
                                                                    makeNotLoggedIn={makeNotLoggedIn}
@@ -207,7 +208,7 @@ function App() {
                                                                    getUserProjects={getUserProjects}
                                                                    currentPage={currentPage}/>}/>
                     <Route exact path="/otherManProfile" element={<OtherManProfile
-                        frames={frames} thisFrame={frames[userId - 1]}
+                        frames={frames} thisFrame={frames[userId - 1 - (4 * (currentPage - 1))]}
                         userId={userId} linkPlates={linkPlates}/>}/>
                     <Route exact path="/uploadProject"
                            element={<UploadProject token={token} updateThisFrame={updateThisFrame}/>}/>
