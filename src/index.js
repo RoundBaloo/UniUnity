@@ -3,6 +3,7 @@ import {createRoot} from 'react-dom/client';
 import './css/reset.css';
 import './css/style.css';
 import logo from './img/LogoPlaceholder.png';
+import newLogo from './img/UniUnityLogo.png';
 import notification from './img/NotificationButton.svg';
 import avatar from './img/Avatars/Avatar-1.svg'
 import {Link} from 'react-router-dom';
@@ -166,7 +167,7 @@ function App() {
         <Router>
             <>
                 <header className="header">
-                    <Link to="/" className="Logo"><img src={logo} width={145} height={50} onClick={updateUsersArray}
+                    <Link to="/" className="Logo"><img src={newLogo} width={245} height={58} onClick={updateUsersArray}
                                                        alt="Логотип"/></Link>
                     {/* <Link to='/uploadProject'><p className="PublishProject">Опубликовать проект</p></Link> */}
                     <NotificationImg src={notification} width={45} alt="Уведомления"/>

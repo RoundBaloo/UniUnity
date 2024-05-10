@@ -150,3 +150,4 @@ FROM users]
 [SQL: INSERT INTO users (email, password, first_name, last_name, father_name, institute, study_direction, course, profession, search_aim, what_want_from_command, about, skill_level, team_search_state, "VK_link", "TG_link", mail, image_link, fill_percentage) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)]
 [parameters: ('df', '$2b$12$bchC/piKIsVRziCqW/oUIuYn6YURtstsbV0jpw04GedQrw7K9R8U6', '', 'sdf', '', '', '', 0, '', '', '', '', '', 0, '', '', '', '', 0)]
 (Background on this error at: https://sqlalche.me/e/20/gkpj)
+2024-05-10 20:04:45,581:config:WARNING:Error while login with email: вап вап: No row was found when one was required

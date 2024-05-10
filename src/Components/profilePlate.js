@@ -5,11 +5,11 @@ import avatar from '../img/Avatars/Avatar-1.svg'
 
 const StyledContainer = styled.div`
     display: flex;
+    width: 438px;
     flex-direction: column;
     align-items: flex-start;
-    width: 438px;
     height: 700px;
-    margin-top: 81px;
+    margin-top: 65px;
     margin-left: 65px;
     padding-bottom: 65px;
 `;
@@ -31,12 +31,19 @@ const StyledForm = styled.form`
     justify-content: flex-end;
 `;
 
-const StyledImg = styled.img`
+const Avatar = styled.img`
+    position: absolute;
+`;
+
+const AvatarContainer = styled.div`
+    border-radius: 100%;
+    position: absolute;
     top: 21px;
     left: 21px;
     width: 110px;
     height: 110px;
     border: 3px solid black;
+    overflow: hidden;
 `;
 
 const StyledMainInfoContainer = styled.div`
@@ -130,7 +137,9 @@ export default class profilePlate extends Component {
         return (
             <StyledContainer>
                 <StyledForm>
-                    <StyledImg className="Avatar" src={frame.image_link ? frame.image_link : avatar}/>
+                    <AvatarContainer>
+                        <Avatar src={frame.image_link ? frame.image_link : avatar}/>
+                    </AvatarContainer>
                     <StyledMainInfoContainer>
                         <UserName>{frame.lastName} {frame.firstName}</UserName>
                         <ul>

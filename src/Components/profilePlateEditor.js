@@ -14,6 +14,7 @@ const StyledContainer = styled.div`
     height: auto;
     padding-bottom: 65px;
     margin-left: 65px;
+    margin-top: 65px;
 `;
 
 const StyledForm = styled.form`
@@ -31,7 +32,6 @@ const StyledForm = styled.form`
     height: 850px;
     box-sizing: border-box;
     justify-content: flex-end;
-    margin: 20px 0px 0px 20px;
 `;
 
 const StyledImg = styled.img`
@@ -93,7 +93,7 @@ const StyledButton = styled.button`
     height: 40px;
     border-bottom-left-radius: 11px;
     border-bottom-right-radius: 11px;
-
+    
     &:hover {
         cursor: pointer;
         color: white;
@@ -102,7 +102,6 @@ const StyledButton = styled.button`
 `;
 
 const StyledButtonContainer = styled.div`
-    margin-left: 20px;
     width: 100%;
     display: flex;
     flex-direction: row;
