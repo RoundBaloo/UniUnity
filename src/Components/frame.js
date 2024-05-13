@@ -3,6 +3,7 @@ import '../css/style.css'
 import avatar from '../img/Avatars/Avatar-1.svg'
 import {Link} from 'react-router-dom';
 import styled from "styled-components";
+import { getToken } from '../tokenService';
 
 const FrameContainer = styled.div`
     box-sizing: border-box;
@@ -97,8 +98,9 @@ const TwoElementsContainer = styled.div`
 class Frame extends React.Component {
     render() {
         const {frame} = this.props;
+        
         return (
-            <Link to="/otherManProfile" onClick={() => this.props.updateUserId(frame.id)}>
+            <Link to="/otherManProfile" onClick={() => { this.props.updateUserId(frame.id); }}>
                 <FrameContainer>
                     <AvatarContainer>
                         <Avatar src={frame.image_link ? frame.image_link : avatar}/>

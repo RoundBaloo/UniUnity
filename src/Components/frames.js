@@ -10,7 +10,8 @@ class Frames extends React.Component {
                     key={frame.id} 
                     frame={frame} 
                     updateUserId={this.props.updateUserId}
-                    onUpdateThisFrame={this.props.onUpdateThisFrame}/>
+                    onUpdateThisFrame={this.props.onUpdateThisFrame}
+                    updateThisFrameToOther={this.props.updateThisFrameToOther}/>
                 ))}
             </div>
         );

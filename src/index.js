@@ -111,6 +111,7 @@ function App() {
     const updateUserId = (_userId) => {
         setUserId(_userId);
         getUserProjects(_userId);
+        updateThisFrameToOther(_userId);
     }
 
     const updateToken = (data) => {
@@ -136,6 +137,13 @@ function App() {
             setCurrentPage(prevCurrentPage => prevCurrentPage - 1);
         updateUsersArray();
     }
+
+    const updateThisFrameToOther = (_userId) => {
+        axios.get(`http://127.0.0.1:5000/get_user/${_userId}`).then((res) => {
+            setThisFrame(res.data.user);
+        });
+    }
+
     const Avatar = styled.img`
         position: absolute;
         width: 90px;
@@ -192,7 +200,8 @@ function App() {
                                                          updateUserId={updateUserId}
                                                          scrollBack={scrollBack} scrollForward={scrollForward}
                                                          currentPage={currentPage}
-                                                         onUpdateThisFrame={updateThisFrame}/>}/>
+                                                         onUpdateThisFrame={updateThisFrame}
+                                                         updateThisFrameToOther={updateThisFrameToOther}/>}/>
                     <Route exact path="/profile" element={<Profile frames={frames}
                                                                    onLogIn={makeLoggedIn}
                                                                    makeNotLoggedIn={makeNotLoggedIn}
@@ -208,7 +217,7 @@ function App() {
                                                                    getUserProjects={getUserProjects}
                                                                    currentPage={currentPage}/>}/>
                     <Route exact path="/otherManProfile" element={<OtherManProfile
-                        frames={frames} thisFrame={frames[userId - 1 - (4 * (currentPage - 1))]}
+                        frames={frames} thisFrame={thisFrame}
                         userId={userId} linkPlates={linkPlates}/>}/>
                     <Route exact path="/uploadProject"
                            element={<UploadProject token={token} updateThisFrame={updateThisFrame}/>}/>
