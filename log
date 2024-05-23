@@ -153,3 +153,4 @@ FROM users]
 2024-05-07 16:15:40,537:config:WARNING:Error while getting user_id:2: User does not exist
 2024-05-07 16:15:47,475:config:WARNING:Error while getting user_id:2: User does not exist
 2024-05-07 16:17:28,636:config:WARNING:Error while login with email: 123: No row was found when one was required
+2024-05-13 17:28:32,803:config:WARNING:Error while getting user_id:1: User does not exist

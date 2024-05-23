@@ -2,7 +2,7 @@ import React, {useState, useEffect} from "react";
 import {createRoot} from 'react-dom/client';
 import './css/reset.css';
 import './css/style.css';
-import logo from './img/LogoPlaceholder.png';
+import newLogo from './img/UniUnityLogo.png';
 import notification from './img/NotificationButton.svg';
 import avatar from './img/Avatars/Avatar-1.svg'
 import {Link} from 'react-router-dom';
@@ -10,6 +10,7 @@ import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 import Profile from './Pages/profile';
 import Main from './Pages/main';
 import OtherManProfile from "./Pages/otherManProfile";
+import ProjectPage from "./Pages/projectPage"
 import axios from 'axios';
 import {saveToken, setAuthHeader, getToken} from './tokenService';
 import UploadProject from "./Pages/uploadProject";
@@ -21,13 +22,14 @@ var selfId;
 
 function App() {
     const [frames, setFrames] = useState([]);
-    const [thisFrame, setThisFrame] = useState();
+    const [thisFrame, setThisFrame] = useState({ image_link: avatar });
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [isFill, setIsFill] = useState(false);
     const [isRegistration, setRegistration] = useState(false);
     const [userId, setUserId] = useState(-1);
     const [linkPlates, setLinkPlates] = useState();
     const [currentPage, setCurrentPage] = useState(1);
+    const [currentProjectId, setCurrentProjectId] = useState();
 
     useEffect(() => {
         axios.get(`http://127.0.0.1:5000/users/${currentPage}`).then((res) => {
@@ -144,6 +146,11 @@ function App() {
         });
     }
 
+    const updateCurrentProjectId = (projId) => {
+        setCurrentProjectId(projId);
+        console.log(projId);
+    }
+
     const Avatar = styled.img`
         position: absolute;
         width: 90px;
@@ -174,7 +181,7 @@ function App() {
         <Router>
             <>
                 <header className="header">
-                    <Link to="/" className="Logo"><img src={logo} width={145} height={50} onClick={updateUsersArray}
+                    <Link to="/" className="Logo"><img src={newLogo} width={245} height={58} onClick={updateUsersArray}
                                                        alt="Логотип"/></Link>
                     {/* <Link to='/uploadProject'><p className="PublishProject">Опубликовать проект</p></Link> */}
                     <NotificationImg src={notification} width={45} alt="Уведомления"/>
@@ -183,17 +190,17 @@ function App() {
                         updateUserId(selfId);
                         updateThisFrame1(token)
                     }}>
-
                         <AvatarContainer>
                             <Avatar
                                 src={(isLoggedIn && thisFrame.image_link) ? thisFrame.image_link : avatar} width={90}
                                 alt='Профиль'/>
                         </AvatarContainer>
-
                     </Link>
                 </header>
                 <Routes>
-                    <Route exact path="/" element={<Main frames={frames} onAdd={addFrame} onLogIn={isLoggedIn}
+                    <Route exact path="/" element={<Main frames={frames} 
+                                                         onAdd={addFrame} 
+                                                         onLogIn={isLoggedIn}
                                                          onMakeRegistration={makeRegistration}
                                                          onRegistarion={isRegistration}
                                                          onMakeNonRegistration={makeNonRegistration}
@@ -215,12 +222,21 @@ function App() {
                                                                    updateToken={updateToken} setFrames={setFrames}
                                                                    userId={userId} linkPlates={linkPlates}
                                                                    getUserProjects={getUserProjects}
-                                                                   currentPage={currentPage}/>}/>
+                                                                   currentPage={currentPage}
+                                                                   updateCurrentProjectId={updateCurrentProjectId}/>}/>
                     <Route exact path="/otherManProfile" element={<OtherManProfile
                         frames={frames} thisFrame={thisFrame}
                         userId={userId} linkPlates={linkPlates}/>}/>
                     <Route exact path="/uploadProject"
-                           element={<UploadProject token={token} updateThisFrame={updateThisFrame}/>}/>
+                           element={<UploadProject token={token} 
+                                                   updateThisFrame={updateThisFrame}/>}/>
+                    <Route exact path="/projectPage" element={
+                        thisFrame!== undefined && linkPlates!== undefined?
+                            <ProjectPage thisFrame={thisFrame}
+                                        thisProject={linkPlates[currentProjectId - 1]}
+                                        avatar={thisFrame.image_link}/> :
+                            null
+                        }/>
                 </Routes>
             </>
         </Router>

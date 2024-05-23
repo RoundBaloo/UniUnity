@@ -11,7 +11,8 @@ export default class linkPlates extends Component {
             {this.props.linkPlates.map((linkPlate) => (
                 <LinkPlate 
                 key={linkPlate.id} 
-                linkPlate={linkPlate} />
+                linkPlate={linkPlate}
+                updateCurrentProjectId={this.props.updateCurrentProjectId} />
             ))}
         </>
     )

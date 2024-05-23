@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import styled from 'styled-components';
 import project from '../img/projectZaglushka.jpg';
+import {Link} from 'react-router-dom';
 
 const StyledPlate = styled.div`
     width: 254px;
@@ -22,12 +23,13 @@ const StyledP = styled.p`
 export default class linkPlate extends Component {
   render() {
     return (
-        <a href={this.props.linkPlate.project_link} target="_blank">
-            <StyledPlate>
+        <Link to="/projectPage">
+            <StyledPlate onClick={() => {this.props.updateCurrentProjectId(this.props.linkPlate.id)}}>
                 <StyledImg src={project} alt="Лого проекта" />
                 <StyledP>{this.props.linkPlate.name}</StyledP>
             </StyledPlate>
-        </a>
+        </Link>
+        
     )
   }
 }

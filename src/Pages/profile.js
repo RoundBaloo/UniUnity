@@ -112,7 +112,8 @@ export default class Profile extends Component {
                   avatar={this.state.avatar} onUpdateThisFrame={this.props.onUpdateThisFrame}/>}
               </StyledFormContainer>
               <StyledProjectsContainer>
-                <LinkPlates linkPlates={this.props.linkPlates}/>
+                <LinkPlates linkPlates={this.props.linkPlates}
+                            updateCurrentProjectId={this.props.updateCurrentProjectId}/>
               </StyledProjectsContainer>
             </>
           )
