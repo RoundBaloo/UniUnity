@@ -14,7 +14,6 @@ class User(db.Model):
 
     first_name = db.Column(db.String(100), default='')
     last_name = db.Column(db.String(100), default='')
-    father_name = db.Column(db.String(100), default='')
 
     institute = db.Column(db.String(100), default='')
     study_direction = db.Column(db.String(100), default='')
@@ -41,7 +40,6 @@ class User(db.Model):
 
         self.first_name = kwargs.get('firstName')
         self.last_name = kwargs.get('lastName')
-        self.father_name = kwargs.get('fatherName')
 
         self.institute = kwargs.get('institute')
         self.study_direction = kwargs.get('studyDirection')
@@ -75,9 +73,30 @@ class User(db.Model):
         return user
 
     @classmethod
-    def get_users_list(cls, page_number):
+    def get_users_list(cls, page_number, request):
         try:
-            all_users = cls.query.all()
+            institute_filter = request.args.get('institute')
+            study_direction_filter = request.args.get('studyDirection')
+            course_filter = request.args.get('course')
+            profession_filter = request.args.get('profession')
+            skill_level_filter = request.args.get('skillLevel')
+            team_search_state_filter = request.args.get('teamSearchState')
+
+            user_query = User.query
+            if institute_filter:
+                user_query = user_query.filter(User.institute.ilike(f"%{institute_filter}"))
+            if study_direction_filter:
+                user_query = user_query.filter(User.study_direction.ilike(f"%{study_direction_filter}"))
+            if course_filter:
+                user_query = user_query.filter(User.course == course_filter)
+            if profession_filter:
+                user_query = user_query.filter(User.profession.ilike(f"%{profession_filter}"))
+            if skill_level_filter:
+                user_query = user_query.filter(User.skill_level >= skill_level_filter)
+            if team_search_state_filter:
+                user_query = user_query.filter(User.team_search_state == team_search_state_filter)
+            all_users = user_query.all()
+
             users = []
             for i in range(4 * (page_number - 1), 4 * page_number):
                 if i < len(all_users):

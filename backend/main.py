@@ -14,7 +14,7 @@ CORS(app)
 @app.route("/users/<int:page_number>", methods=["GET"])
 def get_users(page_number):
     try:
-        users = User.get_users_list(page_number=page_number)
+        users = User.get_users_list(page_number=page_number, request=request.json)
         json_users = list(map(lambda x: x.to_json(), users))
     except Exception as e:
         logger.warning(f'Error while getting users: {e}')
