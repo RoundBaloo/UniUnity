@@ -14,6 +14,7 @@ class User(db.Model):
 
     first_name = db.Column(db.String(100), default='')
     last_name = db.Column(db.String(100), default='')
+    father_name = db.Column(db.String(100), default='')
 
     institute = db.Column(db.String(100), default='')
     study_direction = db.Column(db.String(100), default='')
@@ -40,6 +41,7 @@ class User(db.Model):
 
         self.first_name = kwargs.get('firstName')
         self.last_name = kwargs.get('lastName')
+        self.father_name = kwargs.get('fatherName')
 
         self.institute = kwargs.get('institute')
         self.study_direction = kwargs.get('studyDirection')
