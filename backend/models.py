@@ -83,22 +83,20 @@ class User(db.Model):
             profession_filter = request.args.get('profession')
             skill_level_filter = request.args.get('skillLevel')
             team_search_state_filter = request.args.get('teamSearchState')
-
             user_query = User.query
             if institute_filter:
-                user_query = user_query.filter(User.institute.ilike(f"%{institute_filter}"))
+                user_query = user_query.filter(User.institute.contains(f"%{institute_filter}"))
             if study_direction_filter:
-                user_query = user_query.filter(User.study_direction.ilike(f"%{study_direction_filter}"))
+                user_query = user_query.filter(User.study_direction.contains(f"%{study_direction_filter}"))
             if course_filter:
                 user_query = user_query.filter(User.course == course_filter)
             if profession_filter:
-                user_query = user_query.filter(User.profession.ilike(f"%{profession_filter}"))
+                user_query = user_query.filter(User.profession.contains(f"%{profession_filter}"))
             if skill_level_filter:
                 user_query = user_query.filter(User.skill_level >= skill_level_filter)
             if team_search_state_filter:
                 user_query = user_query.filter(User.team_search_state == team_search_state_filter)
             all_users = user_query.all()
-
             users = []
             for i in range(4 * (page_number - 1), 4 * page_number):
                 if i < len(all_users):

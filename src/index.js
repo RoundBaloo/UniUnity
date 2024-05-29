@@ -74,6 +74,24 @@ function App() {
             });
     }
 
+    const updateUsersByFilters = (filters) => {
+        axios.get(`http://127.0.0.1:5000/users/${currentPage}`, {
+            params: {
+                course: filters.course,
+                institute: filters.institute,
+                studyDirection: filters.studyDirection,
+                profession: filters.profession,
+                skillLevel: filters.skillLevel,
+                teamSearchState: filters.teamSearchState
+            }
+        }).then((res) => {
+            let arr = res.data.users;
+            addFrame(arr);
+            console.log(filters);
+            console.log(arr);
+        });
+    };
+
     const getUserProjects = (_userId) => {
         axios.get(`http://127.0.0.1:5000/get_user_projects/${_userId}`)
             .then(response => {
@@ -208,7 +226,8 @@ function App() {
                                                          scrollBack={scrollBack} scrollForward={scrollForward}
                                                          currentPage={currentPage}
                                                          onUpdateThisFrame={updateThisFrame}
-                                                         updateThisFrameToOther={updateThisFrameToOther}/>}/>
+                                                         updateThisFrameToOther={updateThisFrameToOther}
+                                                         updateUsersByFilters={updateUsersByFilters}/>}/>
                     <Route exact path="/profile" element={<Profile frames={frames}
                                                                    onLogIn={makeLoggedIn}
                                                                    makeNotLoggedIn={makeNotLoggedIn}

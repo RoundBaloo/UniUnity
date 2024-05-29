@@ -154,3 +154,70 @@ FROM users]
 2024-05-07 16:15:47,475:config:WARNING:Error while getting user_id:2: User does not exist
 2024-05-07 16:17:28,636:config:WARNING:Error while login with email: 123: No row was found when one was required
 2024-05-13 17:28:32,803:config:WARNING:Error while getting user_id:1: User does not exist
+2024-05-29 10:36:14,670:config:WARNING:Error while getting users: 415 Unsupported Media Type: Did not attempt to load JSON data because the request Content-Type was not 'application/json'.
+2024-05-29 10:36:20,327:config:WARNING:Error while getting users: 415 Unsupported Media Type: Did not attempt to load JSON data because the request Content-Type was not 'application/json'.
+2024-05-29 10:36:20,343:config:WARNING:Error while getting users: 415 Unsupported Media Type: Did not attempt to load JSON data because the request Content-Type was not 'application/json'.
+2024-05-29 10:36:26,920:config:WARNING:Error while getting users: 415 Unsupported Media Type: Did not attempt to load JSON data because the request Content-Type was not 'application/json'.
+2024-05-29 10:36:26,924:config:WARNING:Error while getting users: 415 Unsupported Media Type: Did not attempt to load JSON data because the request Content-Type was not 'application/json'.
+2024-05-29 10:36:34,515:config:WARNING:Error while getting users: 415 Unsupported Media Type: Did not attempt to load JSON data because the request Content-Type was not 'application/json'.
+2024-05-29 10:37:00,739:config:WARNING:Error while getting users: 415 Unsupported Media Type: Did not attempt to load JSON data because the request Content-Type was not 'application/json'.
+2024-05-29 10:37:05,153:config:WARNING:Error while getting users: 415 Unsupported Media Type: Did not attempt to load JSON data because the request Content-Type was not 'application/json'.
+2024-05-29 10:37:16,363:config:WARNING:Error while getting users: 415 Unsupported Media Type: Did not attempt to load JSON data because the request Content-Type was not 'application/json'.
+2024-05-29 10:37:16,379:config:WARNING:Error while getting users: 415 Unsupported Media Type: Did not attempt to load JSON data because the request Content-Type was not 'application/json'.
+2024-05-29 10:39:40,751:config:WARNING:Error while getting users: 415 Unsupported Media Type: Did not attempt to load JSON data because the request Content-Type was not 'application/json'.
+2024-05-29 10:40:59,352:config:WARNING:Error while getting users: 415 Unsupported Media Type: Did not attempt to load JSON data because the request Content-Type was not 'application/json'.
+2024-05-29 10:41:01,611:config:WARNING:Error while getting users: 415 Unsupported Media Type: Did not attempt to load JSON data because the request Content-Type was not 'application/json'.
+2024-05-29 10:41:40,805:config:WARNING:Error while getting users: 415 Unsupported Media Type: Did not attempt to load JSON data because the request Content-Type was not 'application/json'.
+2024-05-29 10:45:56,408:config:WARNING:Error while getting users: 415 Unsupported Media Type: Did not attempt to load JSON data because the request Content-Type was not 'application/json'.
+2024-05-29 10:47:32,061:config:WARNING:Error while getting users: 415 Unsupported Media Type: Did not attempt to load JSON data because the request Content-Type was not 'application/json'.
+2024-05-29 10:48:14,186:config:WARNING:Error while getting users: 415 Unsupported Media Type: Did not attempt to load JSON data because the request Content-Type was not 'application/json'.
+2024-05-29 10:48:33,050:config:WARNING:Error while getting users: 415 Unsupported Media Type: Did not attempt to load JSON data because the request Content-Type was not 'application/json'.
+2024-05-29 10:48:36,994:config:WARNING:Error while getting users: 415 Unsupported Media Type: Did not attempt to load JSON data because the request Content-Type was not 'application/json'.
+2024-05-29 10:48:52,800:config:WARNING:Error while getting users: 415 Unsupported Media Type: Did not attempt to load JSON data because the request Content-Type was not 'application/json'.
+2024-05-29 10:50:22,937:config:WARNING:Error while getting users: 415 Unsupported Media Type: Did not attempt to load JSON data because the request Content-Type was not 'application/json'.
+2024-05-29 10:54:52,162:config:WARNING:Error while getting users: 415 Unsupported Media Type: Did not attempt to load JSON data because the request Content-Type was not 'application/json'.
+2024-05-29 11:18:09,114:config:WARNING:Error while login with email: : No row was found when one was required
+2024-05-29 11:18:09,928:config:WARNING:Error while login with email: : No row was found when one was required
+2024-05-29 11:18:10,090:config:WARNING:Error while login with email: : No row was found when one was required
+2024-05-29 11:18:10,249:config:WARNING:Error while login with email: : No row was found when one was required
+2024-05-29 11:18:10,404:config:WARNING:Error while login with email: : No row was found when one was required
+2024-05-29 11:18:10,843:config:WARNING:Error while login with email: : No row was found when one was required
+2024-05-29 11:18:11,107:config:WARNING:Error while login with email: : No row was found when one was required
+2024-05-29 11:18:11,298:config:WARNING:Error while login with email: : No row was found when one was required
+2024-05-29 11:18:11,487:config:WARNING:Error while login with email: : No row was found when one was required
+2024-05-29 11:18:11,672:config:WARNING:Error while login with email: : No row was found when one was required
+2024-05-29 11:18:11,880:config:WARNING:Error while login with email: : No row was found when one was required
+2024-05-29 11:18:12,173:config:WARNING:Error while login with email: : No row was found when one was required
+2024-05-29 11:18:12,393:config:WARNING:Error while login with email: : No row was found when one was required
+2024-05-29 11:18:12,610:config:WARNING:Error while login with email: : No row was found when one was required
+2024-05-29 11:18:12,791:config:WARNING:Error while login with email: : No row was found when one was required
+2024-05-29 11:18:13,026:config:WARNING:Error while login with email: : No row was found when one was required
+2024-05-29 11:18:13,230:config:WARNING:Error while login with email: : No row was found when one was required
+2024-05-29 11:18:13,437:config:WARNING:Error while login with email: : No row was found when one was required
+2024-05-29 11:18:13,633:config:WARNING:Error while login with email: : No row was found when one was required
+2024-05-29 11:18:13,811:config:WARNING:Error while login with email: : No row was found when one was required
+2024-05-29 11:18:13,983:config:WARNING:Error while login with email: : No row was found when one was required
+2024-05-29 11:18:14,125:config:WARNING:Error while login with email: : No row was found when one was required
+2024-05-29 13:41:44,950:config:WARNING:Error while login with email: 123: Incorrect password
+2024-05-29 13:45:28,243:config:WARNING:Error while login with email: 1233123: No row was found when one was required
+2024-05-29 13:49:14,456:config:WARNING:Error while login with email: klfjsdhfjksadf: No row was found when one was required
+2024-05-29 16:28:24,066:config:WARNING:Error while login with email: jkghhghjkg: No row was found when one was required
+2024-05-29 17:11:25,749:config:WARNING:Error while login with email: asd: No row was found when one was required
+2024-05-29 17:12:57,841:config:WARNING:Error while login with email: 32: No row was found when one was required
+2024-05-29 17:13:16,048:config:WARNING:Error while login with email: 32: No row was found when one was required
+2024-05-29 17:13:54,791:config:WARNING:Error while login with email: 1: Incorrect password
+2024-05-29 17:13:57,976:config:WARNING:Error while login with email: 12: No row was found when one was required
+2024-05-29 17:14:23,627:config:WARNING:Error while login with email: ;: No row was found when one was required
+2024-05-29 17:21:39,474:config:WARNING:Error while login with email: sda: No row was found when one was required
+2024-05-29 17:22:17,000:config:WARNING:Error while login with email: d: No row was found when one was required
+2024-05-29 17:22:37,334:config:WARNING:Error while login with email: s: No row was found when one was required
+2024-05-29 17:22:52,539:config:WARNING:Error while login with email: s: No row was found when one was required
+2024-05-29 17:23:07,249:config:WARNING:Error while login with email: s: No row was found when one was required
+2024-05-29 17:23:35,285:config:WARNING:Error while login with email: s: No row was found when one was required
+2024-05-29 17:24:06,590:config:WARNING:Error while login with email: khukghuk: No row was found when one was required
+2024-05-29 17:26:08,247:config:WARNING:Error while login with email: hfghfgh: No row was found when one was required
+2024-05-29 19:24:45,642:config:WARNING:Error while login with email: daw: No row was found when one was required
+2024-05-29 19:28:32,103:config:WARNING:Error while login with email: 123: Incorrect password
+2024-05-29 19:28:34,280:config:WARNING:Error while login with email: 123: Incorrect password
+2024-05-29 19:28:35,492:config:WARNING:Error while login with email: 123: Incorrect password
+2024-05-29 21:43:28,058:config:WARNING:Error while getting users: invalid literal for int() with base 10: 'true'

@@ -21,15 +21,16 @@ const ContainerTwoElements = styled.div`
 `;
 
 const StyledP = styled.p`
+    color: ${props => props.color};
     font-size: 23px;
     margin-right: auto;
     margin-bottom: 15px;
 `;
 
 const StyledInput = styled.input`
-    background-color: white;
+    background-color: ${props => props.isValid ? 'white' : '#ffcccb'};
     height: 44px;
-    border: 2px solid black;
+    border: 2px solid ${props => props.isValid ? 'black' : "#f1807e"};
     border-radius: 7px;
     padding: 10px;
     width: 100%;
@@ -69,37 +70,66 @@ const FormContainer = styled.div`
 `;
 
 export default class signin extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+          email: '',
+          password: '',
+          isEmailValid: true,
+          isPasswordValid: true,
+          isCorrectData: true
+        };
+      }
+
   render() {
+
     return (
         <FormContainer>
             <StyledForm className='registration'>
                 <ContainerTwoElements>
-                    <StyledP>Логин</StyledP>
-                    <StyledInput onChange={(e) => this.setState({email: e.target.value})}/>
+                    <StyledP color='black'>Логин</StyledP>
+                    <StyledInput isValid={this.state.isEmailValid} value={this.state.email} onChange={(e) => {
+                        this.setState({email: e.target.value});
+                        this.setState({isEmailValid: true});
+                    }}/>
+                    {!this.state.isEmailValid ? <StyledP color='#f1807e'>требуется ввести email</StyledP> : null}
                 </ContainerTwoElements>
                 <ContainerTwoElements>
-                    <StyledP>Пароль</StyledP>
-                    <StyledInput onChange={(e) => this.setState({password: e.target.value})}/>
+                    <StyledP color='black'>Пароль</StyledP>
+                    <StyledInput isValid={this.state.isPasswordValid} value={this.state.password} onChange={(e) => {
+                        this.setState({password: e.target.value});
+                        this.setState({isPasswordValid: true});
+                    }}/>
+                    {!this.state.isPasswordValid ? <StyledP color='#f1807e'>требуется ввести пароль</StyledP> : null}  
+                    {!this.state.isCorrectData ? <StyledP color='#f1807e'>логин или пароль неверный</StyledP> : null}
                 </ContainerTwoElements>
                 <p onClick={() => {
                     this.props.onMakeRegistration()
                 }}>зарегистрироваться</p>
             </StyledForm>
             <StyledButton type="button" onClick={() => {
-                axios.post('http://127.0.0.1:5000/login', {
-                    email: this.state.email,
-                    password: this.state.password
-                })
-                .then(response => {
-                    console.log(response.data);
-                    const token = response.data.access_token;
-                    saveToken(token);
-                    setAuthHeader(token);
-                    this.props.onUpdateThisFrame(token);
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                });
+                this.setState({isCorrectData: true});
+                if (this.state.email.length < 1) {
+                    this.setState({isEmailValid: false});
+                } else if (this.state.password.length < 1) {
+                    this.setState({isPasswordValid: false});
+                } else {
+                    axios.post('http://127.0.0.1:5000/login', {
+                        email: this.state.email,
+                        password: this.state.password
+                    })
+                    .then(response => {
+                        console.log(response.data);
+                        const token = response.data.access_token;
+                        saveToken(token);
+                        setAuthHeader(token);
+                        this.props.onUpdateThisFrame(token);
+                    })
+                    .catch(error => {
+                        this.setState({isCorrectData: false});
+                        console.error('Error:', error);
+                    });
+                };
             }}>
             Войти</StyledButton>
         </FormContainer>
