@@ -221,3 +221,7 @@ FROM users]
 2024-05-29 19:28:34,280:config:WARNING:Error while login with email: 123: Incorrect password
 2024-05-29 19:28:35,492:config:WARNING:Error while login with email: 123: Incorrect password
 2024-05-29 21:43:28,058:config:WARNING:Error while getting users: invalid literal for int() with base 10: 'true'
+2024-05-30 13:59:43,870:config:WARNING:Error while login with email: 1: Incorrect password
+2024-05-30 14:04:10,573:config:WARNING:Error while deleting project user:1 project:1: Project does not exist
+2024-05-30 14:05:13,656:config:WARNING:Error while deleting project user:1 project:1: Project does not exist
+2024-05-30 14:06:58,662:config:WARNING:Error while login with email: 1: Incorrect password

@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import Stub from '../img/projectZaglushka.jpg';
+import axios from 'axios';
+import {Link} from 'react-router-dom';
 
 export default class projectPage extends Component {
   render() {
@@ -8,6 +10,13 @@ export default class projectPage extends Component {
     }
     return (
       <>
+        <Link to='/profile'>
+          <button type='button' onClick={
+            (e) => {
+              axios.delete(`http://127.0.0.1:5000/delete_project/${this.props.currentProjectId}`)
+            }
+          }>удалить проект</button>
+        </Link>
         <div>  {/*  это под картинки и название  */}
             <p>
                 {this.props.thisProject.name}

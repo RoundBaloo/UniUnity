@@ -94,8 +94,8 @@ class User(db.Model):
                 user_query = user_query.filter(User.profession.contains(f"%{profession_filter}"))
             if skill_level_filter:
                 user_query = user_query.filter(User.skill_level >= skill_level_filter)
-            if team_search_state_filter:
-                user_query = user_query.filter(User.team_search_state == team_search_state_filter)
+            if team_search_state_filter and team_search_state_filter == 'true':
+                user_query = user_query.filter(User.team_search_state == True)
             all_users = user_query.all()
             users = []
             for i in range(4 * (page_number - 1), 4 * page_number):

@@ -253,7 +253,8 @@ function App() {
                         thisFrame!== undefined && linkPlates!== undefined?
                             <ProjectPage thisFrame={thisFrame}
                                         thisProject={linkPlates[currentProjectId - 1]}
-                                        avatar={thisFrame.image_link}/> :
+                                        avatar={thisFrame.image_link}
+                                        currentProjectId={currentProjectId}/> :
                             null
                         }/>
                 </Routes>

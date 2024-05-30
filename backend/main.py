@@ -166,8 +166,11 @@ def update_project(project_id, **kwargs):
 def delete_project(project_id):
     try:
         user_id = get_jwt_identity()
+        print(1)
         project = Project.get_project(user_id=user_id, project_id=project_id)
+        print(2)
         project.delete_project()
+        print(3)
     except Exception as e:
         logger.warning(
             f'Error while deleting project user:{get_jwt_identity()} project:{project_id}: {e}')
