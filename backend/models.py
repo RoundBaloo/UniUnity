@@ -231,6 +231,17 @@ class Project(db.Model):
             raise
         return project
 
+    @classmethod
+    def get_project_by_project_id(cls, project_id):
+        try:
+            project = cls.query.filter(cls.id == project_id).first()
+            if not project:
+                raise Exception('Project does not exist')
+        except Exception:
+            db.session.rollback()
+            raise
+        return project
+
     def save_project(self):
         try:
             db.session.add(self)

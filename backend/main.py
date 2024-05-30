@@ -89,7 +89,7 @@ def register():
     try:
         params = request.json
         user = User(**params)
-        
+
         user.save_user()
         token = user.get_token()
     except Exception as e:
@@ -124,6 +124,19 @@ def get_projects(user_id):
         return jsonify({"message": str(e)}), 404
 
     return projects, 200
+
+
+# Получение проекта юзера по айди проекта
+@app.route("/get_project/<int:project_id>", methods=["GET"])
+@marshal_with(ProjectSchema)
+def get_project(project_id):
+    try:
+        project = Project.get_project_by_project_id(project_id=project_id)
+    except Exception as e:
+        logger.warning(f'Error while getting project {project_id}: {e}')
+        return jsonify({"message": str(e)}), 404
+
+    return project, 200
 
 
 # добавление проекта юзером
