@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import styled from 'styled-components';
 import axios from 'axios';
 import { saveToken, setAuthHeader } from '../tokenService';
+import {Link} from "react-router-dom";
 
 
 const StyledForm = styled.form`
@@ -69,6 +70,13 @@ const FormContainer = styled.div`
     margin-right: auto;
 `;
 
+const StyledButtonContainer = styled.div`
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center; // Выравнивание элементов по центру по вертикали
+`;
+
 export default class signin extends Component {
     constructor(props) {
         super(props);
@@ -103,35 +111,38 @@ export default class signin extends Component {
                     {!this.state.isPasswordValid ? <StyledP color='#f1807e'>требуется ввести пароль</StyledP> : null}  
                     {!this.state.isCorrectData ? <StyledP color='#f1807e'>логин или пароль неверный</StyledP> : null}
                 </ContainerTwoElements>
-                <p onClick={() => {
-                    this.props.onMakeRegistration()
-                }}>зарегистрироваться</p>
             </StyledForm>
-            <StyledButton type="button" onClick={() => {
-                this.setState({isCorrectData: true});
-                if (this.state.email.length < 1) {
-                    this.setState({isEmailValid: false});
-                } else if (this.state.password.length < 1) {
-                    this.setState({isPasswordValid: false});
-                } else {
-                    axios.post('http://127.0.0.1:5000/login', {
-                        email: this.state.email,
-                        password: this.state.password
-                    })
-                    .then(response => {
-                        console.log(response.data);
-                        const token = response.data.access_token;
-                        saveToken(token);
-                        setAuthHeader(token);
-                        this.props.onUpdateThisFrame(token);
-                    })
-                    .catch(error => {
-                        this.setState({isCorrectData: false});
-                        console.error('Error:', error);
-                    });
-                };
-            }}>
-            Войти</StyledButton>
+
+            <StyledButtonContainer>
+                <StyledButton style={{borderBottomRightRadius: '0px'}} type="button" onClick={() => {
+                    this.setState({isCorrectData: true});
+                    if (this.state.email.length < 1) {
+                        this.setState({isEmailValid: false});
+                    } else if (this.state.password.length < 1) {
+                        this.setState({isPasswordValid: false});
+                    } else {
+                        axios.post('http://127.0.0.1:5000/login', {
+                            email: this.state.email,
+                            password: this.state.password
+                        })
+                            .then(response => {
+                                console.log(response.data);
+                                const token = response.data.access_token;
+                                saveToken(token);
+                                setAuthHeader(token);
+                                this.props.onUpdateThisFrame(token);
+                            })
+                            .catch(error => {
+                                this.setState({isCorrectData: false});
+                                console.error('Error:', error);
+                            });
+                    };
+                }}>
+                    Войти</StyledButton>
+                <StyledButton style={{borderBottomLeftRadius: '0px', borderLeft: 'none'}} onClick={() => {
+                    this.props.onMakeRegistration()
+                }}>Регистрация</StyledButton>
+            </StyledButtonContainer>
         </FormContainer>
     )
   }

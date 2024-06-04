@@ -14,8 +14,7 @@ import avatar9 from '../img/Avatars/Avatar-9.svg';
 import avatar10 from '../img/Avatars/Avatar-10.svg';
 
 const StyledAvatarContainer = styled.div`
-    margin-left: 20px;
-    margin-top: 20px;
+    margin-bottom: 30px;
     width: 100%;
     height: 100px;
     border: 3px solid black;

@@ -26,6 +26,7 @@ const StyledForm = styled.form`
     height: 100%;
     box-sizing: border-box;
     justify-content: flex-end;
+    margin-bottom: 30px;
 `;
 
 const Avatar = styled.img`

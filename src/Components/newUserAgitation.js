@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import styled from 'styled-components';
-
+import triangle from '../img/downArrow.svg'
 
 const StyledBottomButton = styled.button`
     background-color: white;
@@ -70,8 +70,8 @@ const TrianglesContainer = styled.div`
     flex-flow: row nowrap;
     margin-top: 60px;
     margin-bottom: 55px;
-    //align-items: center; // Выравнивает компоненты по центру по вертикали
-    //margin-top: 90px;
+    margin-left: 55px;
+    gap: 188px
 `;
 
 const SmallContainer = styled.div`
@@ -134,11 +134,11 @@ export default class newUserAgitation extends Component {
                     </SmallContainer>
                 </BigContainer>
                 <TrianglesContainer>
-                    <TriangleWithBorder/>
-                    <TriangleWithBorder/>
-                    <TriangleWithBorder/>
-                    <TriangleWithBorder/>
-                    <TriangleWithBorder/>
+                    <img src={triangle} width={"130"} alt="Down Arrow"/>
+                    <img src={triangle} width={"130"} alt="Down Arrow"/>
+                    <img src={triangle} width={"130"} alt="Down Arrow"/>
+                    <img src={triangle} width={"130"} alt="Down Arrow"/>
+                    <img src={triangle} width={"130"} alt="Down Arrow"/>
                 </TrianglesContainer>
             </>
         )
