@@ -75,26 +75,20 @@ class User(db.Model):
         return user
 
     @classmethod
-    def get_users_list(cls, page_number, request):
+    def get_users_list(cls, page_number, site_filter):
         try:
-            institute_filter = request.args.get('institute')
-            study_direction_filter = request.args.get('studyDirection')
-            course_filter = request.args.get('course')
-            profession_filter = request.args.get('profession')
-            skill_level_filter = request.args.get('skillLevel')
-            team_search_state_filter = request.args.get('teamSearchState')
             user_query = User.query
-            if institute_filter:
-                user_query = user_query.filter(User.institute.contains(f"%{institute_filter}"))
-            if study_direction_filter:
-                user_query = user_query.filter(User.study_direction.contains(f"%{study_direction_filter}"))
-            if course_filter:
-                user_query = user_query.filter(User.course == course_filter)
-            if profession_filter:
-                user_query = user_query.filter(User.profession.contains(f"%{profession_filter}"))
-            if skill_level_filter:
-                user_query = user_query.filter(User.skill_level >= skill_level_filter)
-            if team_search_state_filter and team_search_state_filter == 'true':
+            if site_filter.institute_filter:
+                user_query = user_query.filter(User.institute.contains(f"%{site_filter.institute_filter}"))
+            if site_filter.study_direction_filter:
+                user_query = user_query.filter(User.study_direction.contains(f"%{site_filter.study_direction_filter}"))
+            if site_filter.course_filter:
+                user_query = user_query.filter(User.course == site_filter.course_filter)
+            if site_filter.profession_filter:
+                user_query = user_query.filter(User.profession.contains(f"%{site_filter.profession_filter}"))
+            if site_filter.skill_level_filter:
+                user_query = user_query.filter(User.skill_level >= site_filter.skill_level_filter)
+            if site_filter.team_search_state_filter and site_filter.team_search_state_filter == 'true':
                 user_query = user_query.filter(User.team_search_state == True)
             all_users = user_query.all()
             users = []

@@ -6,20 +6,45 @@ from flask_apispec import use_kwargs, marshal_with
 from config import app, db, docs, logger
 from models import User, Project
 from schemas import ProjectSchema
+import os
+from werkzeug.utils import secure_filename
 
 CORS(app)
+
+
+class Filter:
+    institute_filter = None
+    study_direction_filter: str
+    course_filter: int
+    profession_filter: str
+    skill_level_filter: str
+    team_search_state_filter: bool
+
+
+site_filter = Filter()
 
 
 # Получение юзеров по страницам
 @app.route("/users/<int:page_number>", methods=["GET"])
 def get_users(page_number):
     try:
-        users = User.get_users_list(page_number=page_number, request=request)
+        users = User.get_users_list(page_number=page_number, site_filter=site_filter)
         json_users = list(map(lambda x: x.to_json(), users))
     except Exception as e:
         logger.warning(f'Error while getting users: {e}')
         return jsonify({"message": str(e)}), 400
     return jsonify({"users": json_users}), 200
+
+
+# Изменение фильтров
+@app.route("/filters", methods=["PATCH"])
+def change_filters():
+    site_filter.institute_filter = request.args.get('institute')
+    site_filter.study_direction_filter = request.args.get('studyDirection')
+    site_filter.course_filter = request.args.get('course')
+    site_filter.profession_filter = request.args.get('profession')
+    site_filter.skill_level_filter = request.args.get('skillLevel')
+    site_filter.team_search_state_filter = request.args.get('teamSearchState')
 
 
 # Получение юзера с проектами по токену
@@ -179,17 +204,40 @@ def update_project(project_id, **kwargs):
 def delete_project(project_id):
     try:
         user_id = get_jwt_identity()
-        print(1)
         project = Project.get_project(user_id=user_id, project_id=project_id)
-        print(2)
         project.delete_project()
-        print(3)
     except Exception as e:
         logger.warning(
             f'Error while deleting project user:{get_jwt_identity()} project:{project_id}: {e}')
         return jsonify({"message": str(e)}), 401
 
     return jsonify({"message": "Проект удален"}), 200
+
+
+# Добавление картинки к проекту
+@app.route("/add_image_for_project/<int:project_id>", methods=["POST"])
+@jwt_required()
+def post_image_for_project(project_id):
+    allowed_extensions = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
+    try:
+        user_id = get_jwt_identity()
+        project = Project.get_project(user_id=user_id, project_id=project_id)
+        if not project:
+            jsonify({"message": "Проекта не существует или вы не имеете к нему доступа"})
+        if 'files[]' not in request.files:
+            return jsonify({'message': 'в запросе нет файлов'}), 400
+        file = request.files['files[]'].first()
+        file_is_allowed = '.' in file.filename and file.filename.rsplit('.', 1)[1].lower() in allowed_extensions
+        if file and file_is_allowed:
+            filename = secure_filename(file.filename)
+            path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+            file.save(path)
+            project.project_image_link = path
+    except Exception as e:
+        logger.warning(f'Error while adding image to project:{project_id}: {e}')
+        return jsonify({"message": str(e)}), 401
+
+    return jsonify({"message": "Картинка добавлена"}), 200
 
 
 @app.errorhandler(422)
