@@ -228,3 +228,11 @@ FROM users]
 2024-06-05 00:00:02,549:config:WARNING:Error while getting user_id:10: User does not exist
 2024-06-05 00:15:50,270:config:WARNING:Error while getting user_id:10: User does not exist
 2024-06-05 00:16:05,610:config:WARNING:Error while getting user_id:10: User does not exist
+2024-06-10 21:53:00,211:config:WARNING:Error while getting users: 'Filter' object has no attribute 'study_direction_filter'
+2024-06-10 22:00:46,212:config:WARNING:Error while getting users: 'Filter' object has no attribute 'study_direction_filter'
+2024-06-10 22:01:04,246:config:WARNING:Error while getting users: 'Filter' object has no attribute 'study_direction_filter'
+2024-06-10 22:04:21,955:config:WARNING:Error while getting users: 'Filter' object has no attribute 'study_direction_filter'
+2024-06-10 22:20:54,773:config:WARNING:Error while getting users: 'Filter' object has no attribute 'study_direction_filter'
+2024-06-10 22:20:57,250:config:WARNING:Error while getting users: 'Filter' object has no attribute 'study_direction_filter'
+2024-06-10 22:21:42,821:config:WARNING:Error while getting users: 'Filter' object has no attribute 'study_direction_filter'
+2024-06-11 00:13:29,381:config:WARNING:Error while getting users: 'Filter' object has no attribute 'study_direction_filter'
