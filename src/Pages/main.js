@@ -20,7 +20,7 @@ const StyledTurningPagesButtonsContainer = styled.div`
 
 const FilterContainer = styled.div`
     position: absolute;
-    top: -94px;
+    top: 0px;
     text-align: left;
     width: 420px;
     border: 3px solid black;
@@ -43,6 +43,7 @@ const FilterContainer2 = styled.div`
 const FilterButtonP = styled.div`
     font-size: 18px;
     margin:0;
+    margin-top: 44px;
     height: 50px;
     width: 360px;
     border: 3px solid black;
@@ -50,6 +51,12 @@ const FilterButtonP = styled.div`
     margin-left: 65px;
     padding-left: 40px;
     padding-top: 12px;
+`;
+
+const FilterButtonPHidden = styled.div`
+    /*костыль жесткий:(*/
+    height: 94px;
+    width: 360px;
 `;
 
 const StyledTurningButton = styled.button`
@@ -102,11 +109,25 @@ const StyledUlRight = styled.ul`
         height: 32px;
         padding-left: 10px
     }
+
+    & > li:first-child {
+        width: 56px;
+    }
+
+    & > li:last-child {
+        width: 56px;
+    }
 `;
 
 const FilterWrapper = styled.div`
     position: relative;
     width: 400px;
+`;
+
+const CheckBox = styled.input`
+    width: 20px;
+    height: 20px;
+    margin-left: 6px;
 `;
 
 const SaveFiltersButton = styled.button`
@@ -117,7 +138,6 @@ const SaveFiltersButton = styled.button`
     padding: 18px;
     padding-left: 25px;
     font-size: 20px;
-
     &:hover {
         background-color: black;
         color: white;
@@ -136,7 +156,7 @@ const Main = (props) => {
     const [hidden, setHidden] = useState(false);
     useMotionValueEvent(scrollY, "change", (latest) => {
         const previous = scrollY.getPrevious();
-        if (latest > previous && latest > 150) {
+        if (latest > previous && latest > 300) {
             setHidden(true);
         }
         else {
@@ -160,12 +180,13 @@ const Main = (props) => {
                 visible: {y:0},
             }}
             animate={hidden ? "hidden" : "visible"}
-            transition={{duration: 0.35, ease: "easeInOut"}}>
+            transition={{duration: 0.8, ease: "easeInOut"}}>
                 {!props.onLogIn && <NewUserAgitation onGoToin={goToIn} onMakeRegistration={props.onMakeRegistration}
                                                      onMakeNonRegistration={props.onMakeNonRegistration}/>}
             </motion.div>
             <FilterWrapper>
                 {isFilterVisible ? (
+                    <div>
                     <FilterContainer>
                         <FilterContainer2>
                             <LeftColumn>
@@ -204,7 +225,7 @@ const Main = (props) => {
                                         }}></input>
                                     </li>
                                     <li>
-                                        <input
+                                        <CheckBox
                                             type="checkbox"
                                             onChange={(e) => {
                                                 setTeamSearchStateFilter(e.target.checked)
@@ -228,6 +249,7 @@ const Main = (props) => {
                         }}>Сохранить фильтры
                         </SaveFiltersButton>
                     </FilterContainer>
+                    <FilterButtonPHidden></FilterButtonPHidden></div>
                 ) : (
                     <FilterButtonP onClick={() => setIsFilterVisible(true)}>Фильтр и поиск</FilterButtonP>
                 )}
