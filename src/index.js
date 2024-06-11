@@ -74,22 +74,26 @@ function App() {
             });
     }
 
-    const updateUsersByFilters = (filters) => {
-        axios.get(`http://127.0.0.1:5000/users/${currentPage}`, {
-            params: {
-                course: filters.course,
-                institute: filters.institute,
-                studyDirection: filters.studyDirection,
-                profession: filters.profession,
-                skillLevel: filters.skillLevel,
-                teamSearchState: filters.teamSearchState
+    const updateFilters = (filters) => {
+        axios.patch('http://127.0.0.1:5000/filters', {
+            institute: filters.institute,
+            studyDirection: filters.studyDirection,
+            course: filters.course,
+            profession: filters.profession,
+            skillLevel: filters.skillLevel,
+            teamSearchState: filters.teamSearchState
+        }, {
+            headers: {
+                'Content-Type': 'application/json'
             }
-        }).then((res) => {
-            let arr = res.data.users;
-            addFrame(arr);
-            console.log(filters);
-            console.log(arr);
-        });
+        }
+        ).then((res) => {
+            updateUsersArray();
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+            // Log the error or display an error message to the user
+          });
     };
 
     const getUserProjects = (_userId) => {
@@ -227,7 +231,7 @@ function App() {
                                                          currentPage={currentPage}
                                                          onUpdateThisFrame={updateThisFrame}
                                                          updateThisFrameToOther={updateThisFrameToOther}
-                                                         updateUsersByFilters={updateUsersByFilters}/>}/>
+                                                         updateFilters={updateFilters}/>}/>
                     <Route exact path="/profile" element={<Profile frames={frames}
                                                                    onLogIn={makeLoggedIn}
                                                                    makeNotLoggedIn={makeNotLoggedIn}

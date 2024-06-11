@@ -14,11 +14,11 @@ CORS(app)
 
 class Filter:
     institute_filter = None
-    study_direction_filter: str
-    course_filter: int
-    profession_filter: str
-    skill_level_filter: str
-    team_search_state_filter: bool
+    study_direction_filter = None
+    course_filter = None
+    profession_filter = None
+    skill_level_filter = None
+    team_search_state_filter = None
 
 
 site_filter = Filter()
@@ -39,12 +39,14 @@ def get_users(page_number):
 # Изменение фильтров
 @app.route("/filters", methods=["PATCH"])
 def change_filters():
-    site_filter.institute_filter = request.args.get('institute')
-    site_filter.study_direction_filter = request.args.get('studyDirection')
-    site_filter.course_filter = request.args.get('course')
-    site_filter.profession_filter = request.args.get('profession')
-    site_filter.skill_level_filter = request.args.get('skillLevel')
-    site_filter.team_search_state_filter = request.args.get('teamSearchState')
+    data = request.json
+    site_filter.institute_filter = data.get('institute')
+    site_filter.study_direction_filter = data.get('studyDirection')
+    site_filter.course_filter = data.get('course')
+    site_filter.profession_filter = data.get('profession')
+    site_filter.skill_level_filter = data.get('skillLevel')
+    site_filter.team_search_state_filter = data.get('teamSearchState')
+    return jsonify({"message": "Filters updated successfully"}), 200
 
 
 # Получение юзера с проектами по токену

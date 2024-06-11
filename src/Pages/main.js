@@ -20,7 +20,7 @@ const StyledTurningPagesButtonsContainer = styled.div`
 
 const FilterContainer = styled.div`
     text-align: left;
-    height: 440px;
+    height: 740px;
     width: 372px;
     border: 3px solid black;
     border-radius: 23px;
@@ -175,7 +175,7 @@ const Main = (props) => {
                 />
 
                 <button type='button' onClick={(e) => {
-                    props.updateUsersByFilters({
+                    props.updateFilters({
                         institute: instituteFilter,
                         studyDirection: studyDirectionFilter,
                         course: courseFilter,
