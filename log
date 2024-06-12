@@ -263,3 +263,19 @@ FROM users]
 2024-06-11 14:19:37,651:config:WARNING:Error while getting users: 'Filter' object has no attribute 'course'
 2024-06-11 19:21:39,538:config:WARNING:Error while login with email: апроанр: No row was found when one was required
 2024-06-11 19:22:19,417:config:WARNING:Error while login with email: вапвап: No row was found when one was required
+2024-06-12 15:39:14,037:config:WARNING:Invalid Input params: {'json': {'type': ['Field may not be null.']}}
+2024-06-12 15:39:41,936:config:WARNING:Invalid Input params: {'json': {'type': ['Field may not be null.'], 'description': ['Field may not be null.']}}
+2024-06-12 15:40:31,116:config:WARNING:Invalid Input params: {'json': {'type': ['Field may not be null.'], 'description': ['Field may not be null.']}}
+2024-06-12 15:43:33,075:config:WARNING:Invalid Input params: {'json': {'type': ['Field may not be null.'], 'description': ['Field may not be null.']}}
+2024-06-12 15:43:49,248:config:WARNING:Invalid Input params: {'json': {'type': ['Field may not be null.'], 'description': ['Field may not be null.']}}
+2024-06-12 15:44:08,631:config:WARNING:Invalid Input params: {'json': {'type': ['Field may not be null.'], 'description': ['Field may not be null.']}}
+2024-06-12 15:45:22,337:config:WARNING:Invalid Input params: {'json': {'params': ['Unknown field.']}}
+2024-06-12 15:52:27,358:config:WARNING:Invalid Input params: {'json': {'type': ['Field may not be null.']}}
+2024-06-12 15:55:10,550:config:WARNING:Invalid Input params: {'json': {'type': ['Field may not be null.']}}
+2024-06-12 15:56:36,978:config:WARNING:Invalid Input params: {'json': {'data': ['Unknown field.']}}
+2024-06-12 15:58:49,830:config:WARNING:Invalid Input params: {'json': {'data': ['Unknown field.']}}
+2024-06-12 15:59:38,385:config:WARNING:Invalid Input params: {'json': {'type': ['Field may not be null.']}}
+2024-06-12 16:00:41,288:config:WARNING:Invalid Input params: {'json': {'type': ['Field may not be null.']}}
+2024-06-12 16:01:45,592:config:WARNING:Invalid Input params: {'json': {'description': ['Field may not be null.']}}
+2024-06-12 16:01:54,493:config:WARNING:Invalid Input params: {'json': {'name': ['Field may not be null.']}}
+2024-06-12 16:02:22,206:config:WARNING:Invalid Input params: {'json': {'type': ['Field may not be null.']}}

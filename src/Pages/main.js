@@ -348,7 +348,9 @@ const Main = (props) => {
             </FilterContainer>*/}
 
 
-            <Frames frames={props.frames} updateUserId={props.updateUserId} onUpdateThisFrame={props.onUpdateThisFrame}
+            <Frames frames={props.frames} 
+                    updateUserId={props.updateUserId} 
+                    onUpdateThisFrame={props.onUpdateThisFrame}
                     updateThisFrameToOther={props.updateThisFrameToOther}/>
             <StyledTurningPagesButtonsContainer>
                 <StyledTurningButton type='button' onClick={() => {

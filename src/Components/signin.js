@@ -87,7 +87,7 @@ export default class signin extends Component {
           isPasswordValid: true,
           isCorrectData: true
         };
-      }
+    }
 
   render() {
 

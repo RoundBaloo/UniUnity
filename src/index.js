@@ -11,6 +11,7 @@ import Profile from './Pages/profile';
 import Main from './Pages/main';
 import OtherManProfile from "./Pages/otherManProfile";
 import ProjectPage from "./Pages/projectPage"
+import ProfileInfoEditor from "./Pages/profileInfoEditor";
 import axios from 'axios';
 import {saveToken, setAuthHeader, getToken} from './tokenService';
 import UploadProject from "./Pages/uploadProject";
@@ -19,6 +20,7 @@ import styled from "styled-components";
 
 var token = getToken();
 var selfId;
+var selfAvatarLink;
 
 function App() {
     const [frames, setFrames] = useState([]);
@@ -30,6 +32,7 @@ function App() {
     const [linkPlates, setLinkPlates] = useState();
     const [currentPage, setCurrentPage] = useState(1);
     const [currentProjectId, setCurrentProjectId] = useState();
+    const [currentProject, setCurrentProject] = useState();
 
     useEffect(() => {
         axios.get(`http://127.0.0.1:5000/users/${currentPage}`).then((res) => {
@@ -48,6 +51,7 @@ function App() {
                 setUserId(response.data.user.id);
                 selfId = response.data.user.id;
                 setThisFrame(response.data.user);
+                selfAvatarLink = response.data.user.image_link;
                 updateUsersArray();
                 makeLoggedIn();
                 getUserProjects(response.data.user.id);
@@ -100,6 +104,7 @@ function App() {
         axios.get(`http://127.0.0.1:5000/get_user_projects/${_userId}`)
             .then(response => {
                 setLinkPlates(response.data)
+                console.log(response.data)
             })
             .catch(error => {
                 console.error('Ошибка при выполнении запроса:', error);
@@ -170,6 +175,11 @@ function App() {
 
     const updateCurrentProjectId = (projId) => {
         setCurrentProjectId(projId);
+        axios.get(`http://127.0.0.1:5000/get_project/${projId}`)
+        .then (res => {
+            setCurrentProject(res.data);
+            console.log(res.data)
+        })
         console.log(projId);
     }
 
@@ -214,10 +224,11 @@ function App() {
                     }}>
                         <AvatarContainer>
                             <Avatar
-                                src={(isLoggedIn && thisFrame.image_link) ? thisFrame.image_link : avatar} width={90}
+                                src={(isLoggedIn && thisFrame.image_link) ? selfAvatarLink : avatar} width={90}
                                 alt='Профиль'/>
                         </AvatarContainer>
                     </Link>
+                    <ProfileInfoEditor />
                 </header>
                 <Routes>
                     <Route exact path="/" element={<Main frames={frames} 
@@ -242,25 +253,34 @@ function App() {
                                                                    onUpdateUsers={updateUsersArray}
                                                                    thisFrame={thisFrame}
                                                                    onUpdateThisFrame={updateThisFrame}
-                                                                   updateToken={updateToken} setFrames={setFrames}
-                                                                   userId={userId} linkPlates={linkPlates}
+                                                                   updateToken={updateToken} 
+                                                                   setFrames={setFrames}
+                                                                   userId={userId} 
+                                                                   linkPlates={linkPlates}
                                                                    getUserProjects={getUserProjects}
                                                                    currentPage={currentPage}
                                                                    updateCurrentProjectId={updateCurrentProjectId}/>}/>
                     <Route exact path="/otherManProfile" element={<OtherManProfile
-                        frames={frames} thisFrame={thisFrame}
-                        userId={userId} linkPlates={linkPlates}/>}/>
+                        frames={frames} 
+                        thisFrame={thisFrame}
+                        userId={userId} 
+                        linkPlates={linkPlates}
+                        updateCurrentProjectId={updateCurrentProjectId}/>}/>
                     <Route exact path="/uploadProject"
                            element={<UploadProject token={token} 
                                                    updateThisFrame={updateThisFrame}/>}/>
                     <Route exact path="/projectPage" element={
                         thisFrame!== undefined && linkPlates!== undefined?
                             <ProjectPage thisFrame={thisFrame}
-                                        thisProject={linkPlates[currentProjectId - 1]}
-                                        avatar={thisFrame.image_link}
-                                        currentProjectId={currentProjectId}/> :
+                                         thisProject={currentProject}
+                                         avatar={thisFrame.image_link}
+                                         currentProjectId={currentProjectId}
+                                         getUserProjects={getUserProjects}
+                                         selfId={selfId}/> :
                             null
                         }/>
+                    <Route exact path="/profileEditor" element={<ProfileInfoEditor thisProject={currentProject}
+                                                                                   updateCurrentProjectId={updateCurrentProjectId}/>} />
                 </Routes>
             </>
         </Router>

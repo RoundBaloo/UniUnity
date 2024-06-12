@@ -105,7 +105,7 @@ export default class otherManProfilePlate extends Component {
     render() {
         const frame = this.props.thisFrame;
         if (!frame) {
-            return <div>Loading...</div>; // Или любой другой компонент загрузки
+            return <div>Loading...</div>; 
         }
         return (
             <StyledContainer>

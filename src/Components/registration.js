@@ -78,7 +78,11 @@ export default class registration extends Component {
             email: "",
             password: "",
             repeated_password: "",
-            FIO: ""
+            FIO: "",
+            IsEmailValid: true,
+            IsPasswordValid: true,
+            IsPasswordsMatch: true,
+            IsFIOHasThreeWords: true
         }
     }
     render() {
@@ -103,26 +107,32 @@ export default class registration extends Component {
                     </ContainerTwoElements>
                 </StyledForm>
                 <StyledButton type="button" onClick={() => {
-                    axios.post(apiUrl, {
-                        "email": this.state.email, 
-                        "password": this.state.password,
-                        "lastName": this.state.FIO.split(" ")[0],
-                        "firstName": this.state.FIO.split(" ")[1],
-                        "fatherName": this.state.FIO.split(" ")[2]
-                      })
-                        .then(response => {
-                            this.props.onUpdateUsers(); // mbd
-                            this.props.updateToken(response.data.access_token); //mbd 
-                            console.log('User added successfully:', response.data);
-                            const token = response.data.access_token; 
-                            saveToken(token);
-                            setAuthHeader(token);
-                            this.props.onUpdateThisFrame(token);
-                            this.props.getUserProjects();
-                        })
-                        .catch(error => {
-                          console.error('Error adding user:', error);
-                        });
+                    if (!this.state.email.includes('@')){
+                        this.setState({IsEmailValid: false})
+                    } else if (!this.state.password.length) {
+
+                    } else {
+                        axios.post(apiUrl, {
+                            "email": this.state.email, 
+                            "password": this.state.password,
+                            "lastName": this.state.FIO.split(" ")[0],
+                            "firstName": this.state.FIO.split(" ")[1],
+                            "fatherName": this.state.FIO.split(" ")[2]
+                            })
+                            .then(response => {
+                                this.props.onUpdateUsers(); // mbd
+                                this.props.updateToken(response.data.access_token); //mbd 
+                                console.log('User added successfully:', response.data);
+                                const token = response.data.access_token; 
+                                saveToken(token);
+                                setAuthHeader(token);
+                                this.props.onUpdateThisFrame(token);
+                                this.props.getUserProjects();
+                            })
+                            .catch(error => {
+                              console.error('Error adding user:', error);
+                            });
+                    }
                 }}>
                 Зарегистрироваться</StyledButton>
             </FormContainer> 

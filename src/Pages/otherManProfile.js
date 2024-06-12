@@ -45,7 +45,8 @@ export default class otherManProfile extends Component {
                 <OtherManProfilePlate thisFrame={this.props.thisFrame} frames={this.props.frames} userId={this.state.userId}/>
             </StyledFormContainer>
             <StyledProjectsContainer>
-              <LinkPlates linkPlates={this.props.linkPlates}/>
+              <LinkPlates linkPlates={this.props.linkPlates}
+                          updateCurrentProjectId={this.props.updateCurrentProjectId}/>
             </StyledProjectsContainer>
         </>
     )

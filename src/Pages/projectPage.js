@@ -3,7 +3,6 @@ import Stub from '../img/projectZaglushka.jpg';
 import axios from 'axios';
 import {Link} from 'react-router-dom';
 import styled from "styled-components";
-import avatar from "../img/Avatars/Avatar-1.svg";
 
 const ImagesContainer = styled.div`
     position: relative;
@@ -108,9 +107,15 @@ export default class projectPage extends Component {
                     <button type='button' onClick={
                         (e) => {
                             axios.delete(`http://127.0.0.1:5000/delete_project/${this.props.currentProjectId}`)
+                            .then(res => {
+                                this.props.getUserProjects(this.props.selfId);
+                            })
                         }
                     }>удалить проект
                     </button>
+                </Link>
+                <Link to='/profileEditor'>
+                    <button type='button'>редактировать проект</button>
                 </Link>
                 <FlexContainer>
                     <ImagesContainer>  {/*  это под картинки и название  */}
