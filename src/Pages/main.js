@@ -116,6 +116,7 @@ const StyledUlRight = styled.ul`
 
     & > li:last-child {
         width: 56px;
+        background: ${props => props.isChecked ? '#90EE90' : '#ffcccb'};
     }
 `;
 
@@ -128,6 +129,7 @@ const CheckBox = styled.input`
     width: 20px;
     height: 20px;
     margin-left: 6px;
+    background: red;
 `;
 
 const SaveFiltersButton = styled.button`
@@ -151,6 +153,7 @@ const Main = (props) => {
     const [professionFilter, setprofessionFilter] = useState('');
     const [skillLevelFilter, setSkillLevelFilter] = useState('');
     const [teamSearchStateFilter, setTeamSearchStateFilter] = useState();
+    const [teamSearchState, setTeamSearchState] = useState();
 
     const { scrollY } = useScroll();
     const [hidden, setHidden] = useState(false);
@@ -199,7 +202,7 @@ const Main = (props) => {
                                 </StyledUlLeft>
                             </LeftColumn>
                             <RightColumn>
-                                <StyledUlRight>
+                                <StyledUlRight isChecked={teamSearchStateFilter}>
                                     <li>
                                         <select onChange={(e) => {
                                             setCourseFilter(e.target.value)
@@ -224,12 +227,9 @@ const Main = (props) => {
                                             setprofessionFilter(e.target.value)
                                         }}></input>
                                     </li>
-                                    <li>
-                                        <CheckBox
-                                            type="checkbox"
-                                            onChange={(e) => {
-                                                setTeamSearchStateFilter(e.target.checked)
-                                            }}/>
+                                    <li onClick={(e) => {
+                                        setTeamSearchStateFilter(!teamSearchStateFilter)
+                                        }}>
                                     </li>
                                 </StyledUlRight>
                             </RightColumn>

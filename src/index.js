@@ -4,14 +4,14 @@ import './css/reset.css';
 import './css/style.css';
 import newLogo from './img/UniUnityLogo.png';
 import notification from './img/NotificationButton.svg';
-import avatar from './img/Avatars/Avatar-1.svg'
+import avatar from './img/avatarPlaceholder.png'
 import {Link} from 'react-router-dom';
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 import Profile from './Pages/profile';
 import Main from './Pages/main';
 import OtherManProfile from "./Pages/otherManProfile";
 import ProjectPage from "./Pages/projectPage"
-import ProfileInfoEditor from "./Pages/profileInfoEditor";
+import ProfileInfoEditor from "./Pages/projectInfoEditor";
 import axios from 'axios';
 import {saveToken, setAuthHeader, getToken} from './tokenService';
 import UploadProject from "./Pages/uploadProject";
@@ -52,6 +52,7 @@ function App() {
                 selfId = response.data.user.id;
                 setThisFrame(response.data.user);
                 selfAvatarLink = response.data.user.image_link;
+                console.log("я был вызван")
                 updateUsersArray();
                 makeLoggedIn();
                 getUserProjects(response.data.user.id);
@@ -93,6 +94,7 @@ function App() {
         }
         ).then((res) => {
             updateUsersArray();
+            console.log(filters);
         })
         .catch((error) => {
             console.error('Error:', error);
@@ -224,11 +226,10 @@ function App() {
                     }}>
                         <AvatarContainer>
                             <Avatar
-                                src={(isLoggedIn && thisFrame.image_link) ? selfAvatarLink : avatar} width={90}
+                                src={(isLoggedIn) ? selfAvatarLink : avatar} width={90}
                                 alt='Профиль'/>
                         </AvatarContainer>
                     </Link>
-                    <ProfileInfoEditor />
                 </header>
                 <Routes>
                     <Route exact path="/" element={<Main frames={frames} 

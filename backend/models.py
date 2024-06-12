@@ -88,7 +88,7 @@ class User(db.Model):
                 user_query = user_query.filter(User.profession.contains(f"%{site_filter.profession_filter}"))
             if site_filter.skill_level_filter:
                 user_query = user_query.filter(User.skill_level >= site_filter.skill_level_filter)
-            if site_filter.team_search_state_filter and site_filter.team_search_state_filter == 'true':
+            if site_filter.team_search_state_filter:
                 user_query = user_query.filter(User.team_search_state == True)
             all_users = user_query.all()
             users = []

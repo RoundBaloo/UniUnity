@@ -24,15 +24,16 @@ const ContainerTwoElements = styled.form`
 `;
 
 const StyledP = styled.p`
+    color: ${props => props.color || 'initial'};
     font-size: 23px;
     margin-right: auto;
     margin-bottom: 15px;
 `;
 
 const StyledInput = styled.input`
-    background-color: white;
+    background-color: ${props => props.isValid ? 'white' : '#ffcccb'};
     height: 44px;
-    border: 2px solid black;
+    border: 2px solid ${props => props.isValid ? 'black' : "#f1807e"};
     border-radius: 7px;
     padding: 10px;
     width: 100%;
@@ -77,12 +78,13 @@ export default class registration extends Component {
         this.state ={
             email: "",
             password: "",
-            repeated_password: "",
+            repeatedPassword: "",
             FIO: "",
             IsEmailValid: true,
             IsPasswordValid: true,
             IsPasswordsMatch: true,
-            IsFIOHasThreeWords: true
+            IsFIOHasThreeWords: true,
+            IsLoginAlreadyUsed: false
         }
     }
     render() {
@@ -91,26 +93,52 @@ export default class registration extends Component {
                 <StyledForm className='registration'>
                     <ContainerTwoElements>
                         <StyledP>Логин</StyledP>
-                        <StyledInput onChange={(e) => this.setState({email: e.target.value})} />
+                        <StyledInput isValid={this.state.IsEmailValid} onChange={(e) => {
+                            this.setState({email: e.target.value})
+                            this.setState({IsEmailValid: true})
+                            this.setState({IsLoginAlreadyUsed: false})
+                        }} />
+                        {!this.state.IsEmailValid ? <StyledP color='#f1807e'>введен некорректный email</StyledP> : null}
                     </ContainerTwoElements>
                     <ContainerTwoElements>
                         <StyledP>Пароль</StyledP>
-                        <StyledInput onChange={(e) => this.setState({password: e.target.value})} />
+                        <StyledInput isValid={this.state.IsPasswordValid} onChange={(e) => {
+                            this.setState({password: e.target.value})
+                            this.setState({IsPasswordValid: true})
+                        }} />
+                        {!this.state.IsPasswordValid ? <StyledP color='#f1807e'>длина пароля должна быть более 8 символов</StyledP> : null}
                     </ContainerTwoElements>
                     <ContainerTwoElements>
                         <StyledP>Подтвердите пароль</StyledP>
-                        <StyledInput onChange={(e) => this.setState({repeated_password: e.target.value})} />
+                        <StyledInput isValid={this.state.IsPasswordsMatch} onChange={(e) => {
+                            this.setState({repeatedPassword: e.target.value})
+                            this.setState({IsPasswordsMatch: true})
+                        }} />
+                        {!this.state.IsPasswordsMatch ? <StyledP color='#f1807e'>пароли не совпадают</StyledP> : null}
                     </ContainerTwoElements>
                     <ContainerTwoElements>
                         <StyledP>ФИО</StyledP>
-                        <StyledInput onChange={(e) => this.setState({FIO: e.target.value})} />
+                        <StyledInput isValid={this.state.IsFIOHasThreeWords} onChange={(e) => {
+                            this.setState({FIO: e.target.value})
+                            this.setState({IsFIOHasThreeWords: true})
+                        }} />
+                        {!this.state.IsFIOHasThreeWords ? <StyledP color='#f1807e'>Введите ФИО полностью</StyledP> : null}
                     </ContainerTwoElements>
+                    {this.state.IsLoginAlreadyUsed ? <StyledP color='#f1807e'>данный логин уже занят</StyledP> : null}
                 </StyledForm>
                 <StyledButton type="button" onClick={() => {
                     if (!this.state.email.includes('@')){
                         this.setState({IsEmailValid: false})
-                    } else if (!this.state.password.length) {
-
+                        console.log(1)
+                    } else if (this.state.password.length < 8) {
+                        this.setState({IsPasswordValid: false})
+                        console.log(2)
+                    } else if (this.state.password !== this.state.repeatedPassword) {
+                        this.setState({IsPasswordsMatch: false})
+                        console.log(3)
+                    } else if (this.state.FIO.split(" ").length !== 3) {
+                        this.setState({IsFIOHasThreeWords: false})
+                        console.log(4)
                     } else {
                         axios.post(apiUrl, {
                             "email": this.state.email, 
@@ -131,6 +159,7 @@ export default class registration extends Component {
                             })
                             .catch(error => {
                               console.error('Error adding user:', error);
+                              this.setState({IsLoginAlreadyUsed: true})
                             });
                     }
                 }}>

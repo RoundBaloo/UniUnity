@@ -279,3 +279,27 @@ FROM users]
 2024-06-12 16:01:45,592:config:WARNING:Invalid Input params: {'json': {'description': ['Field may not be null.']}}
 2024-06-12 16:01:54,493:config:WARNING:Invalid Input params: {'json': {'name': ['Field may not be null.']}}
 2024-06-12 16:02:22,206:config:WARNING:Invalid Input params: {'json': {'type': ['Field may not be null.']}}
+2024-06-12 17:24:17,348:config:WARNING:Error while registering user: (sqlite3.IntegrityError) UNIQUE constraint failed: users.email
+[SQL: INSERT INTO users (email, password, first_name, last_name, father_name, institute, study_direction, course, profession, search_aim, what_want_from_command, about, skill_level, team_search_state, "VK_link", "TG_link", mail, image_link, fill_percentage) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)]
+[parameters: ('', '$2b$12$vqI.9DSUzl.bjRCNbS0PSugLyGgYmrb7DrxsTqEq5H61lXNJQmB0K', '', '', '', '', '', 0, '', '', '', '', '', 0, '', '', '', '', 0)]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+2024-06-12 17:29:03,183:config:WARNING:Error while registering user: (sqlite3.IntegrityError) UNIQUE constraint failed: users.email
+[SQL: INSERT INTO users (email, password, first_name, last_name, father_name, institute, study_direction, course, profession, search_aim, what_want_from_command, about, skill_level, team_search_state, "VK_link", "TG_link", mail, image_link, fill_percentage) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)]
+[parameters: ('@', '$2b$12$VgMfLJdNVvM7hf/Z3reEQu61960lZAq57NsKRS8WJNE8Zh2i0/8/y', '2', '1', '3', '', '', 0, '', '', '', '', '', 0, '', '', '', '', 0)]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+2024-06-12 19:06:44,173:config:WARNING:Error while registering user: (sqlite3.IntegrityError) UNIQUE constraint failed: users.email
+[SQL: INSERT INTO users (email, password, first_name, last_name, father_name, institute, study_direction, course, profession, search_aim, what_want_from_command, about, skill_level, team_search_state, "VK_link", "TG_link", mail, image_link, fill_percentage) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)]
+[parameters: ('@', '$2b$12$EOgoUa/0iBVM1vU4Br3x6ecsD2xldPoOVTI.G5jT77y.olzcEDtEi', '12', '12', '12', '', '', 0, '', '', '', '', '', 0, '', '', '', '', 0)]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+2024-06-12 19:15:58,634:config:WARNING:Error while registering user: (sqlite3.IntegrityError) UNIQUE constraint failed: users.email
+[SQL: INSERT INTO users (email, password, first_name, last_name, father_name, institute, study_direction, course, profession, search_aim, what_want_from_command, about, skill_level, team_search_state, "VK_link", "TG_link", mail, image_link, fill_percentage) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)]
+[parameters: ('@', '$2b$12$KQiZN8bjH3hvnpELZ43bZOn0Jx0Y4toYg1YcwKrDbhkhbvsR941Ne', '1', '1', '1', '', '', 0, '', '', '', '', '', 0, '', '', '', '', 0)]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+2024-06-12 19:17:27,081:config:WARNING:Error while registering user: (sqlite3.IntegrityError) UNIQUE constraint failed: users.email
+[SQL: INSERT INTO users (email, password, first_name, last_name, father_name, institute, study_direction, course, profession, search_aim, what_want_from_command, about, skill_level, team_search_state, "VK_link", "TG_link", mail, image_link, fill_percentage) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)]
+[parameters: ('@', '$2b$12$rxJkH.7gSyaPxVuStCwr7O0YV7JolPSullbtsw9YXrmJdDJOr3eRK', '1', '1', '1', '', '', 0, '', '', '', '', '', 0, '', '', '', '', 0)]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+2024-06-12 19:17:42,622:config:WARNING:Error while registering user: (sqlite3.IntegrityError) UNIQUE constraint failed: users.email
+[SQL: INSERT INTO users (email, password, first_name, last_name, father_name, institute, study_direction, course, profession, search_aim, what_want_from_command, about, skill_level, team_search_state, "VK_link", "TG_link", mail, image_link, fill_percentage) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)]
+[parameters: ('@', '$2b$12$0/xMD9vD.fSAYYgxJXk79.1Mu9nbomehhQ9AN.9dMyhSugHVyqnyS', '1', '1', '1', '', '', 0, '', '', '', '', '', 0, '', '', '', '', 0)]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)

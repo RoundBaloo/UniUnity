@@ -14,8 +14,12 @@ const DescrContainer = styled.div`
     width: 440px;
     border: 3px solid black;
     border-radius: 11px;
+
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    border-bottom: none;
     min-height: 300px;
-    height: 100%;
+    padding: 0;
 `;
 
 const DescriptionName = styled.p`
@@ -26,6 +30,8 @@ const DescriptionName = styled.p`
 const Description = styled.p`
     margin-top: 11px;
     margin-left: 22px;
+    margin-bottom: 30px;
+    font-size: 18px;
 `;
 
 const FlexContainer = styled.div`
@@ -96,6 +102,42 @@ const NotInSearch = styled.span`
     color: red;
 `;
 
+const ButtonsContainer = styled.div`
+    border-bottom-right-radius: 11px;
+    border-bottom-left-radius: 11px;
+    display: flex;
+    width: 440px;
+`;
+
+const StyledButton = styled.button`
+    background-color: white;
+    color: black;
+    outline: none; // Убираем стандартный контур при фокусе
+    box-shadow: none;
+    width: 100%;
+    height: 60px;
+    padding-left: 22px;
+    padding-right: 10px;
+    border: 3px solid black;
+
+    // border-bottom-left-radius: 11px;
+    // border-bottom-right-radius: 11px;
+
+    &:hover {
+        cursor: pointer;
+        color: white;
+        background-color: black;
+    }
+`;
+
+const StyledA = styled.a`
+    color: ;
+    display: inline-bock;
+    font-size: 23px;
+    margin: 50px auto 0px 21px;
+    text-decoration: underline;
+`;
+
 export default class projectPage extends Component {
     render() {
         if (!this.props.thisProject) {
@@ -103,20 +145,7 @@ export default class projectPage extends Component {
         }
         return (
             <>
-                <Link to='/profile'>
-                    <button type='button' onClick={
-                        (e) => {
-                            axios.delete(`http://127.0.0.1:5000/delete_project/${this.props.currentProjectId}`)
-                            .then(res => {
-                                this.props.getUserProjects(this.props.selfId);
-                            })
-                        }
-                    }>удалить проект
-                    </button>
-                </Link>
-                <Link to='/profileEditor'>
-                    <button type='button'>редактировать проект</button>
-                </Link>
+
                 <FlexContainer>
                     <ImagesContainer>  {/*  это под картинки и название  */}
                         <ProjectName>
@@ -125,35 +154,47 @@ export default class projectPage extends Component {
                         <img src={Stub}
                              alt='Фото проекта'></img> {/*  тут потом сделаю так, чтобы оно все фотки выводило, Рома еще не намутил мутку  */}
                     </ImagesContainer>
-                    <DescrContainer>  {/*  это под описание и профиль  */}
-                        <div> {/*  этот контейнер перебрасывает в профиль  */}
-                            <AvatarContainer>
-                                <Avatar src={this.props.avatar}/>
-                            </AvatarContainer>
-                            <StyledMainInfoContainer>
-                                <UserName>{this.props.thisFrame.lastName} {this.props.thisFrame.firstName}</UserName>
-                                <ul>
-                                    <Direction>{this.props.thisFrame.profession}</Direction>
-                                    <Search>{this.props.thisFrame.teamSearchState ?
-                                        <InSearch>В поисках команды</InSearch>
-                                        : <NotInSearch>Не ищет команду</NotInSearch>}
-                                    </Search>
-                                </ul>
-                            </StyledMainInfoContainer>
-                        </div>
+                    <div>
+                        <DescrContainer>  {/*  это под описание и профиль  */}
+                            <Link to='/profile'>
+                                <div style={{zIndex: '1'}}> {/*  этот контейнер перебрасывает в профиль  */}
+                                    <AvatarContainer>
+                                        <Avatar src={this.props.avatar}/>
+                                    </AvatarContainer>
+                                    <StyledMainInfoContainer>
+                                        <UserName>{this.props.thisFrame.lastName} {this.props.thisFrame.firstName}</UserName>
+                                        <ul>
+                                            <Direction>{this.props.thisFrame.profession}</Direction>
+                                            <Search>{this.props.thisFrame.teamSearchState ?
+                                                <InSearch>В поисках команды</InSearch>
+                                                : <NotInSearch>Не ищет команду</NotInSearch>}
+                                            </Search>
+                                        </ul>
+                                    </StyledMainInfoContainer>
+                                </div>
+                            </Link>
+                            <DescriptionName>Описание работы</DescriptionName>
+                            <Description>{this.props.thisProject.description}</Description>
+                            <StyledA href={this.props.thisProject.project_link} target="_blank" rel="noopener noreferrer">Ссылка на проект</StyledA>
+                        </DescrContainer>
+                        <ButtonsContainer>
+                            <Link to='/profileEditor'>
+                                <StyledButton  style={{borderBottomLeftRadius: '11px', borderRight: '10px', paddingLeft:'0px'}}>Редактировать проект</StyledButton>
+                            </Link>
+                            <Link to='/profile'>
+                                <StyledButton  style={{borderBottomRightRadius: '11px', width:'220px'}} onClick={
+                                    (e) => {
+                                        axios.delete(`http://127.0.0.1:5000/delete_project/${this.props.currentProjectId}`)
+                                            .then(res => {
+                                                this.props.getUserProjects(this.props.selfId);
+                                            })
+                                    }
+                                }>Удалить проект
+                                </StyledButton>
+                            </Link>
+                        </ButtonsContainer>
+                    </div>
 
-                        {/*<div className>   этот контейнер перебрасывает в профиль
-                            <img src={this.props.avatar} alt></img>
-                            <p>{this.props.thisFrame.lastName} {this.props.thisFrame.firstName}</p>
-                            <p>{this.props.thisFrame.profession}</p>
-                            <p>{this.props.thisFrame.teamSearchState
-                                ? <p>В поисках команды</p>
-                                : <p>Не ищет команду</p>}
-                            </p>
-                        </div>p*/}
-                        <DescriptionName>Описание работы</DescriptionName>
-                        <Description>{this.props.thisProject.description}</Description>
-                    </DescrContainer>
                 </FlexContainer>
 
             </>
