@@ -44,7 +44,7 @@ logger = setup_logger()
 app.config['SECRET_KEY'] = '4bc3c1f05653443ca31d24b89dbedb90'
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///database.db"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
-app.config['UPLOAD_FOLDER'] = './project images'
+app.config['UPLOAD_FOLDER'] = './src/projectImages'
 app.config["MAX_CONTENT_LENGTH"] = 5 * 1024 * 1024
 
 db = SQLAlchemy(app)

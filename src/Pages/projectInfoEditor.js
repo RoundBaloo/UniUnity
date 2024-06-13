@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import axios from 'axios';
 import {Link} from 'react-router-dom';
 import styled from "styled-components";
+import FileLoader from "../Components/fileLoader"
 
 
 const StyledContainer = styled.div`
@@ -103,9 +104,10 @@ export default class profileInfoEditor extends Component {
         return (
             <>
                 <StyledContainer>
+                    <FileLoader onImageUpload={(file) => console.log(file)} />
                     <StyledForm>
                         <Input>
-                            <input placeholder='Название проекта' value={this.state.name} onChange={(e) => {
+                            <input style={{width:'100%'}} placeholder='Название проекта' value={this.state.name} onChange={(e) => {
                                 this.setState({name: e.target.value})
                             }}/>
                         </Input>
@@ -115,12 +117,12 @@ export default class profileInfoEditor extends Component {
                             onChange={(e) => this.setState({description: e.target.value})}
                         />
                         <Input>
-                            <input placeholder='Добавьте ссылку'
+                            <input style={{width:'100%'}} placeholder='Добавьте ссылку'
                                    value={this.state.project_link}
                                    onChange={(e) => this.setState({project_link: e.target.value})}/>
                         </Input>
                         <Input>
-                            <input placeholder='Тип проекта' value={this.state.value} onChange={(e) => {
+                            <input style={{width:'100%'}} placeholder='Тип проекта' value={this.state.value} onChange={(e) => {
                                 this.setState({type: e.target.value})
                             }}/>
                         </Input>

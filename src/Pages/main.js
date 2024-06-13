@@ -116,20 +116,13 @@ const StyledUlRight = styled.ul`
 
     & > li:last-child {
         width: 56px;
-        background: ${props => props.isChecked ? '#90EE90' : '#ffcccb'};
+        background: ${props => props.isChecked ? '#47D667' : '#F26051'};
     }
 `;
 
 const FilterWrapper = styled.div`
     position: relative;
     width: 400px;
-`;
-
-const CheckBox = styled.input`
-    width: 20px;
-    height: 20px;
-    margin-left: 6px;
-    background: red;
 `;
 
 const SaveFiltersButton = styled.button`
@@ -144,6 +137,10 @@ const SaveFiltersButton = styled.button`
         background-color: black;
         color: white;
     }
+`;
+
+const FilterButtonsContainer = styled.div`
+    display: flex;
 `;
 
 const Main = (props) => {
@@ -198,6 +195,7 @@ const Main = (props) => {
                                     <li>Институт</li>
                                     <li>Направление</li>
                                     <li>Профессия</li>
+                                    <li>Уровень</li>
                                     <li>Поиск команды</li>
                                 </StyledUlLeft>
                             </LeftColumn>
@@ -207,47 +205,67 @@ const Main = (props) => {
                                         <select onChange={(e) => {
                                             setCourseFilter(e.target.value)
                                         }}>курс
+                                            <option>-</option>
                                             <option>1</option>
                                             <option>2</option>
                                             <option>3</option>
                                             <option>4</option>
                                         </select>
                                     </li>
-                                    <li><input placeholder="" onChange={(e) => {
+                                    <li><input style={{width:'95%'}} placeholder="" onChange={(e) => {
                                         setInstituteFilter(e.target.value)
                                     }}></input></li>
                                     <li>
-                                        <input placeholder="" onChange={(e) => {
+                                        <input style={{width:'95%'}} placeholder="" onChange={(e) => {
                                             setStudyDirectionFilter(e.target.value)
                                         }}>
                                         </input>
                                     </li>
                                     <li>
-                                        <input placeholder="" onChange={(e) => {
+                                        <input style={{width:'95%'}} placeholder="" onChange={(e) => {
                                             setprofessionFilter(e.target.value)
+                                        }}></input>
+                                    </li>
+                                    <li>
+                                        <input style={{width:'95%'}} placeholder="" onChange={(e) => {
+                                            setSkillLevelFilter(e.target.value)
                                         }}></input>
                                     </li>
                                     <li onClick={(e) => {
                                         setTeamSearchStateFilter(!teamSearchStateFilter)
-                                        }}>
+                                    }}>
                                     </li>
+
+
                                 </StyledUlRight>
                             </RightColumn>
 
                         </FilterContainer2>
-
-                        <SaveFiltersButton type='button' onClick={(e) => {
-                            props.updateFilters({
-                                institute: instituteFilter,
-                                studyDirection: studyDirectionFilter,
-                                course: courseFilter,
-                                profession: professionFilter,
-                                skillLevel: skillLevelFilter,
-                                teamSearchState: teamSearchStateFilter
-                            });
-                            setIsFilterVisible(false);
-                        }}>Сохранить фильтры
-                        </SaveFiltersButton>
+                        <FilterButtonsContainer>
+                            <SaveFiltersButton type='button' onClick={(e) => {
+                                props.updateFilters({
+                                    institute: instituteFilter,
+                                    studyDirection: studyDirectionFilter,
+                                    course: courseFilter,
+                                    profession: professionFilter,
+                                    skillLevel: skillLevelFilter,
+                                    teamSearchState: teamSearchStateFilter
+                                });
+                                setIsFilterVisible(false);
+                            }}>Сохранить фильтры
+                            </SaveFiltersButton>
+                            <SaveFiltersButton type='button' onClick={(e) => {
+                                props.updateFilters({
+                                    institute: '',
+                                    studyDirection: '',
+                                    course: '',
+                                    profession: '',
+                                    skillLevel: '',
+                                    teamSearchState: false
+                                });
+                                setIsFilterVisible(false);
+                            }}>Убрать фильтры</SaveFiltersButton>
+                        </FilterButtonsContainer>
                     </FilterContainer>
                     <FilterButtonPHidden></FilterButtonPHidden></div>
                 ) : (

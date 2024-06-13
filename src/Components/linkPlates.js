@@ -12,7 +12,8 @@ export default class linkPlates extends Component {
                 <LinkPlate 
                 key={linkPlate.id} 
                 linkPlate={linkPlate}
-                updateCurrentProjectId={this.props.updateCurrentProjectId} />
+                updateCurrentProjectId={this.props.updateCurrentProjectId}
+                isOwner={this.props.isOwner} />
             ))}
         </>
     )

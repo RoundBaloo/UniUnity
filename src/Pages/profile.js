@@ -18,15 +18,15 @@ const StyledFormContainer = styled.div`
 `;
 
 const StyledProjectsContainer = styled.div`
-  width: 60%;
+  width: 63%;
   position: absolute;
-  right: 0px;
-  top: 120px;
-  margin: 5px;
-  padding: 0px;
+  right: 0;
+  top: 180px;
   display: flex;
   flex-wrap: wrap;
-  gap: 5px;
+  row-gap: 10px;
+  column-gap: 40px;
+  
 `;
 
 const StyledDiv = styled.div`
@@ -43,6 +43,22 @@ const StyledBut = styled.button`
   border: 3px solid black;
   border-radius: 11px;
   z-index: 10;
+  color: black;
+  &:hover {
+    color: #F26051;
+    border: 3px solid #F26051;
+  }
+`;
+
+const PortfolioP = styled.p`
+  width: 63%;
+  position: absolute;
+  right: 0px;
+  top: 175px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  font-size: 30px;
 `;
 
 export default class Profile extends Component {
@@ -98,8 +114,8 @@ export default class Profile extends Component {
         {this.props.onLoggedIn
           ? (
             <>
-              <StyledBut type='button' onClick={() => {this.props.makeNotLoggedIn()}}>
-                выйти
+              <StyledBut onClick={() => {this.props.makeNotLoggedIn()}}>
+                Выйти
               </StyledBut>
               <StyledFormContainer>
                 {!this.state.isEditing 
@@ -115,10 +131,16 @@ export default class Profile extends Component {
                                         avatar={this.state.avatar} 
                                         onUpdateThisFrame={this.props.onUpdateThisFrame}/>}
               </StyledFormContainer>
-              <StyledProjectsContainer>
-                <LinkPlates linkPlates={this.props.linkPlates}
-                            updateCurrentProjectId={this.props.updateCurrentProjectId}/>
-              </StyledProjectsContainer>
+              <div>
+                <PortfolioP>Портфолио</PortfolioP>
+                <StyledProjectsContainer>
+
+                  <LinkPlates linkPlates={this.props.linkPlates}
+                              updateCurrentProjectId={this.props.updateCurrentProjectId}
+                              isOwner={true}/>
+                </StyledProjectsContainer>
+              </div>
+
             </>
           )
           : (this.props.onRegistarion 

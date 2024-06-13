@@ -3,14 +3,14 @@ import {createRoot} from 'react-dom/client';
 import './css/reset.css';
 import './css/style.css';
 import newLogo from './img/UniUnityLogo.png';
-import notification from './img/NotificationButton.svg';
-import avatar from './img/avatarPlaceholder.png'
+import avatar from './img/avatarPlaceholder.svg'
 import {Link} from 'react-router-dom';
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 import Profile from './Pages/profile';
 import Main from './Pages/main';
-import OtherManProfile from "./Pages/otherManProfile";
+import OtherManProfile from "./Pages/otherUserProfile";
 import ProjectPage from "./Pages/projectPage"
+import OtherUserProjectPage from "./Pages/otherUserProjectPage"
 import ProfileInfoEditor from "./Pages/projectInfoEditor";
 import axios from 'axios';
 import {saveToken, setAuthHeader, getToken} from './tokenService';
@@ -204,13 +204,6 @@ function App() {
         overflow: hidden;
     `;
 
-    const NotificationImg = styled.img`
-        position: absolute;
-        width: 33px ;
-        right: 163px;
-        top: 36px;
-    `;
-
     return (
         <Router>
             <>
@@ -218,7 +211,6 @@ function App() {
                     <Link to="/" className="Logo"><img src={newLogo} width={245} height={58} onClick={updateUsersArray}
                                                        alt="Логотип"/></Link>
                     {/* <Link to='/uploadProject'><p className="PublishProject">Опубликовать проект</p></Link> */}
-                    <NotificationImg src={notification} width={45} alt="Уведомления"/>
                     <Link to="/profile" onClick={() => {
                         makeNonRegistration();
                         updateUserId(selfId);
@@ -280,6 +272,16 @@ function App() {
                                          selfId={selfId}/> :
                             null
                         }/>
+                    <Route exact path="/otherUserProjectPage" element={
+                        thisFrame!== undefined && linkPlates!== undefined?
+                            <OtherUserProjectPage thisFrame={thisFrame}
+                                         thisProject={currentProject}
+                                         avatar={thisFrame.image_link}
+                                         currentProjectId={currentProjectId}
+                                         getUserProjects={getUserProjects}
+                                         selfId={selfId}/> :
+                            null
+                    }/>
                     <Route exact path="/profileEditor" element={<ProfileInfoEditor thisProject={currentProject}
                                                                                    updateCurrentProjectId={updateCurrentProjectId}/>} />
                 </Routes>

@@ -7,6 +7,7 @@ import styled from "styled-components";
 const ImagesContainer = styled.div`
     position: relative;
     width: 760px;
+    margin-bottom: 65px;
 `;
 
 const DescrContainer = styled.div`
@@ -44,7 +45,7 @@ const FlexContainer = styled.div`
 
 const ProjectName = styled.div`
     font-size: 30px;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
 `;
 
 const AvatarContainer = styled.div`

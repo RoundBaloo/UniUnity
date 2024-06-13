@@ -303,3 +303,6 @@ FROM users]
 [SQL: INSERT INTO users (email, password, first_name, last_name, father_name, institute, study_direction, course, profession, search_aim, what_want_from_command, about, skill_level, team_search_state, "VK_link", "TG_link", mail, image_link, fill_percentage) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)]
 [parameters: ('@', '$2b$12$0/xMD9vD.fSAYYgxJXk79.1Mu9nbomehhQ9AN.9dMyhSugHVyqnyS', '1', '1', '1', '', '', 0, '', '', '', '', '', 0, '', '', '', '', 0)]
 (Background on this error at: https://sqlalche.me/e/20/gkpj)
+2024-06-13 01:57:30,498:config:WARNING:Error while adding image to project:18: '_io.BytesIO' object has no attribute 'first'
+2024-06-13 01:58:56,634:config:WARNING:Error while adding image to project:18: [Errno 2] No such file or directory: './project images\\1.png'
+2024-06-13 02:01:55,070:config:WARNING:Error while adding image to project:18: [Errno 2] No such file or directory: './project/images\\small-gallery-photo-1_1.jpg'

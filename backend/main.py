@@ -7,6 +7,7 @@ from config import app, db, docs, logger
 from models import User, Project
 from schemas import ProjectSchema
 import os
+import glob
 from werkzeug.utils import secure_filename
 
 CORS(app)
@@ -225,19 +226,32 @@ def post_image_for_project(project_id):
         user_id = get_jwt_identity()
         project = Project.get_project(user_id=user_id, project_id=project_id)
         if not project:
-            jsonify({"message": "Проекта не существует или вы не имеете к нему доступа"})
+            return jsonify({"message": "Проекта не существует или вы не имеете к нему доступа"}), 400
         if 'files[]' not in request.files:
             return jsonify({'message': 'в запросе нет файлов'}), 400
-        file = request.files['files[]'].first()
+        file = request.files['files[]']
         file_is_allowed = '.' in file.filename and file.filename.rsplit('.', 1)[1].lower() in allowed_extensions
         if file and file_is_allowed:
-            filename = secure_filename(file.filename)
-            path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+            # Получаем расширение файла
+            _, extension = os.path.splitext(file.filename)
+            # Формируем новое имя файла как "ID_расширение"
+            new_filename = f"{project_id}{extension}"
+            upload_folder = app.config['UPLOAD_FOLDER']  # Используем путь из конфигурации
+            os.makedirs(upload_folder, exist_ok=True)  # Создает директорию, если она не существует
+            path = os.path.join(upload_folder, new_filename)
+            
+            # Проверяем, существует ли старый файл, и если да, то удаляем его
+            old_files_pattern = os.path.join(upload_folder, f"{project_id}*")
+            for old_file in glob.glob(old_files_pattern):
+                if os.path.exists(old_file):
+                    os.remove(old_file)
+            
             file.save(path)
             project.project_image_link = path
     except Exception as e:
-        logger.warning(f'Error while adding image to project:{project_id}: {e}')
+        logger.warning(f'Ошибка при добавлении изображения к проекту:{project_id}: {e}')
         return jsonify({"message": str(e)}), 401
+
 
     return jsonify({"message": "Картинка добавлена"}), 200
 
