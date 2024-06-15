@@ -148,30 +148,33 @@ export default class uploadProject extends Component {
                     </Input>
                 </StyledForm>
 
-                <Link to="/profile">
+                <Link to={this.state.file ? "/profile" : null}>
                     <StyledButton>
                     <button type='button' onClick={() => {
-                        this.props.updateLastProjectId();
-                        axios.post(projects, {
-                            "name": this.state.name,
-                            "type": this.state.type,
-                            "description": this.state.description,
-                            "project_link": this.state.project_link
-                        }, {
-                            headers: {
-                                'Authorization': `Bearer ${token}`
-                            }
-                        }).then(response => {
-                            console.log(response.data.project_id);
-                            this.props.updateThisFrame(token);
-                            this.setState({id: response.data.project_id});
-                            uploadImageToServer(this.state.file, response.data.project_id);
-                        })
+                        if (this.state.file) {
+                            this.props.updateLastProjectId();
+                            axios.post(projects, {
+                                "name": this.state.name,
+                                "type": this.state.type,
+                                "description": this.state.description,
+                                "project_link": this.state.project_link
+                            }, {
+                                headers: {
+                                    'Authorization': `Bearer ${token}`
+                                }
+                            }).then(response => {
+                                console.log(response.data.project_id);
+                                this.props.updateThisFrame(token);
+                                this.setState({id: response.data.project_id});
+                                uploadImageToServer(this.state.file, response.data.project_id);
+                            })
+                        }
                         }}>
                             Добавить проект
                         </button>
                     </StyledButton>
                 </Link>
+                {this.state.file ? null : <StyledP color='red'>Загрузите картинку, описывающую проект</StyledP>}
                 <StyledP>Загружайте только png картинки!</StyledP>
                 <div>
                     <input type="file" accept="image/png" onChange={this.handleFileChange}/>
