@@ -124,7 +124,7 @@ export default class projectPage extends Component {
                     </ImagesContainer>
                     <div>
                         <DescrContainer>  {/*  это под описание и профиль  */}
-                            <Link to='/profile'>
+                            <Link to='/otherManProfile'>
                                 <div style={{zIndex: '1'}}> {/*  этот контейнер перебрасывает в профиль  */}
                                     <AvatarContainer>
                                         <Avatar src={this.props.avatar}/>

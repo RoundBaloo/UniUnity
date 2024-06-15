@@ -306,3 +306,5 @@ FROM users]
 2024-06-13 01:57:30,498:config:WARNING:Error while adding image to project:18: '_io.BytesIO' object has no attribute 'first'
 2024-06-13 01:58:56,634:config:WARNING:Error while adding image to project:18: [Errno 2] No such file or directory: './project images\\1.png'
 2024-06-13 02:01:55,070:config:WARNING:Error while adding image to project:18: [Errno 2] No such file or directory: './project/images\\small-gallery-photo-1_1.jpg'
+2024-06-13 13:08:57,539:config:WARNING:Ошибка при добавлении изображения к проекту:18: Project does not exist
+2024-06-13 14:57:04,918:config:WARNING:Error while updating project user:3 project:19: Project does not exist

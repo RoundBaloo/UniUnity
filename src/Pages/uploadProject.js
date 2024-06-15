@@ -3,6 +3,7 @@ import axios from 'axios';
 import {Link} from 'react-router-dom';
 import {getToken} from '../tokenService';
 import styled from "styled-components";
+import FileLoader from "../Components/fileLoader"
 
 const projects = 'http://127.0.0.1:5000/post_project';
 
@@ -79,6 +80,13 @@ const InputDescription = styled.textarea`
     padding-left: 9px;
 `;
 
+const StyledP = styled.p`
+    color: ${props => props.color};
+    font-size: 23px;
+    margin-right: auto;
+    margin-bottom: 15px;
+`;
+
 export default class uploadProject extends Component {
     constructor(props) {
         super(props)
@@ -130,6 +138,9 @@ export default class uploadProject extends Component {
                         </button>
                     </StyledButton>
                 </Link>
+                <StyledP>Загружайте только png картинки!</StyledP>
+                    <FileLoader onImageUpload={(file) => console.log(file)}
+                                id={this.props.thisProject.id} />
             </StyledContainer>
         )
     }

@@ -78,6 +78,13 @@ const InputDescription = styled.textarea`
     padding-left: 9px;
 `;
 
+const StyledP = styled.p`
+    color: ${props => props.color};
+    font-size: 23px;
+    margin-right: auto;
+    margin-bottom: 15px;
+`;
+
 
 export default class profileInfoEditor extends Component {
     constructor(props) {
@@ -104,7 +111,6 @@ export default class profileInfoEditor extends Component {
         return (
             <>
                 <StyledContainer>
-                    <FileLoader onImageUpload={(file) => console.log(file)} />
                     <StyledForm>
                         <Input>
                             <input style={{width:'100%'}} placeholder='Название проекта' value={this.state.name} onChange={(e) => {
@@ -142,6 +148,9 @@ export default class profileInfoEditor extends Component {
                             </button>
                         </StyledButton>
                     </Link>
+                    <StyledP>Загружайте только png картинки!</StyledP>
+                    <FileLoader onImageUpload={(file) => console.log(file)}
+                                id={this.props.thisProject.id} />
                 </StyledContainer>
             </>
         )

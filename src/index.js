@@ -98,12 +98,12 @@ function App() {
         })
         .catch((error) => {
             console.error('Error:', error);
-            // Log the error or display an error message to the user
           });
     };
 
     const getUserProjects = (_userId) => {
-        axios.get(`http://127.0.0.1:5000/get_user_projects/${_userId}`)
+        if (!!_userId) {
+            axios.get(`http://127.0.0.1:5000/get_user_projects/${_userId}`)
             .then(response => {
                 setLinkPlates(response.data)
                 console.log(response.data)
@@ -111,6 +111,7 @@ function App() {
             .catch(error => {
                 console.error('Ошибка при выполнении запроса:', error);
             });
+        }
     }
 
     const addFrame = (data) => {
@@ -170,9 +171,11 @@ function App() {
     }
 
     const updateThisFrameToOther = (_userId) => {
-        axios.get(`http://127.0.0.1:5000/get_user/${_userId}`).then((res) => {
-            setThisFrame(res.data.user);
-        });
+        if (!!_userId){
+            axios.get(`http://127.0.0.1:5000/get_user/${_userId}`).then((res) => {
+                setThisFrame(res.data.user);
+            });
+        }
     }
 
     const updateCurrentProjectId = (projId) => {
@@ -187,10 +190,10 @@ function App() {
 
     const Avatar = styled.img`
         position: absolute;
-        width: 90px;
-        height: 90px;
-        left: 0;
-        top: 0;
+        width: 45px;
+        height: 60px;
+        left: 10px;
+        top: 12px;
     `;
 
     const AvatarContainer = styled.div`

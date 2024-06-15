@@ -159,8 +159,7 @@ export default class profilePlate extends Component {
                         <StyledP>О себе</StyledP>
                         <StyledP>{frame.about}</StyledP>
                         <StyledP>Что хочу от команды</StyledP>
-                        <StyledP>Хочу быть частью динамичной и технологичной продвинутой команды для создания
-                            действительно проработанной визуальной новеллы.</StyledP>
+                        <StyledP>{frame.what_want_from_command}</StyledP>
                         <StyledP>{frame.TG_link}</StyledP>
                         <StyledP>{frame.VK_link}</StyledP>
                         <StyledP>{frame.mail}</StyledP>

@@ -45,12 +45,13 @@ const FilterButtonP = styled.div`
     margin:0;
     margin-top: 44px;
     height: 50px;
-    width: 360px;
+    width: 295px;
     border: 3px solid black;
     border-radius: 31px;
     margin-left: 65px;
-    padding-left: 40px;
     padding-top: 12px;
+    padding-left: 40px;
+    display: flex;
 `;
 
 const FilterButtonPHidden = styled.div`
@@ -136,6 +137,11 @@ const SaveFiltersButton = styled.button`
     &:hover {
         background-color: black;
         color: white;
+    }
+
+    &:first-child {
+        width: 325px;
+        border-right: 3px solid black;
     }
 `;
 
@@ -269,7 +275,7 @@ const Main = (props) => {
                     </FilterContainer>
                     <FilterButtonPHidden></FilterButtonPHidden></div>
                 ) : (
-                    <FilterButtonP onClick={() => setIsFilterVisible(true)}>Фильтр и поиск</FilterButtonP>
+                    <FilterButtonP onClick={() => setIsFilterVisible(true)}>Фильтры</FilterButtonP>
                 )}
             </FilterWrapper>
 
