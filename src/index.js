@@ -21,6 +21,7 @@ import styled from "styled-components";
 var token = getToken();
 var selfId;
 var selfAvatarLink;
+var lastProjectId;
 
 function App() {
     const [frames, setFrames] = useState([]);
@@ -188,6 +189,10 @@ function App() {
         console.log(projId);
     }
 
+    const updateLastProjectId = () => {
+        lastProjectId = lastProjectId + 1;
+    }
+
     const Avatar = styled.img`
         position: absolute;
         width: 45px;
@@ -264,7 +269,9 @@ function App() {
                         updateCurrentProjectId={updateCurrentProjectId}/>}/>
                     <Route exact path="/uploadProject"
                            element={<UploadProject token={token} 
-                                                   updateThisFrame={updateThisFrame}/>}/>
+                                                   updateThisFrame={updateThisFrame}
+                                                   updateLastProjectId={updateLastProjectId}
+                                                   lastProjectId={lastProjectId}/>}/>
                     <Route exact path="/projectPage" element={
                         thisFrame!== undefined && linkPlates!== undefined?
                             <ProjectPage thisFrame={thisFrame}

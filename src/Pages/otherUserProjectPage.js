@@ -119,7 +119,7 @@ export default class projectPage extends Component {
                         <ProjectName>
                             {this.props.thisProject.name}
                         </ProjectName>
-                        <img src={Stub}
+                        <img src={require(`../projectImages/${this.props.thisProject.id}.png`)}
                              alt='Фото проекта'></img> {/*  тут потом сделаю так, чтобы оно все фотки выводило, Рома еще не намутил мутку  */}
                     </ImagesContainer>
                     <div>

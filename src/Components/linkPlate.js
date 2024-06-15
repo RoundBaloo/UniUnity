@@ -15,6 +15,8 @@ const StyledImg = styled.img`
     border-radius: 7px;
     width: 174px;
     height: 174px;
+    border: 3px solid black;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 `;
 
 const StyledP = styled.p`
@@ -44,7 +46,7 @@ export default class linkPlate extends Component {
         <Link to={this.props.isOwner ? "/projectPage" : "/otherUserProjectPage"}>
             <StyledPlate onClick={() => {this.props.updateCurrentProjectId(this.props.linkPlate.id)}}>
                 <StyledImg
-                    src={isHovered ? projectHover : project}
+                    src={require(`../projectImages/${this.props.linkPlate.id}.png`)}
                     alt="Лого проекта"
                     onMouseEnter={this.handleMouseEnter}
                     onMouseLeave={this.handleMouseLeave}

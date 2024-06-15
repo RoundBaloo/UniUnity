@@ -152,7 +152,7 @@ export default class projectPage extends Component {
                         <ProjectName>
                             {this.props.thisProject.name}
                         </ProjectName>
-                        <img src={Stub} />
+                        <img src={require(`../projectImages/${this.props.thisProject.id}.png`)} />
                     </ImagesContainer>
                     <div>
                         <DescrContainer>  {/*  это под описание и профиль  */}

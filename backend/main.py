@@ -180,7 +180,7 @@ def post_project():
         logger.warning(f'Error while posting project {get_jwt_identity()}: {e}')
         return jsonify({"message": str(e)}), 400
 
-    return jsonify({"message": "Проект добавлен"})
+    return jsonify({"message": "Проект добавлен", "project_id": new_one.id}), 201
 
 
 # изменение проекта юзером

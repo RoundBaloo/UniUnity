@@ -4,6 +4,7 @@ import {Link} from 'react-router-dom';
 import {getToken} from '../tokenService';
 import styled from "styled-components";
 import FileLoader from "../Components/fileLoader"
+import { v4 as uuidv4 } from 'uuid';
 
 const projects = 'http://127.0.0.1:5000/post_project';
 
@@ -87,6 +88,23 @@ const StyledP = styled.p`
     margin-bottom: 15px;
 `;
 
+const uploadImageToServer = (file, projectId) => {
+    const formData = new FormData();
+    formData.append('files[]', file);
+  
+    try {
+      const response = axios.post(`http://127.0.0.1:5000/add_image_for_project/${projectId}`, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          'Authorization': `Bearer ${getToken()}`
+        },
+      });
+      console.log(response.data);
+    } catch (error) {
+      console.error(error.response.data);
+    }
+  }
+
 export default class uploadProject extends Component {
     constructor(props) {
         super(props)
@@ -94,9 +112,22 @@ export default class uploadProject extends Component {
             description: "",
             name: "",
             project_link: "",
-            type: ""
+            type: "",
+            id: 0,
+            file: null
         }
     }
+
+    handleFileChange = (e) => {
+        const file = e.target.files[0];
+        if (!file ||!/\.(png)$/i.test(file.name)) {
+            this.setState({errorMessage: 'Используйте ТОЛЬКО png формат'});
+        } else {
+            this.setState({file});
+            this.setState({errorMessage: ''});
+        }
+    };
+
 
     render() {
         const token = getToken();
@@ -120,27 +151,32 @@ export default class uploadProject extends Component {
                 <Link to="/profile">
                     <StyledButton>
                     <button type='button' onClick={() => {
-                            axios.post(projects, {
-                                "name": this.state.name,
-                                "type": this.state.type,
-                                "description": this.state.description,
-                                "project_link": this.state.project_link
-                            }, {
-                                headers: {
-                                    'Authorization': `Bearer ${token}`
-                                }
-                            }).then(response => {
-                                console.log(response.data);
-                                this.props.updateThisFrame(token);
-                            })
+                        this.props.updateLastProjectId();
+                        axios.post(projects, {
+                            "name": this.state.name,
+                            "type": this.state.type,
+                            "description": this.state.description,
+                            "project_link": this.state.project_link
+                        }, {
+                            headers: {
+                                'Authorization': `Bearer ${token}`
+                            }
+                        }).then(response => {
+                            console.log(response.data.project_id);
+                            this.props.updateThisFrame(token);
+                            this.setState({id: response.data.project_id});
+                            uploadImageToServer(this.state.file, response.data.project_id);
+                        })
                         }}>
                             Добавить проект
                         </button>
                     </StyledButton>
                 </Link>
                 <StyledP>Загружайте только png картинки!</StyledP>
-                    <FileLoader onImageUpload={(file) => console.log(file)}
-                                id={this.props.thisProject.id} />
+                <div>
+                    <input type="file" accept="image/png" onChange={this.handleFileChange}/>
+                    {this.state.errorMessage && <StyledP color='red'>{this.state.errorMessage}</StyledP>}
+                </div>
             </StyledContainer>
         )
     }

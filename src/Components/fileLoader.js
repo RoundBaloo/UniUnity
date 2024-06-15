@@ -11,6 +11,7 @@ const ImageUpload = ({ onImageUpload, id }) => {
       onImageUpload(file); 
       
       var projectId = id; 
+      console.log(projectId)
       await uploadImageToServer(file, projectId); 
     };
   
