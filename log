@@ -309,3 +309,9 @@ FROM users]
 2024-06-13 13:08:57,539:config:WARNING:Ошибка при добавлении изображения к проекту:18: Project does not exist
 2024-06-13 14:57:04,918:config:WARNING:Error while updating project user:3 project:19: Project does not exist
 2024-06-15 15:26:41,980:config:WARNING:Error while deleting project user:1 project:31: Project does not exist
+2024-06-16 16:58:57,061:config:WARNING:Error while getting user_id:1: User does not exist
+2024-06-16 16:58:58,623:config:WARNING:Error while login with email: 1: No row was found when one was required
+2024-06-16 16:59:01,708:config:WARNING:Error while getting user_id:1: User does not exist
+2024-06-16 16:59:02,800:config:WARNING:Error while login with email: 1: No row was found when one was required
+2024-06-16 17:03:44,881:config:WARNING:Error while login with email: 1: No row was found when one was required
+2024-06-16 17:28:36,893:config:WARNING:Error while getting user_id:1: User does not exist

@@ -3,6 +3,7 @@ import '../css/registration.css';
 import styled from 'styled-components';
 import axios from 'axios';
 import { saveToken, setAuthHeader } from '../tokenService';
+import standartAvatar from '../img/Avatars/Avatar-1.svg'
 
 const apiUrl = 'http://127.0.0.1:5000/register';
 
@@ -102,7 +103,7 @@ export default class registration extends Component {
                     </ContainerTwoElements>
                     <ContainerTwoElements>
                         <StyledP>Пароль</StyledP>
-                        <StyledInput isValid={this.state.IsPasswordValid} onChange={(e) => {
+                        <StyledInput type='password' isValid={this.state.IsPasswordValid} onChange={(e) => {
                             this.setState({password: e.target.value})
                             this.setState({IsPasswordValid: true})
                         }} />
@@ -110,7 +111,7 @@ export default class registration extends Component {
                     </ContainerTwoElements>
                     <ContainerTwoElements>
                         <StyledP>Подтвердите пароль</StyledP>
-                        <StyledInput isValid={this.state.IsPasswordsMatch} onChange={(e) => {
+                        <StyledInput type='password' isValid={this.state.IsPasswordsMatch} onChange={(e) => {
                             this.setState({repeatedPassword: e.target.value})
                             this.setState({IsPasswordsMatch: true})
                         }} />
@@ -145,7 +146,8 @@ export default class registration extends Component {
                             "password": this.state.password,
                             "lastName": this.state.FIO.split(" ")[0],
                             "firstName": this.state.FIO.split(" ")[1],
-                            "fatherName": this.state.FIO.split(" ")[2]
+                            "fatherName": this.state.FIO.split(" ")[2],
+                            "image_link": standartAvatar
                             })
                             .then(response => {
                                 this.props.onUpdateUsers(); // mbd

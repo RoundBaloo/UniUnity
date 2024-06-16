@@ -151,11 +151,11 @@ export default class profilePlate extends Component {
                         </ul>
                     </StyledMainInfoContainer>
                     <StyledOtherInfoContainer>
-                        <StyledP className="description">{frame.institute}</StyledP>
+                        <StyledP>{frame.institute}</StyledP>
                         <StyledP>{frame.studyDirection}</StyledP>
-                        <StyledP className="description">{frame.course}</StyledP>
-                        <StyledP className="description">{frame.skillLevel}</StyledP>
-                        <StyledP className="description">Цель поиска: {frame.searchAim}</StyledP>
+                        <StyledP>{frame.course}</StyledP>
+                        <StyledP>{frame.skillLevel}</StyledP>
+                        <StyledP>Цель поиска: {frame.searchAim}</StyledP>
                         <StyledP>О себе</StyledP>
                         <StyledP>{frame.about}</StyledP>
                         <StyledP>Что хочу от команды</StyledP>

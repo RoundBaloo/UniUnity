@@ -211,14 +211,12 @@ function App() {
         border: 3px solid white;
         overflow: hidden;
     `;
-
     return (
         <Router>
             <>
                 <header className="header">
                     <Link to="/" className="Logo"><img src={newLogo} width={245} height={58} onClick={updateUsersArray}
                                                        alt="Логотип"/></Link>
-                    {/* <Link to='/uploadProject'><p className="PublishProject">Опубликовать проект</p></Link> */}
                     <Link to="/profile" onClick={() => {
                         makeNonRegistration();
                         updateUserId(selfId);

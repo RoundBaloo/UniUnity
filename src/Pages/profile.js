@@ -7,7 +7,7 @@ import { getToken } from '../tokenService';
 import ProfilePlate from "../Components/profilePlate";
 import ProfilePlateEditor from "../Components/profilePlateEditor";
 import LinkPlates from "../Components/linkPlates";
-import avatar from '../img/Avatars/Avatar-1.svg'
+import avatar from '../img/avatarPlaceholder.svg'
 
 const StyledFormContainer = styled.div`
   width: 30%;

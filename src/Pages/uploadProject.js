@@ -133,6 +133,9 @@ export default class uploadProject extends Component {
         const token = getToken();
         return (
             <StyledContainer>
+                <Link to="/profile">
+                    <button type='button'>назад в профиль</button>
+                </Link>
                 <StyledForm>
                     <Input>
                         <input placeholder='Название проекта' onChange={(e) => this.setState({name: e.target.value})}/>
@@ -148,7 +151,6 @@ export default class uploadProject extends Component {
                     </Input>
                 </StyledForm>
 
-                <Link to={this.state.file ? "/profile" : null}>
                     <StyledButton>
                     <button type='button' onClick={() => {
                         if (this.state.file) {
@@ -173,7 +175,6 @@ export default class uploadProject extends Component {
                             Добавить проект
                         </button>
                     </StyledButton>
-                </Link>
                 {this.state.file ? null : <StyledP color='red'>Загрузите картинку, описывающую проект</StyledP>}
                 <StyledP>Загружайте только png картинки!</StyledP>
                 <div>

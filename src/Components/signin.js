@@ -104,7 +104,7 @@ export default class signin extends Component {
                 </ContainerTwoElements>
                 <ContainerTwoElements>
                     <StyledP color='black'>Пароль</StyledP>
-                    <StyledInput isValid={this.state.isPasswordValid} value={this.state.password} onChange={(e) => {
+                    <StyledInput type='password' isValid={this.state.isPasswordValid} value={this.state.password} onChange={(e) => {
                         this.setState({password: e.target.value});
                         this.setState({isPasswordValid: true});
                     }}/>
