@@ -107,6 +107,7 @@ function App() {
             axios.get(`http://127.0.0.1:5000/get_user_projects/${_userId}`)
             .then(response => {
                 setLinkPlates(response.data)
+                console.log('загруженные проекты:')
                 console.log(response.data)
             })
             .catch(error => {

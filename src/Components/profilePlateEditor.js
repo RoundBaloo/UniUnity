@@ -166,7 +166,7 @@ export default class profilePlateEditor extends Component {
             about: this.props.thisFrame.about,
             teamSearchState: this.props.thisFrame.teamSearchState,
             TG_link: this.props.thisFrame.TG_link,
-            VK_lnk: this.props.thisFrame.VK_lnk,
+            VK_link: this.props.thisFrame.VK_link,
             mail: this.props.thisFrame.mail,
             what_want_from_command: this.props.thisFrame.what_want_from_command,
             showImageSelector: false,

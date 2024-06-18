@@ -17,7 +17,7 @@ const ImageUpload = ({ onImageUpload, id }) => {
   
     return (
       <div>
-        <input type="file" accept="image/*" onChange={handleImageUpload} />
+        <input type="file" accept="image/png" onChange={handleImageUpload} />
       </div>
     );
   };

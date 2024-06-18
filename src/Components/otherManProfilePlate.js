@@ -56,8 +56,8 @@ const StyledMainInfoContainer = styled.div`
 const StyledOtherInfoContainer = styled.div`
     position: absolute;
     top: 150px;
-    padding-right: 44px;
-    padding-left: 22px;
+    left: 22px;
+    text-align: left;
 `;
 
 const StyledP = styled.p`

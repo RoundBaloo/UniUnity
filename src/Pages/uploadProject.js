@@ -3,8 +3,8 @@ import axios from 'axios';
 import {Link} from 'react-router-dom';
 import {getToken} from '../tokenService';
 import styled from "styled-components";
-import FileLoader from "../Components/fileLoader"
-import { v4 as uuidv4 } from 'uuid';
+import arrow from '../img/arrowLeft.svg'
+import arrowActive from '../img/arrowLeftActive.svg'
 
 const projects = 'http://127.0.0.1:5000/post_project';
 
@@ -14,8 +14,8 @@ const StyledContainer = styled.div`
     flex-direction: column;
     align-items: center;
     height: auto;
-    padding-top: 65px;
     margin-left: 65px;
+    margin-bottom: 20px;
 `;
 
 const StyledForm = styled.form`
@@ -88,6 +88,10 @@ const StyledP = styled.p`
     margin-bottom: 15px;
 `;
 
+const StyleButton = styled.button`
+    margin-bottom: 10px;
+`;
+
 const uploadImageToServer = (file, projectId) => {
     const formData = new FormData();
     formData.append('files[]', file);
@@ -114,7 +118,9 @@ export default class uploadProject extends Component {
             project_link: "",
             type: "",
             id: 0,
-            file: null
+            file: null,
+            isHovered: false,
+            isUploaded: false,
         }
     }
 
@@ -134,7 +140,13 @@ export default class uploadProject extends Component {
         return (
             <StyledContainer>
                 <Link to="/profile">
-                    <button type='button'>назад в профиль</button>
+                    <StyleButton
+                        onMouseOver={() => this.setState({isHovered: true})} // обработчик наведения мыши
+                        onMouseOut={() => this.setState({isHovered: false})} // обработчик убирания мыши
+                    >
+                        <img src={this.state.isHovered ? arrowActive : arrow} />
+                        {/* выбор изображения в зависимости от состояния */}
+                    </StyleButton>
                 </Link>
                 <StyledForm>
                     <Input>
@@ -149,11 +161,18 @@ export default class uploadProject extends Component {
                     <Input>
                         <input placeholder='Тип проекта' onChange={(e) => this.setState({type: e.target.value})}/>
                     </Input>
+                    {this.state.file ? null : <StyledP style={{margin: '0 22px 0'}} color='red'>Загрузите картинку, описывающую проект</StyledP>}
+                    {this.state.isUploaded ? <StyledP style={{margin: '0 auto 0 22px'}} color='green'>Проект успешно добавлен</StyledP> : null}
+                    <StyledP style={{marginRight: 'auto', marginLeft: '22px'}}>Загружайте только png картинки!</StyledP>
+                    <div style={{padding: '0 22px 0', width: '438px'}}>
+                        <input type="file" accept="image/png" onChange={this.handleFileChange}/>
+                        {this.state.errorMessage && <StyledP color='red'>{this.state.errorMessage}</StyledP>}
+                    </div>
                 </StyledForm>
 
                     <StyledButton>
                     <button type='button' onClick={() => {
-                        if (this.state.file) {
+                        if (this.state.file && !this.state.isUploaded) {
                             this.props.updateLastProjectId();
                             axios.post(projects, {
                                 "name": this.state.name,
@@ -169,18 +188,13 @@ export default class uploadProject extends Component {
                                 this.props.updateThisFrame(token);
                                 this.setState({id: response.data.project_id});
                                 uploadImageToServer(this.state.file, response.data.project_id);
+                                this.setState({isUploaded: true})
                             })
                         }
                         }}>
                             Добавить проект
                         </button>
                     </StyledButton>
-                {this.state.file ? null : <StyledP color='red'>Загрузите картинку, описывающую проект</StyledP>}
-                <StyledP>Загружайте только png картинки!</StyledP>
-                <div>
-                    <input type="file" accept="image/png" onChange={this.handleFileChange}/>
-                    {this.state.errorMessage && <StyledP color='red'>{this.state.errorMessage}</StyledP>}
-                </div>
             </StyledContainer>
         )
     }

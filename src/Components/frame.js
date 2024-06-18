@@ -16,7 +16,6 @@ const FrameContainer = styled.div`
     display: block;
     width: 295px;
     height: 481px;
-    box-shadow: 0 0 4px 2px rgba(0, 0, 0, 0.15);
     transition: transform 0.3s ease;
 `;
 
