@@ -109,6 +109,7 @@ function App() {
                 setLinkPlates(response.data)
                 console.log('загруженные проекты:')
                 console.log(response.data)
+                console.log(_userId)
             })
             .catch(error => {
                 console.error('Ошибка при выполнении запроса:', error);

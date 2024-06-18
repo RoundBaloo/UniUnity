@@ -317,3 +317,6 @@ FROM users]
 2024-06-16 17:28:36,893:config:WARNING:Error while getting user_id:1: User does not exist
 2024-06-17 20:56:25,478:config:WARNING:Error while getting user_id:1: User does not exist
 2024-06-17 20:56:27,694:config:WARNING:Error while getting user_id:1: User does not exist
+2024-06-18 21:14:57,178:config:WARNING:Error while getting user_id:2: User does not exist
+2024-06-18 21:24:19,323:config:WARNING:Error while getting user_id:2: User does not exist
+2024-06-18 21:24:46,884:config:WARNING:Error while getting user_id:2: User does not exist
